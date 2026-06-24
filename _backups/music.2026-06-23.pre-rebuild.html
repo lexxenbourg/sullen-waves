@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" data-grain="on" data-ticker="on" data-letterbox="off" data-sprockets="off" data-hotspots="on" data-reveal="on" data-footer="compact" data-italics="off" data-catalog="chapters">
+<head>
+<meta charset="utf-8">
+<title>Sullen Waves — Music</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sullen.css">
+<script>
+  window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "#c9a25c",
+    "logoFont": "Italiana",
+    "italics": false,
+    "grain": true,
+    "letterbox": false,
+    "sprockets": false,
+    "creditsFooter": false,
+    "ticker": true,
+    "hotspots": true,
+    "reveal": true,
+    "heroPhoto": "window-guitar"
+  }/*EDITMODE-END*/;
+  window.SWApply = function (v) {
+    var r = document.documentElement;
+    r.setAttribute("data-grain", v.grain ? "on" : "off");
+    r.setAttribute("data-ticker", v.ticker ? "on" : "off");
+    r.setAttribute("data-letterbox", v.letterbox ? "on" : "off");
+    r.setAttribute("data-sprockets", v.sprockets ? "on" : "off");
+    r.setAttribute("data-hotspots", v.hotspots ? "on" : "off");
+    r.setAttribute("data-reveal", v.reveal ? "on" : "off");
+    r.setAttribute("data-footer", v.creditsFooter ? "credits" : "compact");
+    r.setAttribute("data-italics", v.italics ? "on" : "off");
+    r.style.setProperty("--accent", v.accent || "#c9a25c");
+    var fonts = { Italiana: '"Italiana", serif', Playfair: '"Playfair Display", serif', Cormorant: '"Cormorant Garamond", serif', Cinzel: '"Cinzel", serif' };
+    r.style.setProperty("--logo-font", fonts[v.logoFont] || fonts.Italiana);
+    r.style.setProperty("--hero-img", 'url("assets/photos/' + (v.heroPhoto || "window-guitar") + '.jpg")');
+  };
+  (function () {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem("sw_tweaks") || "{}"); } catch (e) {}
+    window.SW_STATE = Object.assign({}, window.TWEAK_DEFAULTS, saved);
+    window.SWApply(window.SW_STATE);
+  })();
+</script>
+</head>
+<body>
+
+<div class="sprocket l"><div class="stamp">REEL · 04 · MUSIC</div></div>
+<div class="sprocket r"><div class="stamp">CATALOG · SW</div></div>
+
+<header class="chrome">
+  <nav class="left">
+    <a href="index.html#listen">Listen</a>
+    <a href="music.html" aria-current="page">Music</a>
+  </nav>
+  <a class="brand" href="index.html" aria-label="Sullen Waves, home">Sullen Waves</a>
+  <nav class="right">
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<section class="page-top" data-screen-label="Music / header">
+  <div class="eyebrow">Catalog · 2023—2026</div>
+  <h1 class="disp">The <em>discography</em>.</h1>
+  <p class="deck">Four releases, made the way the room would make them, if the room could play. Newest at the top; the first honest one at the bottom.</p>
+</section>
+
+<main class="disco">
+
+  <!-- SW-004 -->
+  <article class="disc reveal" id="sw-004" data-screen-label="Music / SW-004">
+    <div class="art">
+      <img src="assets/photos/motion-tele.jpg" alt="Distant Lights">
+      <div class="tag"><b>SW—004</b> · CURRENT</div>
+    </div>
+    <div class="info">
+      <div class="meta-eyebrow">Single · Self‑released · 05.18.2026</div>
+      <h2 class="disp">Distant <em>Lights</em></h2>
+      <div class="sub">b/w Slow Combustion · 04:12</div>
+      <p>The chorus that finally let itself be loud. A four‑minute drift between two amps, recorded over two evenings in a Highland Park living room.</p>
+      <div class="player" data-duration="252">
+        <button class="play-btn" data-playing="0" aria-label="Play / pause">
+          <svg class="ico-play" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0 L14 8 L0 16 Z"/></svg>
+          <svg class="ico-pause" viewBox="0 0 14 16" fill="currentColor"><rect x="1" width="4" height="16"/><rect x="9" width="4" height="16"/></svg>
+        </button>
+        <div class="progress"><div class="bar"><i></i><span class="dot"></span></div><div class="times"><span>01:25</span><span>04:12</span></div></div>
+      </div>
+      <ul class="tracklist">
+        <li><span class="tn">01</span><span class="tt">Distant Lights</span><span class="td">4:12</span></li>
+        <li><span class="tn">02</span><span class="tt">Slow Combustion <em class="ac">— b‑side</em></span><span class="td">3:58</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- SW-003 -->
+  <article class="disc reveal" id="sw-003" data-screen-label="Music / SW-003">
+    <div class="art">
+      <img src="assets/photos/stage-orange.jpg" alt="Hollow / Hold">
+      <div class="tag"><b>SW—003</b> · EP</div>
+    </div>
+    <div class="info">
+      <div class="meta-eyebrow">EP · Self‑released · 2025</div>
+      <h2 class="disp">Hollow / <em>Hold</em></h2>
+      <div class="sub">Six tracks · 18:44 · first one with a real drummer in the room</div>
+      <p>Made over a long winter. Louder than the demos, quieter than the live set. The EP where the project stopped pretending it was only one person.</p>
+      <ul class="tracklist">
+        <li><span class="tn">01</span><span class="tt">Hollow</span><span class="td">3:21</span></li>
+        <li><span class="tn">02</span><span class="tt">Hold</span><span class="td">2:58</span></li>
+        <li><span class="tn">03</span><span class="tt">Undertow</span><span class="td">3:40</span></li>
+        <li><span class="tn">04</span><span class="tt">Saltwater Pews</span><span class="td">2:50</span></li>
+        <li><span class="tn">05</span><span class="tt">The Echo</span><span class="td">3:05</span></li>
+        <li><span class="tn">06</span><span class="tt">Hold <em class="ac">— reprise</em></span><span class="td">2:50</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- SW-002 -->
+  <article class="disc reveal" id="sw-002" data-screen-label="Music / SW-002">
+    <div class="art">
+      <img src="assets/photos/stage-red.jpg" alt="Tidewater">
+      <div class="tag"><b>SW—002</b> · SINGLE</div>
+    </div>
+    <div class="info">
+      <div class="meta-eyebrow">Single · Self‑released · 2024</div>
+      <h2 class="disp"><em>Tidewater</em></h2>
+      <div class="sub">03:51 · the long erosion · the B‑side never released</div>
+      <p>A single about staying in one place long enough to be worn smooth. Written on the Jaguar, recorded once, kept on the first take.</p>
+      <ul class="tracklist">
+        <li><span class="tn">01</span><span class="tt">Tidewater</span><span class="td">3:51</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- SW-001 -->
+  <article class="disc reveal" id="sw-001" data-screen-label="Music / SW-001">
+    <div class="art">
+      <img src="assets/photos/window-guitar.jpg" alt="First Light">
+      <div class="tag"><b>SW—001</b> · DEMO</div>
+    </div>
+    <div class="info">
+      <div class="meta-eyebrow">Demo · Self‑released · 2023</div>
+      <h2 class="disp">First <em>Light</em></h2>
+      <div class="sub">02:48 · archived · the first honest one</div>
+      <p>The demo that started it. A Tuesday, a chord, and a chord that did not let go. Left rough on purpose.</p>
+      <ul class="tracklist">
+        <li><span class="tn">01</span><span class="tt">First Light</span><span class="td">2:48</span></li>
+      </ul>
+    </div>
+  </article>
+
+</main>
+
+<footer class="foot">
+  <div class="compact">
+    <div class="quote">Some songs were built to be loud only because the quiet underneath wouldn't sit still.</div>
+    <div><h4>Listen</h4><ul><li><a href="#">Spotify</a></li><li><a href="#">Apple Music</a></li><li><a href="#">Bandcamp</a></li><li><a href="#">YouTube</a></li></ul></div>
+    <div><h4>Elsewhere</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">Newsletter</a></li></ul></div>
+    <div><h4>Booking</h4><ul><li><a href="mailto:hello@sullenwaves.com">hello@sullenwaves.com</a></li></ul></div>
+  </div>
+  <div class="credits">
+    <div class="end disp">The <em>End.</em></div>
+    <div class="scroll">
+      <div class="row"><div class="role">Written, Directed &amp; Performed by</div><div>Alex Pratsyuk</div></div>
+      <div class="row"><div class="role">Drums on selected reels</div><div>D. Liang</div></div>
+      <div class="row"><div class="role">Photography</div><div>S. Vela</div></div>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Sullen Waves · Los Angeles</span>
+    <span>Music · SW—001 through SW—004</span>
+  </div>
+</footer>
+
+<div id="sw-tweaks-root"></div>
+
+<script src="site.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks-app.jsx"></script>
+
+</body>
+</html>

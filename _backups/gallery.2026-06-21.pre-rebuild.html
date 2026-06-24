@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-grain="on" data-ticker="on" data-letterbox="off" data-sprockets="off" data-hotspots="on" data-reveal="on" data-footer="compact" data-italics="off" data-catalog="chapters">
+<head>
+<meta charset="utf-8">
+<title>Sullen Waves — Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sullen.css">
+<script>
+  window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "#c9a25c",
+    "logoFont": "Italiana",
+    "italics": false,
+    "grain": true,
+    "letterbox": false,
+    "sprockets": false,
+    "creditsFooter": false,
+    "ticker": true,
+    "hotspots": true,
+    "reveal": true,
+    "heroPhoto": "window-guitar"
+  }/*EDITMODE-END*/;
+  window.SWApply = function (v) {
+    var r = document.documentElement;
+    r.setAttribute("data-grain", v.grain ? "on" : "off");
+    r.setAttribute("data-ticker", v.ticker ? "on" : "off");
+    r.setAttribute("data-letterbox", v.letterbox ? "on" : "off");
+    r.setAttribute("data-sprockets", v.sprockets ? "on" : "off");
+    r.setAttribute("data-hotspots", v.hotspots ? "on" : "off");
+    r.setAttribute("data-reveal", v.reveal ? "on" : "off");
+    r.setAttribute("data-footer", v.creditsFooter ? "credits" : "compact");
+    r.setAttribute("data-italics", v.italics ? "on" : "off");
+    r.style.setProperty("--accent", v.accent || "#c9a25c");
+    var fonts = { Italiana: '"Italiana", serif', Playfair: '"Playfair Display", serif', Cormorant: '"Cormorant Garamond", serif', Cinzel: '"Cinzel", serif' };
+    r.style.setProperty("--logo-font", fonts[v.logoFont] || fonts.Italiana);
+    r.style.setProperty("--hero-img", 'url("assets/photos/' + (v.heroPhoto || "window-guitar") + '.jpg")');
+  };
+  (function () {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem("sw_tweaks") || "{}"); } catch (e) {}
+    window.SW_STATE = Object.assign({}, window.TWEAK_DEFAULTS, saved);
+    window.SWApply(window.SW_STATE);
+  })();
+</script>
+</head>
+<body>
+
+<div class="sprocket l"><div class="stamp">REEL · 05 · STILLS</div></div>
+<div class="sprocket r"><div class="stamp">CONTACT SHEET</div></div>
+
+<header class="chrome">
+  <nav class="left">
+    <a href="index.html#listen">Listen</a>
+    <a href="music.html">Music</a>
+  </nav>
+  <a class="brand" href="index.html" aria-label="Sullen Waves, home">Sullen Waves</a>
+  <nav class="right">
+    <a href="gallery.html" aria-current="page">Gallery</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<section class="page-top" data-screen-label="Gallery / header">
+  <div class="eyebrow">Stills · 2023—2026</div>
+  <h1 class="disp">The <em>photographs</em>.</h1>
+  <p class="deck">Stage shots, studio shots, the north window, the occasional accidental Polaroid. Shot mostly on film, mostly in low light.</p>
+</section>
+
+<main class="gal">
+  <figure class="reveal"><img src="assets/photos/hero.jpg" alt="Portrait, wide"><figcaption><span>Portrait, wide</span><b>2026</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/window-guitar.jpg" alt="The window"><figcaption><span>The window</span><b>2026</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/live-sing.jpg" alt="Live, the vocal"><figcaption><span>Live, the vocal</span><b>2025</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/jaguar.jpg" alt="The Jaguar"><figcaption><span>The Jaguar</span><b>2025</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/stage-orange.jpg" alt="Stage, orange"><figcaption><span>Stage, orange</span><b>2025</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/portrait-bw.jpg" alt="Portrait, black and white"><figcaption><span>Portrait, b/w</span><b>2026</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/live-jaguar.jpg" alt="Live, Jaguar"><figcaption><span>Live, Jaguar</span><b>2025</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/motion-tele.jpg" alt="Tele, in motion"><figcaption><span>Tele, moving</span><b>2026</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/long-exposure.jpg" alt="Long exposure"><figcaption><span>Long exposure</span><b>2026</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/stage-red.jpg" alt="Stage, red"><figcaption><span>Stage, red</span><b>2024</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/live-red.jpg" alt="Live, red"><figcaption><span>Live, red</span><b>2024</b></figcaption></figure>
+  <figure class="reveal"><img src="assets/photos/window.jpg" alt="North window"><figcaption><span>North window</span><b>2026</b></figcaption></figure>
+</main>
+
+<footer class="foot">
+  <div class="compact">
+    <div class="quote">Some songs were built to be loud only because the quiet underneath wouldn't sit still.</div>
+    <div><h4>Listen</h4><ul><li><a href="#">Spotify</a></li><li><a href="#">Apple Music</a></li><li><a href="#">Bandcamp</a></li><li><a href="#">YouTube</a></li></ul></div>
+    <div><h4>Elsewhere</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">Newsletter</a></li></ul></div>
+    <div><h4>Booking</h4><ul><li><a href="mailto:hello@sullenwaves.com">hello@sullenwaves.com</a></li></ul></div>
+  </div>
+  <div class="credits">
+    <div class="end disp">The <em>End.</em></div>
+    <div class="scroll">
+      <div class="row"><div class="role">Photography</div><div>S. Vela</div></div>
+      <div class="row"><div class="role">Filmed on Location at</div><div>A north‑facing room, Highland Park, CA</div></div>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Sullen Waves · Los Angeles</span>
+    <span>Gallery · contact sheet</span>
+  </div>
+</footer>
+
+<div id="sw-tweaks-root"></div>
+
+<script src="site.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks-app.jsx"></script>
+
+</body>
+</html>
