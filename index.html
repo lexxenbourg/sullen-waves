@@ -629,6 +629,7 @@
   var play = document.getElementById("cp-play"), cur = document.getElementById("cp-cur"), dur = document.getElementById("cp-dur");
   var seek = document.getElementById("cp-seek"), hint = document.getElementById("cp-hint"), links = document.getElementById("cp-links");
   var controller = null, pending = null, lastDur = 0, scrub = false, current = null;
+  var wantPlay = false, playTries = 0, playerFailed = false;
   var APPLE = "https://music.apple.com/us/artist/sullen-waves/966765904", BANDCAMP = "https://sullenwaves.bandcamp.com";
 
   function fmt(ms) {
@@ -666,8 +667,18 @@
     setMeta(card);
     var wasOpen = placeBar(card);
     if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
-    if (controller) { controller.loadUri(card.getAttribute("data-uri")); controller.play(); } else { pending = card.getAttribute("data-uri"); }
+    var uri = card.getAttribute("data-uri");
+    if (controller) { startPlay(uri); } else { pending = uri; }
     return true;
+  }
+  // Spotify loads a new uri asynchronously, so a play() fired right after loadUri()
+  // often no-ops. We call play() immediately (warm path) and also retry on the next
+  // few playback updates (cold path), until it actually starts.
+  function startPlay(uri) {
+    if (!controller) { pending = uri; return; }
+    controller.loadUri(uri);
+    wantPlay = true; playTries = 0;
+    controller.play();
   }
   function collapse() {
     bar.classList.remove("on", "is-playing");
@@ -680,6 +691,7 @@
   cards.forEach(function (card) {
     card.addEventListener("click", function (e) {
       if (!card.getAttribute("data-uri")) return;         // forthcoming → follow link
+      if (playerFailed) return;          // Spotify embed blocked/unavailable → let the card's Spotify link open
       e.preventDefault();
       if (card === current) { collapse(); } else { select(card); }
     });
@@ -703,6 +715,10 @@
   function onUpdate(e) {
     var d = (e && e.data) ? e.data : e;
     if (!d) return;
+    if (wantPlay) {                       // retry play until the freshly-loaded track starts
+      if (!d.isPaused) { wantPlay = false; }
+      else if (playTries < 6) { playTries++; controller.play(); }
+    }
     bar.classList.toggle("is-playing", !d.isPaused);
     if (typeof d.duration === "number" && d.duration > 0) {
       lastDur = d.duration;
@@ -726,15 +742,21 @@
       { width: 300, height: 80, uri: "spotify:track:5jaqRMqzgfOYjEB6cyJLqY" },
       function (ctrl) {
         controller = ctrl;
+        playerFailed = false;             // API recovered (e.g. slow load) → re-enable in-page play
         controller.addListener("playback_update", onUpdate);
-        if (pending) { controller.loadUri(pending); controller.play(); pending = null; }
+        if (pending) { var p = pending; pending = null; startPlay(p); }
       }
     );
   };
+  // If the Spotify embed API is blocked (ad blocker / VPN / network) it never loads and
+  // the controller stays null. Detect that and fall back to opening the card's Spotify link.
+  function markFailed() { if (!controller) playerFailed = true; }
   (function () {
     var s = document.createElement("script");
     s.src = "https://open.spotify.com/embed/iframe-api/v1"; s.async = true;
+    s.onerror = markFailed;
     document.body.appendChild(s);
+    setTimeout(markFailed, 6000);
   })();
 })();
 </script>
