@@ -179,6 +179,75 @@
 </head>
 <body>
 
+<!-- intro title card: shows once per browser session, splits open to reveal the site.
+     Skippable (click / scroll / key); reduced-motion just fades. -->
+<style>
+  .sw-intro{ position:fixed; inset:0; z-index:9999; }
+  .sw-intro.done{ pointer-events:none; }
+  .swi-half{ position:absolute; left:0; right:0; height:50.5%; background:var(--ink);
+    transition:transform 1.05s cubic-bezier(.76,0,.24,1); }
+  .swi-half.top{ top:0; } .swi-half.bottom{ bottom:0; }
+  .swi-center{ position:absolute; inset:0; z-index:1; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; transition:opacity .55s ease; }
+  .swi-word{ font-family:var(--logo-font,"Italiana",serif); color:var(--paper);
+    font-size:clamp(34px,7vw,76px); letter-spacing:.02em; line-height:1;
+    opacity:0; transform:translateY(14px); transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1); }
+  .swi-rule{ width:0; height:1px; background:var(--accent); margin:20px 0 15px;
+    transition:width .9s cubic-bezier(.2,.7,.2,1) .3s; }
+  .swi-sub{ font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.32em;
+    text-transform:uppercase; color:var(--paper-dim); opacity:0; transition:opacity .8s ease .45s; }
+  .sw-intro.play .swi-word{ opacity:1; transform:none; }
+  .sw-intro.play .swi-rule{ width:min(280px,46vw); }
+  .sw-intro.play .swi-sub{ opacity:1; }
+  .sw-intro.done .swi-half.top{ transform:translateY(-100%); }
+  .sw-intro.done .swi-half.bottom{ transform:translateY(100%); }
+  .sw-intro.done .swi-center{ opacity:0; }
+  .sw-intro.reduce .swi-half{ transition:opacity .5s ease; }
+  .sw-intro.reduce.done .swi-half{ opacity:0; }
+  @media (prefers-reduced-motion: reduce){ .sw-intro .swi-word,.sw-intro .swi-rule,.sw-intro .swi-sub{ transition-duration:.4s; transition-delay:0s; } }
+</style>
+<div class="sw-intro" id="swIntro" role="presentation">
+  <div class="swi-half top"></div>
+  <div class="swi-half bottom"></div>
+  <div class="swi-center">
+    <div class="swi-word">Sullen Waves</div>
+    <div class="swi-rule"></div>
+    <div class="swi-sub">An alt / post-grunge project · Los Angeles</div>
+  </div>
+</div>
+<script>
+(function () {
+  var el = document.getElementById("swIntro");
+  if (!el) return;
+  var seen = false; try { seen = sessionStorage.getItem("sw_intro") === "1"; } catch (e) {}
+  if (seen) { if (el.parentNode) el.parentNode.removeChild(el); return; }   // repeat visit → no flash
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) el.classList.add("reduce");
+  // next frame so the .play transitions actually run
+  requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add("play"); }); });
+  var removed = false;
+  function finish() {
+    if (removed) return; removed = true;
+    el.classList.add("done");
+    try { sessionStorage.setItem("sw_intro", "1"); } catch (e) {}
+    cleanup();
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, reduce ? 600 : 1150);
+  }
+  function onKey() { finish(); }
+  function cleanup() {
+    el.removeEventListener("click", finish);
+    window.removeEventListener("keydown", onKey);
+    window.removeEventListener("wheel", finish);
+    window.removeEventListener("touchstart", finish);
+  }
+  var hold = setTimeout(finish, reduce ? 650 : 1850);
+  el.addEventListener("click", finish);
+  window.addEventListener("keydown", onKey, { once: true });
+  window.addEventListener("wheel", finish, { once: true, passive: true });
+  window.addEventListener("touchstart", finish, { once: true, passive: true });
+})();
+</script>
+
 <!-- sprocket strips (08) -->
 
 <!-- chrome -->
@@ -351,6 +420,42 @@
     .cp-eq i{ animation:none !important; }
     .cp-caret{ transition:none !important; }
   }
+  .cat-player.no-caret .cp-caret{ display:none; }
+
+  /* EP tracklist panel (Sense of Emergency) */
+  .ep-panel{ grid-column:1 / -1; position:relative; max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .55s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
+  .ep-panel.is-empty{ display:none; }
+  .ep-panel.on{ max-height:460px; opacity:1; }
+  .ep-inner{ position:relative; margin-top:18px; padding:20px 26px 10px;
+    background:var(--ink-2); border:1px solid var(--rule); border-top:2px solid var(--accent); }
+  .ep-head{ display:flex; align-items:baseline; gap:14px; padding-bottom:14px; border-bottom:1px solid var(--rule); }
+  .ep-cat{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); }
+  .ep-name{ font-size:24px; color:var(--paper); line-height:1; }
+  .ep-list{ list-style:none; margin:0; padding:4px 0 0; counter-reset:none; }
+  .ep-row{ display:flex; align-items:center; gap:16px; padding:13px 4px; cursor:pointer;
+    border-bottom:1px solid color-mix(in oklab, var(--rule) 55%, transparent); transition:background .2s ease; }
+  .ep-row:last-child{ border-bottom:0; }
+  @media (hover:hover){ .ep-row:hover{ background:color-mix(in oklab, var(--accent) 7%, transparent); } }
+  .ep-row:focus-visible{ outline:none; background:color-mix(in oklab, var(--accent) 10%, transparent); box-shadow:inset 2px 0 0 var(--accent); }
+  .ep-n{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.14em; color:var(--paper-dim); width:22px; flex:none; }
+  .ep-row:hover .ep-n, .ep-row.is-playing-row .ep-n{ color:var(--accent); }
+  .ep-t{ flex:1 1 auto; font-family:var(--logo-font); font-size:20px; color:var(--paper); line-height:1.1; }
+  .ep-row.is-playing-row .ep-t{ color:var(--accent-soft); }
+  .ep-time{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.06em; color:var(--paper-dim); flex:none; }
+  .ep-eq{ display:none; align-items:flex-end; gap:2px; height:13px; flex:none; }
+  .ep-row.is-playing-row .ep-eq{ display:inline-flex; }
+  .ep-eq i{ width:2px; height:30%; background:var(--accent); }
+  .ep-row.snd .ep-eq i{ animation:cpEq 1s ease-in-out infinite; }
+  .ep-eq i:nth-child(2){ animation-delay:-.8s; } .ep-eq i:nth-child(3){ animation-delay:-.5s; } .ep-eq i:nth-child(4){ animation-delay:-.2s; }
+  .ep-play{ flex:none; width:30px; height:30px; border-radius:50%; border:1px solid var(--rule); background:none; cursor:pointer; position:relative; transition:border-color .2s ease; }
+  .ep-row:hover .ep-play, .ep-row.is-playing-row .ep-play{ border-color:var(--accent); }
+  .ep-play::after{ content:""; position:absolute; top:50%; left:54%; transform:translate(-50%,-50%); border-left:8px solid var(--paper); border-top:5px solid transparent; border-bottom:5px solid transparent; }
+  @media (max-width:760px){
+    .ep-inner{ padding:16px; } .ep-name{ font-size:20px; } .ep-t{ font-size:17px; }
+    .ep-play{ display:none; } .ep-panel.on{ max-height:520px; }
+  }
+  @media (prefers-reduced-motion: reduce){ .ep-panel{ transition:none !important; } .ep-eq i{ animation:none !important; } }
 </style>
 <section class="vitrine v-catalog reveal" id="catalog" data-screen-label="Home / catalog">
   <div class="head">
@@ -358,41 +463,86 @@
     <div class="r">03 · Releases</div>
   </div>
   <div class="toolbar">
-    <span class="eyebrow">Five releases · 2015 to 2026</span>
+    <span class="eyebrow">Five releases</span>
   </div>
   <div class="chapter-grid" id="grid">
     <div class="ch-card is-soon" style="opacity:.78;">
       <div class="thumb"><img src="assets/photos/eftv-cover.jpg" alt="Echoes from the Void"><span class="cnum"><b>SW.05</b></span></div>
-      <div class="cbody"><h4>Echoes from the Void</h4><div class="cdesc">Single. June 26, 2026.</div></div>
+      <div class="cbody"><h4>Echoes from the Void</h4><div class="cdesc">New single. Out June 26.</div></div>
     </div>
     <a class="ch-card" href="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY" target="_blank" rel="noopener"
-       data-uri="spotify:track:5jaqRMqzgfOYjEB6cyJLqY" data-cat="SW.04 · 2025" data-title="Experience from Before"
-       data-cover="assets/covers/sw04-experience.jpg" data-spotify="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY">
+       data-uri="spotify:track:5jaqRMqzgfOYjEB6cyJLqY" data-cat="SW.04" data-title="Experience from Before"
+       data-cover="assets/covers/sw04-experience.jpg" data-audio="assets/audio/experience-from-before.mp3" data-spotify="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY">
       <div class="thumb"><img src="assets/covers/sw04-experience.jpg" alt="Experience from Before"><span class="cnum"><b>SW.04</b></span><span class="cv-play" aria-hidden="true"></span></div>
-      <div class="cbody"><h4>Experience from Before</h4><div class="cdesc">Single. 2025.</div></div>
+      <div class="cbody"><h4>Experience from Before</h4><div class="cdesc">Single</div></div>
     </a>
     <a class="ch-card" href="https://open.spotify.com/track/5cImsqOlv8GQxqNFjG4Bk2" target="_blank" rel="noopener"
-       data-uri="spotify:track:5cImsqOlv8GQxqNFjG4Bk2" data-cat="SW.03 · 2021" data-title="King of Loneliness"
-       data-cover="assets/covers/sw03-king.jpg" data-spotify="https://open.spotify.com/track/5cImsqOlv8GQxqNFjG4Bk2">
+       data-uri="spotify:track:5cImsqOlv8GQxqNFjG4Bk2" data-cat="SW.03" data-title="King of Loneliness"
+       data-cover="assets/covers/sw03-king.jpg" data-audio="assets/audio/king-of-loneliness.mp3" data-spotify="https://open.spotify.com/track/5cImsqOlv8GQxqNFjG4Bk2">
       <div class="thumb"><img src="assets/covers/sw03-king.jpg" alt="King of Loneliness"><span class="cnum"><b>SW.03</b></span><span class="cv-play" aria-hidden="true"></span></div>
-      <div class="cbody"><h4>King of Loneliness</h4><div class="cdesc">Single. 2021.</div></div>
+      <div class="cbody"><h4>King of Loneliness</h4><div class="cdesc">Single</div></div>
     </a>
-    <a class="ch-card" href="https://open.spotify.com/album/3j3DdrVQWkAanFzPiEAKAj" target="_blank" rel="noopener"
-       data-uri="spotify:track:08Fau9oeGxoIn0qQMdrA5L" data-cat="SW.02 · 2015 · EP" data-title="Sense of Emergency"
+    <a class="ch-card is-ep" href="https://open.spotify.com/album/3j3DdrVQWkAanFzPiEAKAj" target="_blank" rel="noopener"
+       data-cat="SW.02 · EP" data-title="Sense of Emergency"
        data-cover="assets/covers/sw02-emergency.jpg" data-spotify="https://open.spotify.com/album/3j3DdrVQWkAanFzPiEAKAj">
       <div class="thumb"><img src="assets/covers/sw02-emergency.jpg" alt="Sense of Emergency"><span class="cnum"><b>SW.02</b></span><span class="cv-play" aria-hidden="true"></span></div>
-      <div class="cbody"><h4>Sense of Emergency</h4><div class="cdesc">EP. 2015.</div></div>
+      <div class="cbody"><h4>Sense of Emergency</h4><div class="cdesc">EP</div></div>
     </a>
     <a class="ch-card" href="https://open.spotify.com/track/112a2sK07drqbLf3rFAwdG" target="_blank" rel="noopener"
-       data-uri="spotify:track:112a2sK07drqbLf3rFAwdG" data-cat="SW.01 · 2015" data-title="Seven"
-       data-cover="assets/covers/sw01-seven.jpg" data-spotify="https://open.spotify.com/track/112a2sK07drqbLf3rFAwdG">
+       data-uri="spotify:track:112a2sK07drqbLf3rFAwdG" data-cat="SW.01" data-title="Seven"
+       data-cover="assets/covers/sw01-seven.jpg" data-audio="assets/audio/seven.mp3" data-spotify="https://open.spotify.com/track/112a2sK07drqbLf3rFAwdG">
       <div class="thumb"><img src="assets/covers/sw01-seven.jpg" alt="Seven"><span class="cnum"><b>SW.01</b></span><span class="cv-play" aria-hidden="true"></span></div>
-      <div class="cbody"><h4>Seven</h4><div class="cdesc">Single. 2015.</div></div>
+      <div class="cbody"><h4>Seven</h4><div class="cdesc">Single</div></div>
     </a>
   </div>
 
-  <!-- inline now-playing player (custom; drives the off-screen Spotify embed). JS moves
-       this into #grid directly below the clicked card's row. -->
+  <!-- EP tracklist panel (Sense of Emergency, SW.02). Clicking the EP cover expands this
+       below its row; clicking a track plays it in the now-playing bar underneath. JS moves
+       this into #grid. Reveal-and-wait: opening does NOT auto-play. -->
+  <div class="ep-panel is-empty" id="eppanel" aria-live="polite">
+    <span class="cp-caret" aria-hidden="true"></span>
+    <div class="ep-inner">
+      <div class="ep-head">
+        <span class="ep-cat">SW.02 · EP</span>
+        <span class="ep-name disp">Sense of Emergency</span>
+      </div>
+      <ol class="ep-list">
+        <li class="ep-row" tabindex="0" role="button"
+            data-uri="spotify:track:63TQS4EIZ0jBWCdyeIis6H" data-audio="assets/audio/seven.mp3"
+            data-title="Seven" data-cat="SW.02 · EP · 1" data-cover="assets/covers/sw02-emergency.jpg"
+            data-spotify="https://open.spotify.com/track/63TQS4EIZ0jBWCdyeIis6H">
+          <span class="ep-n">01</span><span class="ep-t">Seven</span>
+          <span class="ep-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="ep-time">2:40</span>
+          <button class="ep-play" type="button" tabindex="-1" aria-hidden="true"></button>
+        </li>
+        <li class="ep-row" tabindex="0" role="button"
+            data-uri="spotify:track:3C7pX1a7ySb33xxCfZFWt7" data-audio="assets/audio/dean.m4a"
+            data-title="Dean" data-cat="SW.02 · EP · 2" data-cover="assets/covers/sw02-emergency.jpg"
+            data-spotify="https://open.spotify.com/track/3C7pX1a7ySb33xxCfZFWt7">
+          <span class="ep-n">02</span><span class="ep-t">Dean</span>
+          <span class="ep-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="ep-time">4:01</span>
+          <button class="ep-play" type="button" tabindex="-1" aria-hidden="true"></button>
+        </li>
+        <li class="ep-row" tabindex="0" role="button"
+            data-uri="spotify:track:08Fau9oeGxoIn0qQMdrA5L" data-audio="assets/audio/sense-of-emergency.m4a"
+            data-title="Sense of Emergency" data-cat="SW.02 · EP · 3" data-cover="assets/covers/sw02-emergency.jpg"
+            data-spotify="https://open.spotify.com/track/08Fau9oeGxoIn0qQMdrA5L">
+          <span class="ep-n">03</span><span class="ep-t">Sense of Emergency</span>
+          <span class="ep-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="ep-time">4:33</span>
+          <button class="ep-play" type="button" tabindex="-1" aria-hidden="true"></button>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- local-audio fallback element: used when Spotify's embed is blocked (Brave, ad-blockers) -->
+  <audio id="cp-audio" preload="none"></audio>
+
+  <!-- inline now-playing player (custom; drives the off-screen Spotify embed, or the local
+       <audio> fallback when Spotify is blocked). JS moves this into #grid below the active row. -->
   <div class="cat-player is-empty" id="catplayer" aria-live="polite">
     <span class="cp-caret" aria-hidden="true"></span>
     <div class="cp-inner">
@@ -517,6 +667,7 @@
     <a href="https://www.youtube.com/@sullenwaves" target="_blank" rel="noopener">YouTube</a>
     <a href="https://www.instagram.com/sullenwavesofficial" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.tiktok.com/@sullenwaves" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://x.com/sullenwaves" target="_blank" rel="noopener">X</a>
   </div>
 </section>
 
@@ -538,6 +689,7 @@
         <li><a href="https://www.instagram.com/sullenwavesofficial" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://www.youtube.com/@sullenwaves" target="_blank" rel="noopener">YouTube</a></li>
         <li><a href="https://www.tiktok.com/@sullenwaves" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://x.com/sullenwaves" target="_blank" rel="noopener">X</a></li>
       </ul>
     </div>
   </div>
@@ -550,7 +702,7 @@
   </div>
 
   <div class="colophon">
-    <span>© 2026 Sullen Waves · Los Angeles</span>
+    <span>© 2026 Sullen Waves</span>
     <span>Los Angeles, California</span>
   </div>
 </footer>
@@ -624,12 +776,19 @@
   var grid = document.getElementById("grid");
   var cards = [].slice.call(document.querySelectorAll(".v-catalog .ch-card"));
   var bar = document.getElementById("catplayer");
+  var ep = document.getElementById("eppanel");
+  var audio = document.getElementById("cp-audio");
   if (!grid || !bar) return;
   var img = document.getElementById("cp-img"), cat = document.getElementById("cp-cat"), title = document.getElementById("cp-title");
   var play = document.getElementById("cp-play"), cur = document.getElementById("cp-cur"), dur = document.getElementById("cp-dur");
   var seek = document.getElementById("cp-seek"), hint = document.getElementById("cp-hint"), links = document.getElementById("cp-links");
-  var controller = null, pending = null, lastDur = 0, scrub = false, current = null;
+  var controller = null, lastDur = 0, scrub = false;
   var wantPlay = false, playTries = 0, playerFailed = false;
+  var mode = "spotify";            // active engine: "spotify" | "local"
+  var current = null;              // expanded single card, or null
+  var epCard = null;               // expanded EP card, or null
+  var activeRow = null;            // playing EP track <li>, or null
+  var curSpotify = "#";            // current track's Spotify URL (used by the preview hint)
   var APPLE = "https://music.apple.com/us/artist/sullen-waves/966765904", BANDCAMP = "https://sullenwaves.bandcamp.com";
 
   function fmt(ms) {
@@ -637,94 +796,175 @@
     var s = Math.floor(ms / 1000), m = Math.floor(s / 60);
     return m + ":" + String(s % 60).padStart(2, "0");
   }
-  function setMeta(card) {
-    img.src = card.getAttribute("data-cover"); img.alt = card.getAttribute("data-title") + " cover";
-    cat.textContent = card.getAttribute("data-cat"); title.textContent = card.getAttribute("data-title");
+  // Use the local <audio> file when the Spotify embed is unavailable (blocked, or not yet loaded).
+  function useLocal() { return playerFailed || !controller; }
+  function trackOf(el) {
+    return { uri: el.getAttribute("data-uri"), audio: el.getAttribute("data-audio"),
+             cover: el.getAttribute("data-cover"), cat: el.getAttribute("data-cat"),
+             title: el.getAttribute("data-title"), spotify: el.getAttribute("data-spotify") };
+  }
+  function setMeta(t) {
+    img.src = t.cover || ""; img.alt = (t.title || "") + " cover";
+    cat.textContent = t.cat || ""; title.textContent = t.title || "";
+    curSpotify = t.spotify || "#";
     links.innerHTML =
-      '<a href="' + card.getAttribute("data-spotify") + '" target="_blank" rel="noopener">Spotify</a>' +
+      '<a href="' + curSpotify + '" target="_blank" rel="noopener">Spotify</a>' +
       '<a href="' + APPLE + '" target="_blank" rel="noopener">Apple</a>' +
       '<a href="' + BANDCAMP + '" target="_blank" rel="noopener">Bandcamp</a>';
     hint.textContent = ""; cur.textContent = "0:00"; dur.textContent = "0:00";
     seek.value = 0; seek.style.setProperty("--pct", "0%");
   }
-  // move the panel into the grid, right after the last card of the clicked card's row,
-  // and point the caret at the active card. Returns whether the panel was already open.
-  function placeBar(card) {
-    var wasOpen = bar.classList.contains("on") && !bar.classList.contains("is-empty");
-    bar.classList.add("is-empty");                        // out of flow → clean measurement
-    var top = card.offsetTop, last = card;
-    cards.forEach(function (c) { if (Math.abs(c.offsetTop - top) < 6 && c.offsetLeft >= last.offsetLeft) last = c; });
-    grid.insertBefore(bar, last.nextSibling);
-    bar.classList.remove("is-empty");
-    var gx = grid.getBoundingClientRect().left, cr = card.getBoundingClientRect();
-    bar.style.setProperty("--caret-x", (cr.left - gx + cr.width / 2) + "px");
-    return wasOpen;
-  }
-  function select(card) {
-    if (!card.getAttribute("data-uri")) return false;     // forthcoming → follow link
-    current = card;
-    cards.forEach(function (c) { c.classList.toggle("is-current", c === card); });
-    setMeta(card);
-    var wasOpen = placeBar(card);
-    if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
-    var uri = card.getAttribute("data-uri");
-    if (controller) { startPlay(uri); } else { pending = uri; }
-    return true;
-  }
-  // Spotify loads a new uri asynchronously, so a play() fired right after loadUri()
-  // often no-ops. We call play() immediately (warm path) and also retry on the next
-  // few playback updates (cold path), until it actually starts.
-  function startPlay(uri) {
-    if (!controller) { pending = uri; return; }
-    controller.loadUri(uri);
-    wantPlay = true; playTries = 0;
-    controller.play();
-  }
-  function collapse() {
-    bar.classList.remove("on", "is-playing");
-    current = null;
-    cards.forEach(function (c) { c.classList.remove("is-current"); });
-    if (controller) controller.pause();
-    setTimeout(function () { bar.classList.add("is-empty"); }, 480);
+  function setPlaying(on) {
+    bar.classList.toggle("is-playing", on);
+    if (activeRow) activeRow.classList.toggle("snd", on);
   }
 
+  // ---- placement ----
+  function rowLast(card) {
+    var top = card.offsetTop, last = card;
+    cards.forEach(function (c) { if (Math.abs(c.offsetTop - top) < 6 && c.offsetLeft >= last.offsetLeft) last = c; });
+    return last;
+  }
+  function caretTo(panel, card) {
+    var gx = grid.getBoundingClientRect().left, cr = card.getBoundingClientRect();
+    panel.style.setProperty("--caret-x", (cr.left - gx + cr.width / 2) + "px");
+  }
+  // place the now-playing bar after `node`; if `card` is given, point the caret at it, else hide caret.
+  function placeBar(node, card) {
+    var wasOpen = bar.classList.contains("on") && !bar.classList.contains("is-empty");
+    bar.classList.add("is-empty");
+    grid.insertBefore(bar, node.nextSibling);
+    bar.classList.remove("is-empty");
+    if (card) { bar.classList.remove("no-caret"); caretTo(bar, card); } else { bar.classList.add("no-caret"); }
+    return wasOpen;
+  }
+
+  // ---- engine (Spotify primary, local <audio> fallback) ----
+  function startPlay(t) {
+    if (useLocal()) {
+      mode = "local";
+      try { if (controller) controller.pause(); } catch (e) {}
+      audio.src = t.audio || "";
+      try { audio.currentTime = 0; } catch (e) {}
+      var p = audio.play(); if (p && p.catch) p.catch(function () {});
+    } else {
+      mode = "spotify";
+      try { audio.pause(); } catch (e) {}
+      controller.loadUri(t.uri);     // Spotify loads async; play() now + retry on playback_update
+      wantPlay = true; playTries = 0;
+      controller.play();
+    }
+  }
+  function enginePause() { if (mode === "local") { try { audio.pause(); } catch (e) {} } else if (controller) { controller.pause(); } }
+  function engineToggle() { if (mode === "local") { audio.paused ? audio.play() : audio.pause(); } else if (controller) { controller.togglePlay(); } }
+
+  // ---- show/hide (deferred display:none, guarded so a quick reopen isn't hidden) ----
+  function hideBar() { bar.classList.remove("on", "is-playing"); clearTimeout(bar._h); bar._h = setTimeout(function () { if (!bar.classList.contains("on")) bar.classList.add("is-empty"); }, 470); }
+  function hideEP() { if (!ep) return; ep.classList.remove("on"); clearTimeout(ep._h); ep._h = setTimeout(function () { if (!ep.classList.contains("on")) ep.classList.add("is-empty"); }, 470); }
+  function clearActiveRow() { if (activeRow) { activeRow.classList.remove("is-playing-row", "snd"); activeRow = null; } }
+
+  function collapse() {                 // close everything and stop audio
+    enginePause();
+    hideBar(); hideEP();
+    cards.forEach(function (c) { c.classList.remove("is-current"); });
+    clearActiveRow();
+    current = null; epCard = null;
+  }
+
+  // ---- singles (instant play) ----
+  function selectSingle(card) {
+    if (epCard) { hideEP(); epCard.classList.remove("is-current"); epCard = null; clearActiveRow(); }
+    current = card;
+    cards.forEach(function (c) { c.classList.toggle("is-current", c === card); });
+    setMeta(trackOf(card));
+    var wasOpen = placeBar(rowLast(card), card);
+    if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
+    startPlay(trackOf(card));
+  }
+
+  // ---- EP (reveal the tracklist and wait; tracks play on click) ----
+  function openEP(card) {
+    if (current) { enginePause(); hideBar(); current.classList.remove("is-current"); current = null; }
+    epCard = card; card.classList.add("is-current");
+    ep.classList.add("is-empty");
+    grid.insertBefore(ep, rowLast(card).nextSibling);
+    ep.classList.remove("is-empty");
+    caretTo(ep, card);
+    setTimeout(function () { ep.classList.add("on"); }, 16);
+  }
+  function playEPTrack(row) {
+    if (row === activeRow) { engineToggle(); return; }   // re-click active track → toggle play/pause
+    clearActiveRow();
+    activeRow = row; row.classList.add("is-playing-row");
+    setMeta(trackOf(row));
+    var wasOpen = placeBar(ep, null);                    // sits under the EP panel, no caret
+    if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
+    startPlay(trackOf(row));
+  }
+
+  // ---- events ----
   cards.forEach(function (card) {
     card.addEventListener("click", function (e) {
-      if (!card.getAttribute("data-uri")) return;         // forthcoming → follow link
-      if (playerFailed) return;          // Spotify embed blocked/unavailable → let the card's Spotify link open
+      if (card.classList.contains("is-soon")) return;                 // forthcoming → no-op
+      if (card.classList.contains("is-ep")) { e.preventDefault(); (epCard === card) ? collapse() : openEP(card); return; }
+      if (!card.getAttribute("data-uri")) return;
       e.preventDefault();
-      if (card === current) { collapse(); } else { select(card); }
+      (card === current) ? collapse() : selectSingle(card);
     });
   });
-  play.addEventListener("click", function () { if (controller) controller.togglePlay(); });
+  if (ep) {
+    [].slice.call(ep.querySelectorAll(".ep-row")).forEach(function (row) {
+      row.addEventListener("click", function () { playEPTrack(row); });
+      row.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playEPTrack(row); } });
+    });
+  }
+  play.addEventListener("click", engineToggle);
   seek.addEventListener("input", function () {
     scrub = true;
     seek.style.setProperty("--pct", (seek.value / 10) + "%");
     cur.textContent = fmt(lastDur * (seek.value / 1000));
   });
   seek.addEventListener("change", function () {
-    if (controller && lastDur) controller.seek(Math.round((lastDur * (seek.value / 1000)) / 1000));
+    if (mode === "local") { if (audio.duration) audio.currentTime = audio.duration * (seek.value / 1000); }
+    else if (controller && lastDur) { controller.seek(Math.round((lastDur * (seek.value / 1000)) / 1000)); }
     scrub = false;
   });
   var rz;
   window.addEventListener("resize", function () {
-    if (!current) return;
-    clearTimeout(rz); rz = setTimeout(function () { placeBar(current); }, 150);
+    clearTimeout(rz);
+    rz = setTimeout(function () {
+      if (epCard) { grid.insertBefore(ep, rowLast(epCard).nextSibling); caretTo(ep, epCard); if (activeRow) placeBar(ep, null); }
+      else if (current) placeBar(rowLast(current), current);
+    }, 150);
   });
 
+  // ---- local <audio> events (drive the same UI as Spotify) ----
+  audio.addEventListener("loadedmetadata", function () { if (mode !== "local") return; lastDur = (audio.duration || 0) * 1000; dur.textContent = fmt(lastDur); });
+  audio.addEventListener("timeupdate", function () {
+    if (mode !== "local" || scrub) return;
+    var pos = audio.currentTime * 1000;
+    cur.textContent = fmt(pos);
+    if (lastDur) { var pct = Math.min(1000, Math.round((pos / lastDur) * 1000)); seek.value = pct; seek.style.setProperty("--pct", (pct / 10) + "%"); }
+  });
+  audio.addEventListener("play", function () { if (mode === "local") setPlaying(true); });
+  audio.addEventListener("pause", function () { if (mode === "local") setPlaying(false); });
+  audio.addEventListener("ended", function () { if (mode === "local") { setPlaying(false); seek.value = 0; seek.style.setProperty("--pct", "0%"); cur.textContent = "0:00"; } });
+
+  // ---- Spotify iFrame API ----
   function onUpdate(e) {
+    if (mode !== "spotify") return;
     var d = (e && e.data) ? e.data : e;
     if (!d) return;
     if (wantPlay) {                       // retry play until the freshly-loaded track starts
       if (!d.isPaused) { wantPlay = false; }
       else if (playTries < 6) { playTries++; controller.play(); }
     }
-    bar.classList.toggle("is-playing", !d.isPaused);
+    setPlaying(!d.isPaused);
     if (typeof d.duration === "number" && d.duration > 0) {
       lastDur = d.duration;
       dur.textContent = fmt(d.duration);
       hint.innerHTML = (d.duration <= 31000)
-        ? 'Preview · <a href="' + (current ? current.getAttribute("data-spotify") : "#") + '" target="_blank" rel="noopener">full track on Spotify</a>'
+        ? 'Preview · <a href="' + curSpotify + '" target="_blank" rel="noopener">full track on Spotify</a>'
         : '';
     }
     if (!scrub && typeof d.position === "number") {
@@ -735,21 +975,19 @@
       }
     }
   }
-
   window.onSpotifyIframeApiReady = function (IFrameAPI) {
     IFrameAPI.createController(
       document.getElementById("sp-host"),
       { width: 300, height: 80, uri: "spotify:track:5jaqRMqzgfOYjEB6cyJLqY" },
       function (ctrl) {
         controller = ctrl;
-        playerFailed = false;             // API recovered (e.g. slow load) → re-enable in-page play
+        playerFailed = false;             // API loaded (even if slow) → prefer Spotify next play
         controller.addListener("playback_update", onUpdate);
-        if (pending) { var p = pending; pending = null; startPlay(p); }
       }
     );
   };
-  // If the Spotify embed API is blocked (ad blocker / VPN / network) it never loads and
-  // the controller stays null. Detect that and fall back to opening the card's Spotify link.
+  // If the Spotify embed API is blocked (Brave Shields / ad-blocker / VPN) it never loads;
+  // mark failed so playback falls back to the in-page local <audio> instead of opening a new tab.
   function markFailed() { if (!controller) playerFailed = true; }
   (function () {
     var s = document.createElement("script");

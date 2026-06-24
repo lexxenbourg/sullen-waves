@@ -364,8 +364,7 @@ em.ac, .ac{ font-family:"Cormorant Garamond", serif; font-style:italic; color:va
 .foot .compact{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.2em; color:var(--paper-dim); text-transform:uppercase; }
 .foot .compact h4{ color:var(--accent); margin-bottom:14px; font-weight:500; letter-spacing:.3em; font-size:10px; }
 .foot .compact ul{ list-style:none; line-height:2; }
-.foot .compact .quote{ font-family:"Cormorant Garamond", serif; font-style:italic; font-size:22px; color:var(--paper); text-transform:none; letter-spacing:0; line-height:1.45; max-width:32ch; }
-.foot .compact .quote::before{ content:"\201C"; color:var(--accent); font-size:46px; vertical-align:-8px; margin-right:6px; }
+.foot .compact .quote{ font-family:"Cormorant Garamond", serif; font-style:italic; font-size:22px; color:var(--paper); text-transform:none; letter-spacing:0; line-height:1.45; max-width:34ch; }
 .foot .credits{ display:none; text-align:center; padding:20px 0 0; }
 .foot .credits .end{ font-family:var(--logo-font); font-size:clamp(60px,10vw,170px); line-height:.95; margin-bottom:54px; }
 .foot .credits .end em{ font-family:"Cormorant Garamond", serif; font-style:italic; color:var(--accent); }
