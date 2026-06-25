@@ -30,12 +30,8 @@
   .pk-kicker{ font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:18px; }
   .pk-name{ font-family:"Bodoni Moda", serif; font-weight:400; font-optical-sizing:auto; font-size:clamp(42px,7vw,72px); letter-spacing:-0.01em; line-height:1; color:var(--paper); margin:0 0 12px; }
   .pk-desc{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:30px; }
-  .pk-introgrid{ display:grid; grid-template-columns:1.35fr 0.65fr; gap:52px; align-items:start; }
-  .pk-bio{ font-size:21px; line-height:1.62; color:var(--paper); }
+  .pk-bio{ font-size:21px; line-height:1.62; color:var(--paper); max-width:62ch; }
   .pk-bio em{ font-style:italic; color:var(--accent-soft); }
-  .pk-introphoto{ position:relative; }
-  .pk-introphoto img{ width:100%; aspect-ratio:4/5; object-fit:cover; border:1px solid var(--rule); filter:grayscale(.12) contrast(1.03); display:block; }
-  .pk-introphoto figcaption{ font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--paper-dim); margin-top:9px; }
 
   /* fact sheet */
   .pk-facts{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); }
@@ -58,16 +54,17 @@
   .pk-track.is-playing .pk-tt{ color:var(--accent-soft); }
   .pk-badge{ font-family:"JetBrains Mono", monospace; font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:2px 6px; flex:none; }
   .pk-tm{ font-family:"JetBrains Mono", monospace; font-size:11px; color:var(--paper-dim); flex:none; }
-  .pk-bar{ position:relative; height:5px; background:var(--rule); margin:18px 6px 0; cursor:pointer; }
+  .pk-bar{ position:relative; height:4px; background:var(--rule); margin:18px 6px 0; cursor:pointer; transition:height .15s ease; }
+  .pk-bar:hover{ height:6px; }
   .pk-bar i{ display:block; position:relative; height:100%; width:0; background:var(--accent); pointer-events:none; }
   .pk-bar i::after{ content:""; position:absolute; right:-5px; top:50%; transform:translateY(-50%); width:11px; height:11px; border-radius:50%; background:var(--accent); opacity:0; transition:opacity .2s ease; }
   .pk-bar:hover i::after{ opacity:1; }
 
   /* quotes */
-  .pk-quotes{ display:grid; grid-template-columns:1fr 1fr; gap:42px 56px; }
-  .pk-quote p{ font-family:"Bodoni Moda", serif; font-weight:500; font-size:21px; line-height:1.55; font-style:italic; color:var(--paper); margin:0 0 14px; }
-  .pk-quote cite{ display:flex; align-items:center; gap:12px; font-family:"JetBrains Mono", monospace; font-style:normal; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); }
-  .pk-quote cite::before{ content:""; width:22px; height:1px; background:var(--accent); flex:none; }
+  .pk-quotes{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .pk-quote{ border-left:2px solid var(--accent); padding:4px 0 4px 20px; }
+  .pk-quote p{ font-family:"Bodoni Moda", serif; font-weight:500; font-size:20px; line-height:1.55; font-style:italic; color:var(--paper); margin:0 0 12px; }
+  .pk-quote cite{ font-family:"JetBrains Mono", monospace; font-style:normal; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); }
   .pk-quote cite a{ color:var(--accent); text-decoration:none; }
 
   /* photos */
@@ -89,8 +86,7 @@
   .pk-foot{ padding:30px 0 48px; display:flex; justify-content:space-between; font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); }
 
   @media (max-width:720px){
-    .pk-introgrid{ grid-template-columns:1fr; gap:30px; }
-    .pk-facts{ grid-template-columns:1fr; } .pk-quotes{ grid-template-columns:1fr; gap:34px; }
+    .pk-facts{ grid-template-columns:1fr; } .pk-quotes{ grid-template-columns:1fr; }
     .pk-photos{ grid-template-columns:repeat(2,1fr); } .pk-thumb{ display:none; }
     .pk-foot{ flex-direction:column; gap:8px; }
   }
@@ -111,10 +107,7 @@
     <span class="pk-kicker">Press Kit</span>
     <h1 class="pk-name">Sullen Waves</h1>
     <div class="pk-desc">Alternative · Grunge · Post-rock — Los Angeles</div>
-    <div class="pk-introgrid">
-      <p class="pk-bio">Sullen Waves is the project of Los Angeles musician Alex Pratsyuk. Formed in 2014 and now a solo undertaking, it takes its name from two things held together — <em>sullen</em> for mood, <em>waves</em> for sound frequency. Pratsyuk writes music first and lets vocals and lyrics follow, a method that runs from the 2015 single &ldquo;Seven&rdquo; and the <em>Sense of Emergency</em> EP through &ldquo;King of Loneliness&rdquo; (2021) and the 2025 single &ldquo;Experience from Before&rdquo; — a song he carried unfinished for years and released without smoothing its original edges. The new single &ldquo;Echoes from the Void&rdquo; arrives June 26, 2026.</p>
-      <figure class="pk-introphoto"><img src="assets/photos/studio-portrait-bw.jpg" alt="Alex Pratsyuk, Sullen Waves"><figcaption>Alex Pratsyuk</figcaption></figure>
-    </div>
+    <p class="pk-bio">Sullen Waves is the project of Los Angeles musician Alex Pratsyuk. Formed in 2014 and now a solo undertaking, it takes its name from two things held together — <em>sullen</em> for mood, <em>waves</em> for sound frequency. Pratsyuk writes music first and lets vocals and lyrics follow, a method that runs from the 2015 single &ldquo;Seven&rdquo; and the <em>Sense of Emergency</em> EP through &ldquo;King of Loneliness&rdquo; (2021) and the 2025 single &ldquo;Experience from Before&rdquo; — a song he carried unfinished for years and released without smoothing its original edges. The new single &ldquo;Echoes from the Void&rdquo; arrives June 26, 2026.</p>
   </section>
 
   <!-- FACTS -->
@@ -133,7 +126,7 @@
   <!-- LISTEN -->
   <section class="pk-sec">
     <div class="pk-h"><h2>Listen</h2><span class="ix">02 · Music</span></div>
-    <div class="pk-note">Full tracks, no login. &ldquo;Echoes from the Void&rdquo; is a pre-release advance.</div>
+    <div class="pk-note">Full tracks · no login required · &ldquo;Echoes from the Void&rdquo; is an advance, pre-release listen</div>
     <div id="pk-list">
       <div class="pk-track" data-audio="assets/audio/seven.m4a" data-title="Seven" data-cover="assets/covers/sw01-seven.jpg">
         <button class="pk-play" type="button" aria-label="Play Seven"></button>
