@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="final">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sullen Waves — Press Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sullen.css">
+<style>
+  :root{ --logo-font:"Italiana", serif; --wordmark-font:"Italiana", serif; --body-font:"Cormorant Garamond", serif; }
+  html.final body{ font-family:"Cormorant Garamond", serif; }
+  .pk-wrap{ max-width:960px; margin:0 auto; padding:0 26px; }
+  .mono, .pk-eyebrow, .pk-kicker{ font-family:"JetBrains Mono", monospace; }
+
+  /* header */
+  .pk-head{ display:flex; align-items:center; justify-content:space-between; padding:26px 0 22px; border-bottom:1px solid var(--rule); }
+  .pk-head .brand{ font-family:var(--wordmark-font); font-size:23px; letter-spacing:.38em; color:var(--paper); text-transform:uppercase; text-decoration:none; }
+  .pk-head .tag{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); }
+
+  /* section scaffold */
+  .pk-sec{ padding:54px 0; border-bottom:1px solid var(--rule); }
+  .pk-h{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:26px; }
+  .pk-h h2{ font-family:var(--logo-font); font-weight:400; font-size:30px; color:var(--paper); letter-spacing:.01em; }
+  .pk-h .ix{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--paper-dim); }
+
+  /* lede / bio */
+  .pk-kicker{ font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:18px; }
+  .pk-name{ font-family:var(--logo-font); font-size:clamp(46px,9vw,92px); line-height:.96; color:var(--paper); margin:0 0 12px; }
+  .pk-desc{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:30px; }
+  .pk-bio{ font-size:21px; line-height:1.62; color:var(--paper); max-width:62ch; }
+  .pk-bio em{ font-style:italic; color:var(--accent-soft); }
+
+  /* fact sheet */
+  .pk-facts{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); }
+  .pk-fact{ background:var(--ink); padding:18px 20px; }
+  .pk-fact dt{ font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:.26em; text-transform:uppercase; color:var(--accent); margin-bottom:7px; }
+  .pk-fact dd{ margin:0; font-size:18px; color:var(--paper); line-height:1.3; }
+
+  /* listen */
+  .pk-note{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:18px; }
+  .pk-track{ display:flex; align-items:center; gap:16px; padding:12px 6px; border-bottom:1px solid color-mix(in oklab, var(--rule) 60%, transparent); cursor:pointer; transition:background .2s ease; }
+  .pk-track:last-child{ border-bottom:0; }
+  .pk-track:hover{ background:color-mix(in oklab, var(--accent) 7%, transparent); }
+  .pk-track .pk-play{ flex:none; width:34px; height:34px; border-radius:50%; border:1px solid var(--rule); background:none; position:relative; transition:border-color .2s ease; }
+  .pk-track:hover .pk-play, .pk-track.is-playing .pk-play{ border-color:var(--accent); }
+  .pk-track .pk-play::after{ content:""; position:absolute; top:50%; left:54%; transform:translate(-50%,-50%); border-left:9px solid var(--paper); border-top:5.5px solid transparent; border-bottom:5.5px solid transparent; }
+  .pk-track.is-playing .pk-play::after{ border:0; width:8px; height:8px; background:var(--accent); border-radius:1px; left:50%; }
+  .pk-thumb{ width:42px; height:42px; flex:none; object-fit:cover; border:1px solid var(--rule); }
+  .pk-tn{ font-family:"JetBrains Mono", monospace; font-size:11px; color:var(--paper-dim); width:20px; flex:none; }
+  .pk-tt{ flex:1 1 auto; font-family:var(--logo-font); font-size:21px; color:var(--paper); }
+  .pk-track.is-playing .pk-tt{ color:var(--accent-soft); }
+  .pk-badge{ font-family:"JetBrains Mono", monospace; font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:2px 6px; flex:none; }
+  .pk-tm{ font-family:"JetBrains Mono", monospace; font-size:11px; color:var(--paper-dim); flex:none; }
+  .pk-bar{ height:2px; background:var(--rule); margin:14px 6px 0; }
+  .pk-bar i{ display:block; height:100%; width:0; background:var(--accent); }
+
+  /* quotes */
+  .pk-quotes{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .pk-quote{ border-left:2px solid var(--accent); padding:4px 0 4px 20px; }
+  .pk-quote p{ font-size:21px; line-height:1.5; font-style:italic; color:var(--paper); margin:0 0 12px; }
+  .pk-quote cite{ font-family:"JetBrains Mono", monospace; font-style:normal; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); }
+  .pk-quote cite a{ color:var(--accent); text-decoration:none; }
+
+  /* photos */
+  .pk-photos{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .pk-photo{ position:relative; display:block; overflow:hidden; border:1px solid var(--rule); aspect-ratio:4/5; }
+  .pk-photo img{ width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease; filter:grayscale(.15); }
+  .pk-photo:hover img{ transform:scale(1.04); filter:grayscale(0); }
+  .pk-photo .dl{ position:absolute; left:0; right:0; bottom:0; padding:9px 12px; background:linear-gradient(0deg, rgba(8,7,10,.86), transparent); font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--paper); display:flex; justify-content:space-between; align-items:center; }
+  .pk-photo .dl b{ color:var(--accent); font-weight:400; }
+
+  /* link rows + contact */
+  .pk-links{ display:flex; flex-wrap:wrap; gap:10px 28px; }
+  .pk-links a{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--paper-dim); text-decoration:none; transition:color .2s ease; }
+  .pk-links a:hover{ color:var(--accent); }
+  .pk-contact a{ font-family:var(--logo-font); font-size:clamp(26px,5vw,44px); color:var(--paper); text-decoration:none; border-bottom:1px solid var(--rule); transition:color .2s ease, border-color .2s ease; }
+  .pk-contact a:hover{ color:var(--accent); border-color:var(--accent); }
+  .pk-contact .role{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:16px; }
+
+  .pk-foot{ padding:30px 0 48px; display:flex; justify-content:space-between; font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); }
+
+  @media (max-width:720px){
+    .pk-facts{ grid-template-columns:1fr; } .pk-quotes{ grid-template-columns:1fr; }
+    .pk-photos{ grid-template-columns:repeat(2,1fr); } .pk-thumb{ display:none; }
+    .pk-foot{ flex-direction:column; gap:8px; }
+  }
+  @media (prefers-reduced-motion: reduce){ .pk-photo img{ transition:none; } }
+</style>
+</head>
+<body>
+
+<div class="pk-wrap">
+
+  <header class="pk-head">
+    <a class="brand" href="index.html">Sullen Waves</a>
+    <span class="tag">Electronic Press Kit</span>
+  </header>
+
+  <!-- BIO -->
+  <section class="pk-sec">
+    <span class="pk-kicker">Press Kit</span>
+    <h1 class="pk-name">Sullen Waves</h1>
+    <div class="pk-desc">Alternative · Grunge · Post-rock — Los Angeles</div>
+    <p class="pk-bio">Sullen Waves is the project of Los Angeles musician Alex Pratsyuk. Formed in 2014 and now a solo undertaking, it takes its name from two things held together — <em>sullen</em> for mood, <em>waves</em> for sound frequency. Pratsyuk writes music first and lets vocals and lyrics follow, a method that runs from the 2015 single &ldquo;Seven&rdquo; and the <em>Sense of Emergency</em> EP through &ldquo;King of Loneliness&rdquo; (2021) and the 2025 single &ldquo;Experience from Before&rdquo; — a song he carried unfinished for years and released without smoothing its original edges. The new single &ldquo;Echoes from the Void&rdquo; arrives June 26, 2026.</p>
+  </section>
+
+  <!-- FACTS -->
+  <section class="pk-sec">
+    <div class="pk-h"><h2>At a glance</h2><span class="ix">01 · Facts</span></div>
+    <dl class="pk-facts">
+      <div class="pk-fact"><dt>Project</dt><dd>Solo project of Alex Pratsyuk</dd></div>
+      <div class="pk-fact"><dt>Formed</dt><dd>2014 · Los Angeles, CA</dd></div>
+      <div class="pk-fact"><dt>Genre</dt><dd>Alternative / grunge / post-rock</dd></div>
+      <div class="pk-fact"><dt>For fans of</dt><dd>Alice in Chains, Smashing Pumpkins, Queens of the Stone Age</dd></div>
+      <div class="pk-fact"><dt>New single</dt><dd>&ldquo;Echoes from the Void&rdquo; — June 26, 2026</dd></div>
+      <div class="pk-fact"><dt>Live</dt><dd>The Viper Room, Los Angeles (2015)</dd></div>
+    </dl>
+  </section>
+
+  <!-- LISTEN -->
+  <section class="pk-sec">
+    <div class="pk-h"><h2>Listen</h2><span class="ix">02 · Music</span></div>
+    <div class="pk-note">Full tracks · no login required · &ldquo;Echoes from the Void&rdquo; is an advance, pre-release listen</div>
+    <div id="pk-list">
+      <div class="pk-track" data-audio="assets/audio/seven.mp3" data-title="Seven" data-cover="assets/covers/sw01-seven.jpg">
+        <button class="pk-play" type="button" aria-label="Play Seven"></button>
+        <img class="pk-thumb" src="assets/covers/sw01-seven.jpg" alt=""><span class="pk-tn">01</span>
+        <span class="pk-tt">Seven</span><span class="pk-tm">2:40</span>
+      </div>
+      <div class="pk-track" data-audio="assets/audio/dean.m4a" data-title="Dean" data-cover="assets/covers/sw02-emergency.jpg">
+        <button class="pk-play" type="button" aria-label="Play Dean"></button>
+        <img class="pk-thumb" src="assets/covers/sw02-emergency.jpg" alt=""><span class="pk-tn">02</span>
+        <span class="pk-tt">Dean</span><span class="pk-tm">4:01</span>
+      </div>
+      <div class="pk-track" data-audio="assets/audio/sense-of-emergency.m4a" data-title="Sense of Emergency" data-cover="assets/covers/sw02-emergency.jpg">
+        <button class="pk-play" type="button" aria-label="Play Sense of Emergency"></button>
+        <img class="pk-thumb" src="assets/covers/sw02-emergency.jpg" alt=""><span class="pk-tn">03</span>
+        <span class="pk-tt">Sense of Emergency</span><span class="pk-tm">4:33</span>
+      </div>
+      <div class="pk-track" data-audio="assets/audio/king-of-loneliness.mp3" data-title="King of Loneliness" data-cover="assets/covers/sw03-king.jpg">
+        <button class="pk-play" type="button" aria-label="Play King of Loneliness"></button>
+        <img class="pk-thumb" src="assets/covers/sw03-king.jpg" alt=""><span class="pk-tn">04</span>
+        <span class="pk-tt">King of Loneliness</span><span class="pk-tm">4:52</span>
+      </div>
+      <div class="pk-track" data-audio="assets/audio/experience-from-before.mp3" data-title="Experience from Before" data-cover="assets/covers/sw04-experience.jpg">
+        <button class="pk-play" type="button" aria-label="Play Experience from Before"></button>
+        <img class="pk-thumb" src="assets/covers/sw04-experience.jpg" alt=""><span class="pk-tn">05</span>
+        <span class="pk-tt">Experience from Before</span><span class="pk-tm">2:45</span>
+      </div>
+      <div class="pk-track" data-audio="assets/audio/echoes-from-the-void.mp3" data-title="Echoes from the Void" data-cover="assets/photos/eftv-cover.jpg">
+        <button class="pk-play" type="button" aria-label="Play Echoes from the Void"></button>
+        <img class="pk-thumb" src="assets/photos/eftv-cover.jpg" alt=""><span class="pk-tn">06</span>
+        <span class="pk-tt">Echoes from the Void</span><span class="pk-badge">Advance</span><span class="pk-tm">2:52</span>
+      </div>
+    </div>
+    <div class="pk-bar"><i id="pk-prog"></i></div>
+    <audio id="pk-audio" preload="none"></audio>
+  </section>
+
+  <!-- PRESS -->
+  <section class="pk-sec">
+    <div class="pk-h"><h2>Press</h2><span class="ix">03 · Quotes</span></div>
+    <div class="pk-quotes">
+      <blockquote class="pk-quote">
+        <p>This is a cathartic return to origins, loud, gritty and absolutely necessary.</p>
+        <cite><a href="https://lastdaydeaf.com/listening-now-sullen-waves-experience-from-before/" target="_blank" rel="noopener">Last Day Deaf</a></cite>
+      </blockquote>
+      <blockquote class="pk-quote">
+        <p>There&rsquo;s an aggressiveness and an emotional intensity that defines these songs.</p>
+        <cite><a href="https://v13.net/2025/04/sullen-waves-experience-from-before-single-premiere/" target="_blank" rel="noopener">V13</a></cite>
+      </blockquote>
+      <blockquote class="pk-quote">
+        <p>Heavy, fuzzed-out guitars with a restrained emotional undercurrent &mdash; a rawness that feels both intentional and unfiltered.</p>
+        <cite><a href="https://lastdaydeaf.com/listening-now-sullen-waves-experience-from-before/" target="_blank" rel="noopener">Last Day Deaf</a></cite>
+      </blockquote>
+      <blockquote class="pk-quote">
+        <p>Intentionally rough around the edges, the band&rsquo;s sound has been shaped by years of exploration.</p>
+        <cite><a href="https://v13.net/2025/04/sullen-waves-experience-from-before-single-premiere/" target="_blank" rel="noopener">V13</a></cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="pk-sec">
+    <div class="pk-h"><h2>Photos</h2><span class="ix">04 · Press images</span></div>
+    <div class="pk-note">Click any image to download (right-click &rarr; Save also works)</div>
+    <div class="pk-photos">
+      <a class="pk-photo" href="assets/photos/jaguar.jpg" download><img src="assets/photos/jaguar.jpg" alt="Sullen Waves portrait"><span class="dl">Portrait <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/studio-portrait-bw.jpg" download><img src="assets/photos/studio-portrait-bw.jpg" alt="Studio portrait"><span class="dl">Studio <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/live-sing.jpg" download><img src="assets/photos/live-sing.jpg" alt="Live"><span class="dl">Live <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/portrait-warm.jpg" download><img src="assets/photos/portrait-warm.jpg" alt="Portrait"><span class="dl">Portrait <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/red-wall-archtop.jpg" download><img src="assets/photos/red-wall-archtop.jpg" alt="With guitar"><span class="dl">Guitar <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/long-exposure.jpg" download><img src="assets/photos/long-exposure.jpg" alt="Long exposure"><span class="dl">Motion <b>JPG</b></span></a>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section class="pk-sec">
+    <div class="pk-h"><h2>Find the music</h2><span class="ix">05 · Links</span></div>
+    <div class="pk-links" style="margin-bottom:22px;">
+      <a href="https://open.spotify.com/artist/0ovc0euj1pJrgx8vfhrrQD" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://music.apple.com/us/artist/sullen-waves/966765904" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://sullenwaves.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+    </div>
+    <div class="pk-links">
+      <a href="https://www.instagram.com/sullenwavesofficial" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@sullenwaves" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.tiktok.com/@sullenwaves" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://x.com/sullenwaves" target="_blank" rel="noopener">X</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="pk-sec" style="border-bottom:0;">
+    <div class="pk-h"><h2>Contact</h2><span class="ix">06 · Booking &amp; press</span></div>
+    <p class="pk-contact"><span class="role">Booking &amp; press</span>
+      <a href="mailto:contact@sullenwaves.com">contact@sullenwaves.com</a></p>
+  </section>
+
+  <footer class="pk-foot">
+    <span>Sullen Waves · Los Angeles</span>
+    <span>Press kit · 2026</span>
+  </footer>
+
+</div>
+
+<script>
+/* Press-kit listen player — one shared <audio>, full self-hosted tracks (no login). */
+(function () {
+  var audio = document.getElementById("pk-audio");
+  var prog = document.getElementById("pk-prog");
+  var rows = [].slice.call(document.querySelectorAll("#pk-list .pk-track"));
+  if (!audio || !rows.length) return;
+  var active = null;
+
+  function play(row) {
+    if (row === active) { audio.paused ? audio.play() : audio.pause(); return; }
+    if (active) active.classList.remove("is-playing");
+    active = row; row.classList.add("is-playing");
+    audio.src = row.getAttribute("data-audio");
+    prog.style.width = "0%";
+    var p = audio.play(); if (p && p.catch) p.catch(function () {});
+  }
+  rows.forEach(function (row) {
+    row.addEventListener("click", function () { play(row); });
+  });
+  audio.addEventListener("timeupdate", function () {
+    if (!audio.duration) return;
+    prog.style.width = Math.min(100, (audio.currentTime / audio.duration) * 100) + "%";
+  });
+  audio.addEventListener("ended", function () {
+    if (active) active.classList.remove("is-playing");
+    active = null; prog.style.width = "0%";
+  });
+  audio.addEventListener("pause", function () { if (active) active.classList.remove("is-playing"); });
+  audio.addEventListener("play", function () { if (active) active.classList.add("is-playing"); });
+})();
+</script>
+
+</body>
+</html>
