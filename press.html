@@ -30,12 +30,13 @@
   .pk-kicker{ font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:18px; }
   .pk-name{ font-family:"Bodoni Moda", serif; font-weight:400; font-optical-sizing:auto; font-size:clamp(42px,7vw,72px); letter-spacing:-0.01em; line-height:1; color:var(--paper); margin:0 0 12px; }
   .pk-desc{ font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--paper-dim); margin-bottom:30px; }
-  .pk-introgrid{ display:grid; grid-template-columns:1.35fr 0.65fr; gap:52px; align-items:start; }
+  .pk-herogrid{ display:grid; grid-template-columns:1.32fr 0.68fr; gap:54px; align-items:stretch; }
+  .pk-heroleft{ min-width:0; }
   .pk-bio{ font-size:21px; line-height:1.62; color:var(--paper); }
   .pk-bio em{ font-style:italic; color:var(--accent-soft); }
-  .pk-introphoto{ position:relative; }
-  .pk-introphoto img{ width:100%; aspect-ratio:4/5; object-fit:cover; border:1px solid var(--rule); filter:grayscale(.12) contrast(1.03); display:block; }
-  .pk-introphoto figcaption{ font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--paper-dim); margin-top:9px; }
+  .pk-introphoto{ display:flex; flex-direction:column; height:100%; margin:0; }
+  .pk-introphoto img{ width:100%; flex:1 1 auto; min-height:360px; object-fit:cover; object-position:center 28%; border:1px solid var(--rule); filter:grayscale(.12) contrast(1.03); display:block; }
+  .pk-introphoto figcaption{ font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--paper-dim); margin-top:9px; flex:none; }
 
   /* fact sheet */
   .pk-facts{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); }
@@ -89,7 +90,8 @@
   .pk-foot{ padding:30px 0 48px; display:flex; justify-content:space-between; font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); }
 
   @media (max-width:720px){
-    .pk-introgrid{ grid-template-columns:1fr; gap:30px; }
+    .pk-herogrid{ grid-template-columns:1fr; gap:30px; }
+    .pk-introphoto{ height:auto; } .pk-introphoto img{ aspect-ratio:4/5; flex:none; min-height:0; }
     .pk-facts{ grid-template-columns:1fr; } .pk-quotes{ grid-template-columns:1fr; gap:34px; }
     .pk-photos{ grid-template-columns:repeat(2,1fr); } .pk-thumb{ display:none; }
     .pk-foot{ flex-direction:column; gap:8px; }
@@ -108,11 +110,13 @@
 
   <!-- BIO -->
   <section class="pk-sec">
-    <span class="pk-kicker">Press Kit</span>
-    <h1 class="pk-name">Sullen Waves</h1>
-    <div class="pk-desc">Alternative · Grunge · Post-rock — Los Angeles</div>
-    <div class="pk-introgrid">
-      <p class="pk-bio">Sullen Waves is the project of Los Angeles musician Alex Pratsyuk. Formed in 2014 and now a solo undertaking, it takes its name from two things held together — <em>sullen</em> for mood, <em>waves</em> for sound frequency. Pratsyuk writes music first and lets vocals and lyrics follow, a method that runs from the 2015 single &ldquo;Seven&rdquo; and the <em>Sense of Emergency</em> EP through &ldquo;King of Loneliness&rdquo; (2021) and the 2025 single &ldquo;Experience from Before&rdquo; — a song he carried unfinished for years and released without smoothing its original edges. The new single &ldquo;Echoes from the Void&rdquo; arrives June 26, 2026.</p>
+    <div class="pk-herogrid">
+      <div class="pk-heroleft">
+        <span class="pk-kicker">Press Kit</span>
+        <h1 class="pk-name">Sullen Waves</h1>
+        <div class="pk-desc">Alternative · Grunge · Post-rock — Los Angeles</div>
+        <p class="pk-bio">Sullen Waves is the project of Los Angeles musician Alex Pratsyuk. Formed in 2014 and now a solo undertaking, it runs heavy and unpolished, and stays that way by choice. Pratsyuk writes music first and lets vocals and lyrics follow, a method that runs from the 2015 single &ldquo;Seven&rdquo; and the <em>Sense of Emergency</em> EP through &ldquo;King of Loneliness&rdquo; (2021) and the 2025 single &ldquo;Experience from Before&rdquo; — a song he carried unfinished for years and released without smoothing its original edges. The new single &ldquo;Echoes from the Void&rdquo; arrives June 26, 2026.</p>
+      </div>
       <figure class="pk-introphoto"><img src="assets/photos/studio-portrait-bw.jpg" alt="Alex Pratsyuk, Sullen Waves"><figcaption>Alex Pratsyuk</figcaption></figure>
     </div>
   </section>
@@ -198,12 +202,15 @@
     <div class="pk-h"><h2>Photos</h2><span class="ix">04 · Press images</span></div>
     <div class="pk-note">Click any image to download (right-click &rarr; Save also works)</div>
     <div class="pk-photos">
-      <a class="pk-photo" href="assets/photos/jaguar.jpg" download><img src="assets/photos/jaguar.jpg" alt="Sullen Waves portrait"><span class="dl">Portrait <b>JPG</b></span></a>
-      <a class="pk-photo" href="assets/photos/studio-portrait-bw.jpg" download><img src="assets/photos/studio-portrait-bw.jpg" alt="Studio portrait"><span class="dl">Studio <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/jaguar.jpg" download><img src="assets/photos/jaguar.jpg" alt="Portrait, window"><span class="dl">Portrait <b>JPG</b></span></a>
       <a class="pk-photo" href="assets/photos/live-sing.jpg" download><img src="assets/photos/live-sing.jpg" alt="Live"><span class="dl">Live <b>JPG</b></span></a>
       <a class="pk-photo" href="assets/photos/portrait-warm.jpg" download><img src="assets/photos/portrait-warm.jpg" alt="Portrait"><span class="dl">Portrait <b>JPG</b></span></a>
       <a class="pk-photo" href="assets/photos/red-wall-archtop.jpg" download><img src="assets/photos/red-wall-archtop.jpg" alt="With guitar"><span class="dl">Guitar <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/portrait-window-bw.jpg" download><img src="assets/photos/portrait-window-bw.jpg" alt="Portrait, black and white"><span class="dl">Portrait B&amp;W <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/steps-jaguar.jpg" download><img src="assets/photos/steps-jaguar.jpg" alt="On the steps"><span class="dl">Steps <b>JPG</b></span></a>
       <a class="pk-photo" href="assets/photos/long-exposure.jpg" download><img src="assets/photos/long-exposure.jpg" alt="Long exposure"><span class="dl">Motion <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/exterior-courtyard.jpg" download><img src="assets/photos/exterior-courtyard.jpg" alt="Exterior"><span class="dl">Exterior <b>JPG</b></span></a>
+      <a class="pk-photo" href="assets/photos/stairwell-palms-bw.jpg" download><img src="assets/photos/stairwell-palms-bw.jpg" alt="Stairwell"><span class="dl">Stairwell <b>JPG</b></span></a>
     </div>
   </section>
 
