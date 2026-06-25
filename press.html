@@ -54,8 +54,11 @@
   .pk-track.is-playing .pk-tt{ color:var(--accent-soft); }
   .pk-badge{ font-family:"JetBrains Mono", monospace; font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:2px 6px; flex:none; }
   .pk-tm{ font-family:"JetBrains Mono", monospace; font-size:11px; color:var(--paper-dim); flex:none; }
-  .pk-bar{ height:2px; background:var(--rule); margin:14px 6px 0; }
-  .pk-bar i{ display:block; height:100%; width:0; background:var(--accent); }
+  .pk-bar{ position:relative; height:4px; background:var(--rule); margin:18px 6px 0; cursor:pointer; transition:height .15s ease; }
+  .pk-bar:hover{ height:6px; }
+  .pk-bar i{ display:block; position:relative; height:100%; width:0; background:var(--accent); pointer-events:none; }
+  .pk-bar i::after{ content:""; position:absolute; right:-5px; top:50%; transform:translateY(-50%); width:11px; height:11px; border-radius:50%; background:var(--accent); opacity:0; transition:opacity .2s ease; }
+  .pk-bar:hover i::after{ opacity:1; }
 
   /* quotes */
   .pk-quotes{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
@@ -125,10 +128,10 @@
     <div class="pk-h"><h2>Listen</h2><span class="ix">02 · Music</span></div>
     <div class="pk-note">Full tracks · no login required · &ldquo;Echoes from the Void&rdquo; is an advance, pre-release listen</div>
     <div id="pk-list">
-      <div class="pk-track" data-audio="assets/audio/seven.mp3" data-title="Seven" data-cover="assets/covers/sw01-seven.jpg">
+      <div class="pk-track" data-audio="assets/audio/seven.m4a" data-title="Seven" data-cover="assets/covers/sw01-seven.jpg">
         <button class="pk-play" type="button" aria-label="Play Seven"></button>
         <img class="pk-thumb" src="assets/covers/sw01-seven.jpg" alt=""><span class="pk-tn">01</span>
-        <span class="pk-tt">Seven</span><span class="pk-tm">2:40</span>
+        <span class="pk-tt">Seven</span><span class="pk-tm">2:23</span>
       </div>
       <div class="pk-track" data-audio="assets/audio/dean.m4a" data-title="Dean" data-cover="assets/covers/sw02-emergency.jpg">
         <button class="pk-play" type="button" aria-label="Play Dean"></button>
@@ -247,6 +250,26 @@
   rows.forEach(function (row) {
     row.addEventListener("click", function () { play(row); });
   });
+
+  // scrubber: click or drag the bar to seek the playing track
+  var bar = document.querySelector(".pk-bar");
+  function seekAt(clientX) {
+    if (!audio.duration || !bar) return;
+    var r = bar.getBoundingClientRect();
+    var frac = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
+    audio.currentTime = frac * audio.duration;
+    prog.style.width = (frac * 100) + "%";
+  }
+  if (bar) {
+    var dragging = false;
+    bar.addEventListener("mousedown", function (e) { dragging = true; seekAt(e.clientX); e.preventDefault(); });
+    window.addEventListener("mousemove", function (e) { if (dragging) seekAt(e.clientX); });
+    window.addEventListener("mouseup", function () { dragging = false; });
+    bar.addEventListener("click", function (e) { seekAt(e.clientX); });
+    bar.addEventListener("touchstart", function (e) { if (e.touches[0]) seekAt(e.touches[0].clientX); }, { passive: true });
+    bar.addEventListener("touchmove", function (e) { if (e.touches[0]) seekAt(e.touches[0].clientX); }, { passive: true });
+  }
+
   audio.addEventListener("timeupdate", function () {
     if (!audio.duration) return;
     prog.style.width = Math.min(100, (audio.currentTime / audio.duration) * 100) + "%";
