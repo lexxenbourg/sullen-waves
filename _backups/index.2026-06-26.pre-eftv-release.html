@@ -303,16 +303,16 @@
 <section class="vitrine v-feature reveal" id="listen" data-screen-label="Home / listen">
   <div class="head">
     <h2 class="disp">New single</h2>
-    <div class="r">01 · Out now</div>
+    <div class="r">01 · Forthcoming</div>
   </div>
   <div class="feature">
-    <span class="fslug"><b>SW.05</b>·OUT NOW</span>
+    <span class="fslug"><b>SW.05</b>·JUNE 26, 2026</span>
     <span class="ftc">2026 · Single</span>
     <div class="art">
       <img src="assets/photos/eftv-cover.jpg" alt="Echoes from the Void cover art">
     </div>
     <div class="info">
-      <div class="ns">Out now</div>
+      <div class="ns">Coming June 26</div>
       <h3 class="disp">Echoes from the Void</h3>
       <div class="fmeta">
         <span><b>Release</b>June 26, 2026</span>
@@ -329,8 +329,8 @@
       </div>
     </div>
     <div class="links">
-      <a href="https://open.spotify.com/album/1D4rRYsNgT6LvHLJ8Ac7B6" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://music.apple.com/us/song/echoes-from-the-void/6782503783" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://open.spotify.com/artist/0ovc0euj1pJrgx8vfhrrQD" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://music.apple.com/us/artist/sullen-waves/966765904" target="_blank" rel="noopener">Apple Music</a>
       <a href="https://sullenwaves.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
     </div>
   </div>
@@ -472,12 +472,10 @@
     <span class="eyebrow">Five releases</span>
   </div>
   <div class="chapter-grid" id="grid">
-    <a class="ch-card" href="https://open.spotify.com/album/1D4rRYsNgT6LvHLJ8Ac7B6" target="_blank" rel="noopener"
-       data-uri="spotify:track:30Co7Qk63OVh6yE1qvMrVt" data-cat="SW.05" data-title="Echoes from the Void"
-       data-cover="assets/photos/eftv-cover.jpg" data-audio="assets/audio/echoes-from-the-void.mp3" data-spotify="https://open.spotify.com/album/1D4rRYsNgT6LvHLJ8Ac7B6">
-      <div class="thumb"><img src="assets/photos/eftv-cover.jpg" alt="Echoes from the Void"><span class="cnum"><b>SW.05</b></span><span class="cv-play" aria-hidden="true"></span></div>
-      <div class="cbody"><h4>Echoes from the Void</h4><div class="cdesc">Single</div></div>
-    </a>
+    <div class="ch-card is-soon" style="opacity:.78;">
+      <div class="thumb"><img src="assets/photos/eftv-cover.jpg" alt="Echoes from the Void"><span class="cnum"><b>SW.05</b></span></div>
+      <div class="cbody"><h4>Echoes from the Void</h4><div class="cdesc">New single. Out June 26.</div></div>
+    </div>
     <a class="ch-card" href="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY" target="_blank" rel="noopener"
        data-uri="spotify:track:5jaqRMqzgfOYjEB6cyJLqY" data-cat="SW.04" data-title="Experience from Before"
        data-cover="assets/covers/sw04-experience.jpg" data-audio="assets/audio/experience-from-before.mp3" data-spotify="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY">
@@ -726,7 +724,7 @@
      quotes below. Once it's set AND the release time has passed, the countdown is
      replaced automatically by the Spotify player. Leave it empty and the block still
      flips to "Out Now" with working links — nothing breaks either way. */
-  var EFTV_TRACK_ID = '30Co7Qk63OVh6yE1qvMrVt';
+  var EFTV_TRACK_ID = '';
 
   function markOutNow() {
     var ns = document.querySelector('.v-feature .ns');
