@@ -170,28 +170,17 @@
     .final .ch-card .thumb img,.final .chrome nav a::after{ transition:none !important; }
   }
 
-  /* ---- featured single: custom in-page player (mirrors the catalog player; no second
-         cover — the disc on the left already shows the artwork) ---- */
-  .feat-player{ display:flex; align-items:center; gap:16px; max-width:380px; margin:2px 0 4px; }
-  .feat-player .ps-play{ flex:none; width:46px; height:46px; border-radius:50%; border:1px solid var(--accent); background:none; color:var(--paper); cursor:pointer; position:relative; transition:background .25s ease, transform .15s ease-out; }
-  .feat-player .ps-play:hover{ background:color-mix(in oklab,var(--accent) 16%, transparent); }
-  .feat-player .ps-play:active{ transform:scale(.94); }
-  .feat-player .ps-play:focus-visible{ outline:none; box-shadow:0 0 0 2px var(--ink), 0 0 0 3px var(--accent); }
-  .feat-player .ps-play svg{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
-  .feat-player .ps-play .ico-pause{ display:none; }
-  .feat-player .ps-play .ico-play{ margin-left:2px; }
-  .feat-player.is-playing .ps-play .ico-play{ display:none; }
-  .feat-player.is-playing .ps-play .ico-pause{ display:block; }
-  .feat-player .ps-time{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.1em; color:var(--paper-dim); width:42px; }
-  .feat-player .ps-time.total{ text-align:right; }
-  .feat-player .ps-seek{ -webkit-appearance:none; appearance:none; flex:1; min-width:60px; height:2px; background:var(--rule); cursor:pointer; outline:none; }
-  .feat-player .ps-seek::-webkit-slider-runnable-track{ height:2px; background:linear-gradient(90deg, var(--accent) var(--pct,0%), var(--rule) var(--pct,0%)); }
-  .feat-player .ps-seek::-moz-range-progress{ height:2px; background:var(--accent); }
-  .feat-player .ps-seek::-moz-range-track{ height:2px; background:var(--rule); }
-  .feat-player .ps-seek::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:12px; height:12px; border-radius:50%; background:var(--accent); margin-top:-5px; transition:transform .15s ease; }
-  .feat-player .ps-seek:hover::-webkit-slider-thumb{ transform:scale(1.3); }
-  .feat-player .ps-seek::-moz-range-thumb{ width:12px; height:12px; border:0; border-radius:50%; background:var(--accent); }
-  .feat-hint{ min-height:12px; margin-top:9px; }
+  /* ---- EFTV countdown ---- */
+  .cd-wrap{ margin:20px 0; }
+  .cd-avail{ font-family:"JetBrains Mono",monospace; font-size:.62rem; letter-spacing:.14em;
+    text-transform:uppercase; opacity:.45; margin-bottom:12px; }
+  #eftv-countdown{ font-family:"JetBrains Mono",monospace; font-size:1.45rem;
+    letter-spacing:.04em; color:var(--paper); }
+  #eftv-countdown .cd-n{ font-weight:400; }
+  #eftv-countdown .cd-l{ font-weight:300; opacity:.38; font-size:.8em; margin-left:2px; }
+  #eftv-countdown .cd-sep{ opacity:.22; margin:0 6px; }
+  #eftv-countdown .cd-now{ font-size:.8rem; letter-spacing:.2em; text-transform:uppercase;
+    opacity:.65; font-weight:300; }
 </style>
 </head>
 <body>
@@ -330,23 +319,13 @@
         <span><b>Format</b>Single</span>
         <span><b>Cat</b>SW.05</span>
       </div>
-      <!-- Custom in-page player. Drives the SAME off-screen Spotify embed as the catalog
-           player (counts as a stream), and falls back to the local file if Spotify is
-           blocked. Wired by the catalog player script at the bottom of the page. -->
+      <!-- On release, JS replaces this .embed block with the Spotify player
+           (see EFTV_TRACK_ID in the script at the bottom of the page). -->
       <div class="embed">
-        <div class="feat-player" id="featplayer"
-             data-uri="spotify:track:30Co7Qk63OVh6yE1qvMrVt"
-             data-audio="assets/audio/echoes-from-the-void.mp3"
-             data-spotify="https://open.spotify.com/album/1D4rRYsNgT6LvHLJ8Ac7B6">
-          <button class="ps-play" id="fp-play" type="button" aria-label="Play Echoes from the Void">
-            <svg class="ico-play" width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0 L15 8.5 L0 17 Z"/></svg>
-            <svg class="ico-pause" width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><rect x="1" width="4" height="16"/><rect x="9" width="4" height="16"/></svg>
-          </button>
-          <span class="ps-time ps-cur" id="fp-cur">0:00</span>
-          <input class="ps-seek" id="fp-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">
-          <span class="ps-time total ps-dur" id="fp-dur">0:00</span>
+        <div class="cd-wrap">
+          <div class="cd-avail">Available June 26 · Spotify · Apple Music · Bandcamp</div>
+          <div id="eftv-countdown"></div>
         </div>
-        <div class="cp-hint feat-hint" id="fp-hint"></div>
       </div>
     </div>
     <div class="links">
@@ -738,6 +717,62 @@
 
 <script src="site.js"></script>
 
+<script>
+/* ---- EFTV countdown + auto-embed — targets midnight PDT June 26, 2026 ---- */
+(function () {
+  var RELEASE = new Date('2026-06-26T07:00:00Z');
+
+  /* RELEASE DAY: paste the Spotify track ID for "Echoes from the Void" between the
+     quotes below. Once it's set AND the release time has passed, the countdown is
+     replaced automatically by the Spotify player. Leave it empty and the block still
+     flips to "Out Now" with working links — nothing breaks either way. */
+  var EFTV_TRACK_ID = '30Co7Qk63OVh6yE1qvMrVt';
+
+  function markOutNow() {
+    var ns = document.querySelector('.v-feature .ns');
+    if (ns) ns.textContent = 'Out now';
+    var slug = document.querySelector('.fslug');
+    if (slug) slug.innerHTML = '<b>SW.05</b>·OUT NOW';
+  }
+  function showPlayer() {
+    var wrap = document.querySelector('.v-feature .embed');
+    if (!wrap || wrap.querySelector('iframe')) return;
+    wrap.innerHTML =
+      '<iframe src="https://open.spotify.com/embed/track/' + EFTV_TRACK_ID +
+      '?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" ' +
+      'loading="lazy" title="Echoes from the Void on Spotify" ' +
+      'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    var diff = RELEASE - Date.now();
+    var el = document.getElementById('eftv-countdown');
+    if (diff <= 0) {
+      markOutNow();
+      if (EFTV_TRACK_ID) { showPlayer(); }
+      else if (el) { el.innerHTML = '<span class="cd-now">Out Now</span>'; }
+      clearInterval(window._cdTimer);
+      return;
+    }
+    if (!el) return;
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    el.innerHTML =
+      '<span class="cd-unit"><span class="cd-n">' + pad(d) + '</span><span class="cd-l">d</span></span>' +
+      '<span class="cd-sep"> · </span>' +
+      '<span class="cd-unit"><span class="cd-n">' + pad(h) + '</span><span class="cd-l">h</span></span>' +
+      '<span class="cd-sep"> · </span>' +
+      '<span class="cd-unit"><span class="cd-n">' + pad(m) + '</span><span class="cd-l">m</span></span>';
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    tick();
+    window._cdTimer = setInterval(tick, 30000);
+  });
+})();
+</script>
+
 <!-- off-screen Spotify controller host for the catalog player -->
 <div class="sp-offscreen" aria-hidden="true"><div id="sp-host"></div></div>
 <script>
@@ -764,21 +799,6 @@
   var curSpotify = "#";            // current track's Spotify URL (used by the preview hint)
   var APPLE = "https://music.apple.com/us/artist/sullen-waves/966765904", BANDCAMP = "https://sullenwaves.bandcamp.com";
 
-  // ---- two display surfaces share ONE engine (only one thing ever plays at a time):
-  //      the catalog now-playing bar, and the featured "New single" player up top. ----
-  var fpEl = document.getElementById("featplayer");
-  var catUI = {
-    cur: cur, dur: dur, seek: seek, hint: hint,
-    setPlaying: function (on) { bar.classList.toggle("is-playing", on); if (activeRow) activeRow.classList.toggle("snd", on); }
-  };
-  var featUI = fpEl ? {
-    cur: document.getElementById("fp-cur"), dur: document.getElementById("fp-dur"),
-    seek: document.getElementById("fp-seek"), hint: document.getElementById("fp-hint"),
-    setPlaying: function (on) { fpEl.classList.toggle("is-playing", on); }
-  } : null;
-  var ui = catUI;                  // active display surface
-  var featLoaded = false;          // true while the featured player is the loaded source
-
   function fmt(ms) {
     if (!ms || ms < 0) ms = 0;
     var s = Math.floor(ms / 1000), m = Math.floor(s / 60);
@@ -802,7 +822,10 @@
     hint.textContent = ""; cur.textContent = "0:00"; dur.textContent = "0:00";
     seek.value = 0; seek.style.setProperty("--pct", "0%");
   }
-  function setPlaying(on) { ui.setPlaying(on); }
+  function setPlaying(on) {
+    bar.classList.toggle("is-playing", on);
+    if (activeRow) activeRow.classList.toggle("snd", on);
+  }
 
   // ---- placement ----
   function rowLast(card) {
@@ -858,7 +881,6 @@
 
   // ---- singles (instant play) ----
   function selectSingle(card) {
-    stopFeat();
     if (epCard) { hideEP(); epCard.classList.remove("is-current"); epCard = null; clearActiveRow(); }
     current = card;
     cards.forEach(function (c) { c.classList.toggle("is-current", c === card); });
@@ -880,32 +902,12 @@
   }
   function playEPTrack(row) {
     if (row === activeRow) { engineToggle(); return; }   // re-click active track → toggle play/pause
-    stopFeat();
     clearActiveRow();
     activeRow = row; row.classList.add("is-playing-row");
     setMeta(trackOf(row));
     var wasOpen = placeBar(ep, null);                    // sits under the EP panel, no caret
     if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
     startPlay(trackOf(row));
-  }
-
-  // ---- featured "New single" player (top of page; shares this same engine) ----
-  function stopFeat() {
-    if (!featLoaded) return;
-    enginePause();
-    if (featUI) featUI.setPlaying(false);
-    featLoaded = false; ui = catUI;
-  }
-  function featSelect() {
-    if (!featUI) return;
-    if (featLoaded) { engineToggle(); return; }   // already loaded → toggle play/pause
-    collapse();                                   // stop & close any catalog playback first
-    ui = featUI; featLoaded = true;
-    var t = trackOf(fpEl);
-    curSpotify = t.spotify || "#";
-    ui.hint.innerHTML = ""; ui.cur.textContent = "0:00"; ui.dur.textContent = "0:00";
-    ui.seek.value = 0; ui.seek.style.setProperty("--pct", "0%");
-    startPlay(t);
   }
 
   // ---- events ----
@@ -925,21 +927,16 @@
     });
   }
   play.addEventListener("click", engineToggle);
-  if (featUI) document.getElementById("fp-play").addEventListener("click", featSelect);
-  function wireSeek(seekEl, curEl) {
-    seekEl.addEventListener("input", function () {
-      scrub = true;
-      seekEl.style.setProperty("--pct", (seekEl.value / 10) + "%");
-      curEl.textContent = fmt(lastDur * (seekEl.value / 1000));
-    });
-    seekEl.addEventListener("change", function () {
-      if (mode === "local") { if (audio.duration) audio.currentTime = audio.duration * (seekEl.value / 1000); }
-      else if (controller && lastDur) { controller.seek(Math.round((lastDur * (seekEl.value / 1000)) / 1000)); }
-      scrub = false;
-    });
-  }
-  wireSeek(seek, cur);
-  if (featUI) wireSeek(featUI.seek, featUI.cur);
+  seek.addEventListener("input", function () {
+    scrub = true;
+    seek.style.setProperty("--pct", (seek.value / 10) + "%");
+    cur.textContent = fmt(lastDur * (seek.value / 1000));
+  });
+  seek.addEventListener("change", function () {
+    if (mode === "local") { if (audio.duration) audio.currentTime = audio.duration * (seek.value / 1000); }
+    else if (controller && lastDur) { controller.seek(Math.round((lastDur * (seek.value / 1000)) / 1000)); }
+    scrub = false;
+  });
   var rz;
   window.addEventListener("resize", function () {
     clearTimeout(rz);
@@ -950,16 +947,16 @@
   });
 
   // ---- local <audio> events (drive the same UI as Spotify) ----
-  audio.addEventListener("loadedmetadata", function () { if (mode !== "local") return; lastDur = (audio.duration || 0) * 1000; ui.dur.textContent = fmt(lastDur); });
+  audio.addEventListener("loadedmetadata", function () { if (mode !== "local") return; lastDur = (audio.duration || 0) * 1000; dur.textContent = fmt(lastDur); });
   audio.addEventListener("timeupdate", function () {
     if (mode !== "local" || scrub) return;
     var pos = audio.currentTime * 1000;
-    ui.cur.textContent = fmt(pos);
-    if (lastDur) { var pct = Math.min(1000, Math.round((pos / lastDur) * 1000)); ui.seek.value = pct; ui.seek.style.setProperty("--pct", (pct / 10) + "%"); }
+    cur.textContent = fmt(pos);
+    if (lastDur) { var pct = Math.min(1000, Math.round((pos / lastDur) * 1000)); seek.value = pct; seek.style.setProperty("--pct", (pct / 10) + "%"); }
   });
   audio.addEventListener("play", function () { if (mode === "local") setPlaying(true); });
   audio.addEventListener("pause", function () { if (mode === "local") setPlaying(false); });
-  audio.addEventListener("ended", function () { if (mode === "local") { setPlaying(false); ui.seek.value = 0; ui.seek.style.setProperty("--pct", "0%"); ui.cur.textContent = "0:00"; } });
+  audio.addEventListener("ended", function () { if (mode === "local") { setPlaying(false); seek.value = 0; seek.style.setProperty("--pct", "0%"); cur.textContent = "0:00"; } });
 
   // ---- Spotify iFrame API ----
   function onUpdate(e) {
@@ -973,16 +970,16 @@
     setPlaying(!d.isPaused);
     if (typeof d.duration === "number" && d.duration > 0) {
       lastDur = d.duration;
-      ui.dur.textContent = fmt(d.duration);
-      ui.hint.innerHTML = (d.duration <= 31000)
+      dur.textContent = fmt(d.duration);
+      hint.innerHTML = (d.duration <= 31000)
         ? 'Preview · <a href="' + curSpotify + '" target="_blank" rel="noopener">full track on Spotify</a>'
         : '';
     }
     if (!scrub && typeof d.position === "number") {
-      ui.cur.textContent = fmt(d.position);
+      cur.textContent = fmt(d.position);
       if (lastDur) {
         var pct = Math.min(1000, Math.round((d.position / lastDur) * 1000));
-        ui.seek.value = pct; ui.seek.style.setProperty("--pct", (pct / 10) + "%");
+        seek.value = pct; seek.style.setProperty("--pct", (pct / 10) + "%");
       }
     }
   }
