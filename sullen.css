@@ -365,6 +365,10 @@ em.ac, .ac{ font-family:"Cormorant Garamond", serif; font-style:italic; color:va
 .foot .compact h4,
 .foot .compact h2{ color:var(--accent); margin-bottom:14px; font-weight:500; letter-spacing:.3em; font-size:10px; }
 .foot .compact ul{ list-style:none; line-height:2; }
+.foot .compact li a{ display:inline-flex; align-items:center; gap:9px; transition:color .25s; }
+.foot .compact li a:hover{ color:var(--accent); }
+.foot .compact li a .pi{ width:13px; height:13px; flex:none; fill:currentColor; opacity:.82; transition:opacity .25s; }
+.foot .compact li a:hover .pi{ opacity:1; }
 .foot .compact .quote{ font-family:"Cormorant Garamond", serif; font-style:italic; font-size:22px; color:var(--paper); text-transform:none; letter-spacing:0; line-height:1.45; max-width:40ch; text-wrap:balance; }
 .foot .credits{ display:none; text-align:center; padding:20px 0 0; }
 .foot .credits .end{ font-family:var(--logo-font); font-size:clamp(60px,10vw,170px); line-height:.95; margin-bottom:54px; }
