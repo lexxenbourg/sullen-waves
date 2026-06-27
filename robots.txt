@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /press.html
+Disallow: /player-proto.html
+
+Sitemap: https://sullenwaves.com/sitemap.xml
