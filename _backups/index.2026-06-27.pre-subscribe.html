@@ -768,58 +768,20 @@
 
 
 <!-- VII · REACH (telephone) -->
-<section class="vitrine reveal" id="reach" data-screen-label="Home / mailing list">
+<section class="vitrine v-tel reveal" id="reach" data-screen-label="Home / reach">
   <div class="head">
-    <h2 class="disp">Hear it first</h2>
-    <div class="r">Mailing list</div>
+    <h2 class="disp">Listen and follow</h2>
   </div>
-  <p class="lede">Word on new releases and shows, sent rarely.</p>
-
-  <form class="sub-form" id="subForm" novalidate>
-    <label class="sub-sr" for="subEmail">Email address</label>
-    <input class="sub-input" id="subEmail" name="email_address" type="email" required autocomplete="email" placeholder="Email address" inputmode="email">
-    <button class="sub-btn" type="submit">Subscribe</button>
-  </form>
-  <p class="sub-note">Confirm by email. Unsubscribe anytime.</p>
-  <p class="sub-status" id="subStatus" role="status" aria-live="polite"></p>
-
-  <style>
-    #reach .lede{ font-family:"Space Grotesk", sans-serif; font-style:normal; font-size:18px; line-height:1.55; letter-spacing:.01em; color:var(--paper-dim); max-width:46ch; margin:0 auto; text-align:center; }
-    #reach .sub-form{ display:flex; align-items:stretch; max-width:480px; margin:36px auto 0; border:1px solid var(--rule); transition:border-color .3s; }
-    #reach .sub-form:focus-within{ border-color:var(--accent); }
-    #reach .sub-form.is-done{ display:none; }
-    #reach .sub-input{ flex:1 1 auto; min-width:0; background:transparent; border:0; color:var(--paper); font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; padding:15px 16px; }
-    #reach .sub-input:focus{ outline:none; }
-    #reach .sub-input::placeholder{ color:var(--paper-faint); letter-spacing:.18em; text-transform:uppercase; opacity:1; }
-    #reach .sub-btn{ flex:0 0 auto; background:transparent; border:0; border-left:1px solid var(--rule); color:var(--accent); font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.3em; text-transform:uppercase; padding:15px 26px; cursor:pointer; transition:background .3s,color .3s; }
-    #reach .sub-btn:hover,#reach .sub-btn:focus-visible{ background:var(--accent); color:var(--ink); outline:none; }
-    #reach .sub-note{ font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.28em; color:var(--paper-faint); text-transform:uppercase; margin-top:14px; text-align:center; }
-    #reach .sub-status{ font-family:"Space Grotesk", sans-serif; font-style:normal; font-size:17px; letter-spacing:.01em; color:var(--accent-soft); margin-top:20px; min-height:1.3em; text-align:center; }
-    #reach .sub-status.is-error{ color:#c98a8a; }
-    #reach .sub-sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
-    @media (max-width:560px){
-      #reach .sub-form{ flex-wrap:wrap; }
-      #reach .sub-input{ flex:1 0 100%; text-align:center; }
-      #reach .sub-btn{ flex:1 0 100%; border-left:0; border-top:1px solid var(--rule); }
-    }
-  </style>
-  <script>
-  (function(){
-    var f=document.getElementById('subForm'), s=document.getElementById('subStatus'), inp=document.getElementById('subEmail');
-    if(!f) return;
-    f.addEventListener('submit', function(e){
-      e.preventDefault();
-      var email=(inp.value||'').trim();
-      if(!email || !inp.checkValidity()){ inp.focus(); return; }
-      s.classList.remove('is-error'); s.textContent='Sending...';
-      var data=new FormData(); data.append('email_address', email);
-      fetch('https://app.kit.com/forms/9619498/subscriptions', { method:'POST', headers:{'Accept':'application/json'}, body:data })
-        .then(function(r){ if(!r.ok) throw new Error('http'); return r.json().catch(function(){ return {status:'success'}; }); })
-        .then(function(){ f.classList.add('is-done'); var n=document.querySelector('#reach .sub-note'); if(n) n.style.display='none'; s.textContent='Thank you. Check your inbox to confirm your subscription.'; })
-        .catch(function(){ s.classList.add('is-error'); s.textContent='Something went wrong. Please try again, or write to contact@sullenwaves.com.'; });
-    });
-  })();
-  </script>
+  <p class="lede">Streaming and social, in the usual places.</p>
+  <div class="lines">
+    <a href="https://open.spotify.com/artist/0ovc0euj1pJrgx8vfhrrQD" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/sullen-waves/966765904" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://sullenwaves.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+    <a href="https://www.youtube.com/@sullenwaves" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.instagram.com/sullenwavesofficial" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.tiktok.com/@sullenwaves" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://x.com/sullenwaves" target="_blank" rel="noopener">X</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
