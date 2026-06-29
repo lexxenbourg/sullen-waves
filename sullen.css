@@ -32,7 +32,12 @@ html, body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
-body{ overflow-x:hidden; }
+/* Prevent horizontal scroll WITHOUT making <body> a scroll container. `overflow-x:hidden`
+   forces the body's computed overflow-y to `auto`, which on iOS Safari breaks position:fixed
+   children (the fixed .chrome navbar scrolls away instead of staying pinned). `overflow-x:clip`
+   clips the same overflow but keeps overflow-y `visible`, so the fixed header stays put.
+   `hidden` is kept first as a fallback for the rare browser without `clip` support. */
+body{ overflow-x:hidden; overflow-x:clip; }
 ::selection{ background:var(--rust); color:var(--paper); }
 a{ color:inherit; text-decoration:none; }
 img{ display:block; max-width:100%; }
