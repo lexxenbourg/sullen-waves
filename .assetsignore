@@ -1,0 +1,9 @@
+# Files kept in the git repo for history, but NOT published to the live site.
+# wrangler reads this on `pages deploy`; these paths are excluded from the upload.
+_backups
+player-proto.html
+*.jsx
+.claude
+.gitignore
+.DS_Store
+**/.DS_Store
