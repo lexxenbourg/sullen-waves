@@ -25,76 +25,10 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
-  // ---- unified fake player + persistent now-playing bar ----
-  function initPlayer() {
-    var TRACK = { title: "Distant Lights", meta: "Sullen Waves \u00b7 SW\u2014004", dur: 252 };
-    var pos = Math.round(TRACK.dur * 0.34), playing = false, timer = null;
-
-    var bar = document.createElement("div");
-    bar.className = "nowbar";
-    bar.innerHTML =
-      '<button class="play-btn nb-play" data-playing="0" aria-label="Play / pause">' +
-        '<svg class="ico-play" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0 L14 8 L0 16 Z"/></svg>' +
-        '<svg class="ico-pause" viewBox="0 0 14 16" fill="currentColor"><rect x="1" width="4" height="16"/><rect x="9" width="4" height="16"/></svg>' +
-      '</button>' +
-      '<div class="nb-meta"><b>' + TRACK.title + '</b><span>' + TRACK.meta + '</span></div>' +
-      '<div class="nb-prog"><div class="bar"><i></i><span class="dot"></span></div></div>' +
-      '<div class="nb-time"><span class="cur">01:25</span> / 04:12</div>' +
-      '<a class="nb-link" href="#">Spotify \u2197</a>' +
-      '<button class="nb-x" aria-label="Hide player">\u2715</button>';
-    document.body.appendChild(bar);
-
-    var playBtns = [].slice.call(document.querySelectorAll(".play-btn"));
-    var fills = [].slice.call(document.querySelectorAll(".player .bar i, .nowbar .bar i"));
-    var dots = [].slice.call(document.querySelectorAll(".player .bar .dot, .nowbar .bar .dot"));
-    var curs = [].slice.call(document.querySelectorAll(".player .times span:first-child, .nowbar .nb-time .cur"));
-
-    // build audio-reactive waveforms (v2)
-    var waves = [].slice.call(document.querySelectorAll(".wave"));
-    waves.forEach(function (w) {
-      if (w.children.length) return;
-      var n = parseInt(w.getAttribute("data-bars") || "66", 10), html = "";
-      for (var i = 0; i < n; i++) {
-        var a = Math.abs(Math.sin(i * 0.7) + Math.sin(i * 0.13) * 0.6 + Math.sin(i * 0.37) * 0.35);
-        var h = Math.max(14, Math.min(100, 16 + Math.round(a * 62)));
-        html += '<i style="height:' + h + '%;animation-delay:' + (-(i % 9) * 0.11).toFixed(2) + 's"></i>';
-      }
-      w.innerHTML = html;
-    });
-
-    var tracks = [].slice.call(document.querySelectorAll(".player .bar, .nowbar .bar, .wave"));
-
-    function render() {
-      var pct = Math.min(100, (pos / TRACK.dur) * 100);
-      fills.forEach(function (el) { el.style.width = pct + "%"; });
-      dots.forEach(function (el) { el.style.left = pct + "%"; });
-      curs.forEach(function (el) { el.textContent = fmt(pos); });
-      waves.forEach(function (w) {
-        var bs = w.children, n = bs.length, lit = Math.round(n * pos / TRACK.dur);
-        for (var i = 0; i < n; i++) bs[i].classList.toggle("on", i < lit);
-      });
-      playBtns.forEach(function (b) { b.setAttribute("data-playing", playing ? "1" : "0"); });
-    }
-    function show() { bar.classList.add("show"); document.body.classList.add("has-nowbar"); }
-    function play() { playing = true; document.body.classList.add("is-playing"); show(); if (!timer) timer = setInterval(tick, 1000); render(); }
-    function pause() { playing = false; document.body.classList.remove("is-playing"); clearInterval(timer); timer = null; render(); }
-    function tick() { pos += 1; if (pos >= TRACK.dur) pos = 0; render(); }
-
-    playBtns.forEach(function (b) {
-      b.addEventListener("click", function (e) { e.preventDefault(); playing ? pause() : play(); });
-    });
-    tracks.forEach(function (t) {
-      t.addEventListener("click", function (e) {
-        var r = t.getBoundingClientRect();
-        pos = Math.max(0, Math.min(TRACK.dur, Math.round(((e.clientX - r.left) / r.width) * TRACK.dur)));
-        show(); render();
-      });
-    });
-    bar.querySelector(".nb-x").addEventListener("click", function () {
-      pause(); bar.classList.remove("show"); document.body.classList.remove("has-nowbar");
-    });
-    render();
-  }
+  // NOTE: the old prototype "now-playing bar" (initPlayer / .nowbar, fake "Distant Lights"
+  // placeholder track) was removed 2026-06-29. The real player is the Spotify-backed catalog
+  // player + featured player wired in index.html; this fake bar was dead code that still got
+  // injected into <body> and could surface over page content. Do not reintroduce it.
 
   // ---- newsletter ----
   function initForms() {
@@ -169,7 +103,7 @@
     io.observe(track.closest(".marquee"));
   }
 
-  function init() { initReveals(); initPlayer(); initForms(); initParallax(); initIntro(); initMarquee(); }
+  function init() { initReveals(); initForms(); initParallax(); initIntro(); initMarquee(); }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else { init(); }
