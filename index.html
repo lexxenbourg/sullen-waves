@@ -495,7 +495,10 @@
     .cp-cover{ width:64px; height:64px; }
     .cp-id{ flex:1 1 auto; }
     .cat-player .ps-seek{ order:6; flex:1 1 100%; }
-    .cat-player.on{ max-height:260px; }
+    /* mobile stacks the inner items (cover/title row, controls, full-width seek), so the
+       open bar is ~305px tall — cap must clear that or the bottom seek row gets clipped
+       (only the gold thumb peeked through). Headroom left for a two-line title. */
+    .cat-player.on{ max-height:360px; }
   }
   @media (prefers-reduced-motion: reduce){
     .cat-player{ transition:none !important; }
