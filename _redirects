@@ -1,0 +1,6 @@
+# 301s for stale WordPress-era URLs still in Google's index (pre-2026 site).
+# Reclaims old backlink equity instead of dead-ending on the 404 page.
+/about /#about 301
+/about/ /#about 301
+/albums/* /#catalog 301
+/sitemap_index.xml /sitemap.xml 301
