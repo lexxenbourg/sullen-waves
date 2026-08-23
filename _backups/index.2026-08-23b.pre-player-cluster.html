@@ -854,7 +854,6 @@
   var controller = null, lastDur = 0, scrub = false;
   var wantPlay = false, playTries = 0, playerFailed = false;
   var spWatch = null, spStarted = false, curTrack = null;   // Spotify "did it actually start?" watchdog
-  var playSeq = 0;                 // load generation; stale watchdogs/updates must not act
   var mode = "spotify";            // active engine: "spotify" | "local"
   var current = null;              // expanded single card, or null
   var epCard = null;               // expanded EP card, or null
@@ -924,26 +923,17 @@
 
   // ---- engine (Spotify primary, local <audio> fallback) ----
   function playLocal(t) {
-    mode = "local"; wantPlay = false;
+    mode = "local";
     try { if (controller) controller.pause(); } catch (e) {}
     audio.src = t.audio || "";
     try { audio.currentTime = 0; } catch (e) {}
-    var p = audio.play();
-    if (p && p.catch) p.catch(function () {
-      // iOS/WebKit: a play() fired from the watchdog timer is outside the user-activation
-      // window and rejects. Say so instead of sitting silent at 0:00.
-      if (mode !== "local") return;
-      setPlaying(false);
-      ui.hint.textContent = "Tap play to listen";
-    });
+    var p = audio.play(); if (p && p.catch) p.catch(function () {});
   }
   function startPlay(t) {
-    var seq = ++playSeq;
     curTrack = t; clearTimeout(spWatch); lastDur = 0;
     if (useLocal()) { playLocal(t); return; }          // embed blocked / not loaded
     mode = "spotify"; spStarted = false;
     try { audio.pause(); } catch (e) {}
-    try { controller.pause(); } catch (e) {}  // silence the old track so its late updates read paused
     controller.loadUri(t.uri);     // Spotify loads async; play() now + retry on playback_update
     wantPlay = true; playTries = 0;
     controller.play();
@@ -951,16 +941,11 @@
     // logged-out listeners. If Spotify hasn't actually started in a couple seconds,
     // fall back to the self-hosted file so the visitor still hears the song.
     spWatch = setTimeout(function () {
-      if (seq === playSeq && mode === "spotify" && !spStarted && t.audio) { playLocal(t); }
+      if (mode === "spotify" && !spStarted && t.audio) { playLocal(t); }
     }, 2800);
   }
-  function enginePause() { clearTimeout(spWatch); wantPlay = false; if (mode === "local") { try { audio.pause(); } catch (e) {} } else if (controller) { controller.pause(); } }
-  function engineToggle() {
-    if (mode === "local") {
-      if (audio.paused) { var p = audio.play(); if (p && p.catch) p.catch(function () {}); }
-      else audio.pause();
-    } else if (controller) { wantPlay = false; controller.togglePlay(); }  // explicit toggle owns playback now
-  }
+  function enginePause() { clearTimeout(spWatch); if (mode === "local") { try { audio.pause(); } catch (e) {} } else if (controller) { controller.pause(); } }
+  function engineToggle() { if (mode === "local") { audio.paused ? audio.play() : audio.pause(); } else if (controller) { controller.togglePlay(); } }
 
   // ---- show/hide (deferred display:none, guarded so a quick reopen isn't hidden) ----
   function hideBar() { bar.classList.remove("on", "is-playing"); clearTimeout(bar._h); bar._h = setTimeout(function () { if (!bar.classList.contains("on")) bar.classList.add("is-empty"); }, 470); }
@@ -1012,12 +997,7 @@
   function stopFeat() {
     if (!featLoaded) return;
     enginePause();
-    if (featUI) {
-      featUI.setPlaying(false);
-      featUI.seek.value = 0; featUI.seek.style.setProperty("--pct", "0%");
-      featUI.cur.textContent = "0:00"; featUI.dur.textContent = "0:00";
-      featUI.hint.innerHTML = "";
-    }
+    if (featUI) featUI.setPlaying(false);
     featLoaded = false; ui = catUI;
   }
   function featSelect() {
@@ -1035,16 +1015,8 @@
   // ---- events ----
   cards.forEach(function (card) {
     card.addEventListener("click", function (e) {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // open-in-new-tab etc. → let the link work
       if (card.classList.contains("is-soon")) return;                 // forthcoming → no-op
-      if (card.classList.contains("is-ep")) {
-        e.preventDefault();
-        if (epCard !== card) { openEP(card); return; }
-        if (featLoaded) {              // featured owns the engine — close the panel, keep the music
-          hideEP(); card.classList.remove("is-current"); epCard = null; clearActiveRow();
-        } else collapse();
-        return;
-      }
+      if (card.classList.contains("is-ep")) { e.preventDefault(); (epCard === card) ? collapse() : openEP(card); return; }
       if (!card.getAttribute("data-uri")) return;
       e.preventDefault();
       (card === current) ? collapse() : selectSingle(card);
@@ -1058,24 +1030,20 @@
   }
   play.addEventListener("click", engineToggle);
   if (featUI) document.getElementById("fp-play").addEventListener("click", featSelect);
-  function wireSeek(seekEl, curEl, ownUI) {
+  function wireSeek(seekEl, curEl) {
     seekEl.addEventListener("input", function () {
-      if (ui !== ownUI) {              // this surface doesn't own the engine — don't remote-control it
-        seekEl.value = 0; seekEl.style.setProperty("--pct", "0%"); return;
-      }
       scrub = true;
       seekEl.style.setProperty("--pct", (seekEl.value / 10) + "%");
       curEl.textContent = fmt(lastDur * (seekEl.value / 1000));
     });
     seekEl.addEventListener("change", function () {
-      if (ui !== ownUI) return;
       if (mode === "local") { if (audio.duration) audio.currentTime = audio.duration * (seekEl.value / 1000); }
       else if (controller && lastDur) { controller.seek(Math.round((lastDur * (seekEl.value / 1000)) / 1000)); }
       scrub = false;
     });
   }
-  wireSeek(seek, cur, catUI);
-  if (featUI) wireSeek(featUI.seek, featUI.cur, featUI);
+  wireSeek(seek, cur);
+  if (featUI) wireSeek(featUI.seek, featUI.cur);
   var rz;
   window.addEventListener("resize", function () {
     clearTimeout(rz);
@@ -1093,19 +1061,15 @@
     ui.cur.textContent = fmt(pos);
     if (lastDur) { var pct = Math.min(1000, Math.round((pos / lastDur) * 1000)); ui.seek.value = pct; ui.seek.style.setProperty("--pct", (pct / 10) + "%"); }
   });
-  audio.addEventListener("play", function () { if (mode === "local") { setPlaying(true); ui.hint.textContent = ""; } });
+  audio.addEventListener("play", function () { if (mode === "local") setPlaying(true); });
   audio.addEventListener("pause", function () { if (mode === "local") setPlaying(false); });
   audio.addEventListener("ended", function () { if (mode === "local") { setPlaying(false); ui.seek.value = 0; ui.seek.style.setProperty("--pct", "0%"); ui.cur.textContent = "0:00"; } });
 
   // ---- Spotify iFrame API ----
   function onUpdate(e) {
+    if (mode !== "spotify") return;
     var d = (e && e.data) ? e.data : e;
     if (!d) return;
-    if (mode !== "spotify") {
-      // local fallback took over but the embed honored its deferred play → two sources at once
-      if (!d.isPaused && controller) { try { controller.pause(); } catch (err) {} }
-      return;
-    }
     if (!d.isPaused) { spStarted = true; clearTimeout(spWatch); }   // Spotify really started
     if (wantPlay) {                       // retry play until the freshly-loaded track starts
       if (!d.isPaused) { wantPlay = false; }
