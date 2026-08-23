@@ -70,17 +70,57 @@
   .final .v-window .text p em, .final .ch-card h4 em, .final .disp em,
   .final .hotspot .tip h4 em, .final em.ac, .final .ac{ color:inherit; }
 </style>
-<style>
-  /* ---- Final theme values (2026-08-23). Replaces the deleted tweaks-panel
-     script: the html tag carries the final data-attributes, sullen.css holds
-     --accent and --hero-img, and this block pins the three font variables.
-     Stale localStorage saved by the retired React panel no longer applies. ---- */
-  :root{
-    --logo-font:"Bodoni Moda", serif;      /* all headlines */
-    --wordmark-font:"Italiana", serif;     /* brand wordmark only */
-    --body-font:"Archivo", sans-serif;
-  }
-</style>
+<script>
+  window.TWEAK_DEFAULTS = {
+    "accent": "#c9a25c",
+    "logoFont": "Italiana",
+    "headFont": "Bodoni",
+    "bodyFont": "Archivo",
+    "grain": true,
+    "letterbox": false,
+    "sprockets": false,
+    "creditsFooter": false,
+    "ticker": false,
+    "hotspots": false,
+    "reveal": true
+  };
+
+  window.SWApply = function (v) {
+    var r = document.documentElement;
+    r.setAttribute("data-grain", v.grain ? "on" : "off");
+    r.setAttribute("data-ticker", "off");
+    r.setAttribute("data-letterbox", v.letterbox ? "on" : "off");
+    r.setAttribute("data-sprockets", "off");
+    r.setAttribute("data-hotspots", "off");
+    r.setAttribute("data-reveal", v.reveal ? "on" : "off");
+    r.setAttribute("data-footer", v.creditsFooter ? "credits" : "compact");
+    r.setAttribute("data-italics", "off");
+    r.style.setProperty("--accent", v.accent || "#c9a25c");
+    var heads = {
+      Italiana: '"Italiana", serif', Cinzel: '"Cinzel", serif',
+      Marcellus: '"Marcellus", serif', Forum: '"Forum", serif',
+      Cormorant: '"Cormorant Garamond", serif',
+      Bodoni: '"Bodoni Moda", serif',
+      SixCaps: '"Six Caps", sans-serif',
+      SpecialElite: '"Special Elite", monospace'
+    };
+    var bodies = {
+      Cormorant: '"Cormorant Garamond", serif', EBGaramond: '"EB Garamond", serif',
+      Spectral: '"Spectral", serif', Archivo: '"Archivo", sans-serif',
+      CrimsonPro: '"Crimson Pro", serif', CourierPrime: '"Courier Prime", monospace'
+    };
+    r.style.setProperty("--logo-font", heads[v.headFont] || heads.Italiana);
+    r.style.setProperty("--wordmark-font", heads[v.logoFont] || heads.Italiana);
+    r.style.setProperty("--body-font", bodies[v.bodyFont] || bodies.Cormorant);
+  };
+
+  (function () {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem("sw_tweaks_final") || "{}"); } catch (e) {}
+    window.SW_STATE = Object.assign({}, window.TWEAK_DEFAULTS, saved);
+    window.SWApply(window.SW_STATE);
+  })();
+</script>
 <style>
   /* ============================================================
      Gallery — motion layer. Mirrors index.html final pass.
@@ -209,10 +249,6 @@
     .lb-img{ will-change:auto; }
   }
 </style>
-<noscript><style>
-  /* JS off: reveal-on-scroll can never fire; show every plate. */
-  .reveal{ opacity:1; transform:none; transition:none; }
-</style></noscript>
 </head>
 <body>
 
@@ -451,11 +487,8 @@
     if (e.key === "Escape") { close(); }
     else if (e.key === "ArrowRight") { go(1); }
     else if (e.key === "ArrowLeft") { go(-1); }
-    else if (e.key === "Tab") {            // focus trap (visible controls only:
-      // <=760px hides .lb-nav, and a hidden button in the list lets focus escape)
-      var f = [btnClose, btnPrev, btnNext].filter(function (b) {
-        return b && getComputedStyle(b).display !== "none";
-      });
+    else if (e.key === "Tab") {            // focus trap
+      var f = [btnClose, btnPrev, btnNext];
       var first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }

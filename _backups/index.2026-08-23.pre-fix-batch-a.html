@@ -111,17 +111,64 @@
   .final .v-window .text p em, .final .ch-card h4 em, .final .disp em,
   .final .hotspot .tip h4 em, .final em.ac, .final .ac{ color:inherit; }
 </style>
-<style>
-  /* ---- Final theme values (2026-08-23). Replaces the deleted tweaks-panel
-     script: the html tag carries the final data-attributes, sullen.css holds
-     --accent and --hero-img, and this block pins the three font variables.
-     Stale localStorage saved by the retired React panel no longer applies. ---- */
-  :root{
-    --logo-font:"Bodoni Moda", serif;      /* all headlines */
-    --wordmark-font:"Italiana", serif;     /* brand wordmark only */
-    --body-font:"Archivo", sans-serif;
-  }
-</style>
+<script>
+  // ---- tweak defaults (host rewrites this block on save) ----
+  window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "#c9a25c",
+    "logoFont": "Italiana",
+    "headFont": "Bodoni",
+    "bodyFont": "Archivo",
+    "grain": true,
+    "letterbox": false,
+    "sprockets": false,
+    "creditsFooter": false,
+    "ticker": true,
+    "hotspots": true,
+    "reveal": true,
+    "catalogStyle": "chapters",
+    "heroPhoto": "jaguar"
+  }/*EDITMODE-END*/;
+
+  // ---- apply theme to <html> (shared by head-init + tweaks panel) ----
+  window.SWApply = function (v) {
+    var r = document.documentElement;
+    r.setAttribute("data-grain", v.grain ? "on" : "off");
+    r.setAttribute("data-ticker", v.ticker ? "on" : "off");
+    r.setAttribute("data-letterbox", v.letterbox ? "on" : "off");
+    r.setAttribute("data-sprockets", v.sprockets ? "on" : "off");
+    r.setAttribute("data-hotspots", v.hotspots ? "on" : "off");
+    r.setAttribute("data-reveal", v.reveal ? "on" : "off");
+    r.setAttribute("data-footer", v.creditsFooter ? "credits" : "compact");
+    r.setAttribute("data-italics", "off"); // italics retired — final
+    r.setAttribute("data-catalog", v.catalogStyle === "table" ? "table" : "chapters");
+    r.style.setProperty("--accent", v.accent || "#c9a25c");
+    var heads = {
+      Italiana: '"Italiana", serif', Cinzel: '"Cinzel", serif',
+      Marcellus: '"Marcellus", serif', Forum: '"Forum", serif',
+      Cormorant: '"Cormorant Garamond", serif',
+      Bodoni: '"Bodoni Moda", serif',
+      SixCaps: '"Six Caps", sans-serif',
+      SpecialElite: '"Special Elite", monospace'
+    };
+    var bodies = {
+      Cormorant: '"Cormorant Garamond", serif', EBGaramond: '"EB Garamond", serif',
+      Spectral: '"Spectral", serif', Archivo: '"Archivo", sans-serif',
+      CrimsonPro: '"Crimson Pro", serif', CourierPrime: '"Courier Prime", monospace'
+    };
+    r.style.setProperty("--logo-font", heads[v.headFont] || heads.Italiana);     /* all headlines */
+    r.style.setProperty("--wordmark-font", heads[v.logoFont] || heads.Italiana); /* brand only */
+    r.style.setProperty("--body-font", bodies[v.bodyFont] || bodies.Cormorant);
+    r.style.setProperty("--hero-img", 'url("assets/photos/' + (v.heroPhoto || "jaguar") + '.jpg")');
+  };
+
+  // ---- no-flash init: merge saved over defaults, apply immediately ----
+  (function () {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem("sw_tweaks_final") || "{}"); } catch (e) {}
+    window.SW_STATE = Object.assign({}, window.TWEAK_DEFAULTS, saved);
+    window.SWApply(window.SW_STATE);
+  })();
+</script>
 <style>
   /* ============================================================
      FACELIFT v2 — additive motion layer only. Identity unchanged.
@@ -201,12 +248,6 @@
   .feat-player .ps-seek::-moz-range-thumb{ width:12px; height:12px; border:0; border-radius:50%; background:var(--accent); }
   .feat-hint{ min-height:12px; margin-top:9px; }
 </style>
-<noscript><style>
-  /* JS off: the intro overlay can never open and reveal-on-scroll can never fire.
-     Show the page instead of a sealed dark screen. */
-  .sw-intro{ display:none; }
-  .reveal{ opacity:1; transform:none; transition:none; }
-</style></noscript>
 </head>
 <body>
 
@@ -758,7 +799,6 @@
     #reach .sub-input::placeholder{ color:var(--paper-faint); letter-spacing:.18em; text-transform:uppercase; opacity:1; }
     #reach .sub-btn{ flex:0 0 auto; background:transparent; border:0; border-left:1px solid var(--rule); color:var(--accent); font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.3em; text-transform:uppercase; padding:15px 26px; cursor:pointer; transition:background .3s,color .3s; }
     #reach .sub-btn:hover,#reach .sub-btn:focus-visible{ background:var(--accent); color:var(--ink); outline:none; }
-    #reach .sub-btn:disabled{ opacity:.45; cursor:default; background:transparent; color:var(--accent); }
     #reach .sub-note{ font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.28em; color:var(--paper-faint); text-transform:uppercase; margin-top:14px; text-align:center; }
     #reach .sub-status{ font-family:"Space Grotesk", sans-serif; font-style:normal; font-size:17px; letter-spacing:.01em; color:var(--accent-soft); margin-top:20px; min-height:1.3em; text-align:center; }
     #reach .sub-status.is-error{ color:#c98a8a; }
@@ -773,19 +813,16 @@
   (function(){
     var f=document.getElementById('subForm'), s=document.getElementById('subStatus'), inp=document.getElementById('subEmail');
     if(!f) return;
-    var btn=f.querySelector('.sub-btn'), busy=false;
     f.addEventListener('submit', function(e){
       e.preventDefault();
-      if(busy) return;
       var email=(inp.value||'').trim();
-      if(!email || !inp.checkValidity()){ s.classList.add('is-error'); s.textContent='Enter a valid email address.'; inp.focus(); return; }
-      busy=true; if(btn) btn.disabled=true;
+      if(!email || !inp.checkValidity()){ inp.focus(); return; }
       s.classList.remove('is-error'); s.textContent='Sending...';
       var data=new FormData(); data.append('email_address', email);
       fetch('https://app.kit.com/forms/9619498/subscriptions', { method:'POST', headers:{'Accept':'application/json'}, body:data })
         .then(function(r){ if(!r.ok) throw new Error('http'); return r.json().catch(function(){ return {status:'success'}; }); })
         .then(function(){ f.classList.add('is-done'); var n=document.querySelector('#reach .sub-note'); if(n) n.style.display='none'; s.textContent='Thank you. Check your inbox to confirm your subscription.'; })
-        .catch(function(){ busy=false; if(btn) btn.disabled=false; s.classList.add('is-error'); s.textContent='Something went wrong. Please try again, or write to contact@sullenwaves.com.'; });
+        .catch(function(){ s.classList.add('is-error'); s.textContent='Something went wrong. Please try again, or write to contact@sullenwaves.com.'; });
     });
   })();
   </script>

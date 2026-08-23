@@ -1,5 +1,7 @@
 # Files kept in the git repo for history, but NOT published to the live site.
-# wrangler reads this on `pages deploy`; these paths are excluded from the upload.
+# NOTE: `wrangler pages deploy` IGNORES this file (it's a Workers-Assets feature,
+# verified 2026-06-28). It documents intent only — the real exclusion happens in the
+# staged rsync clean-copy deploy; see memory/04-build/deployment.md ROUTINE PUBLISH.
 _backups
 player-proto.html
 *.jsx

@@ -62,7 +62,7 @@
   .pk-track.is-playing .pk-tt{ color:var(--accent-soft); }
   .pk-badge{ font-family:"JetBrains Mono", monospace; font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:2px 6px; flex:none; }
   .pk-tm{ font-family:"JetBrains Mono", monospace; font-size:11px; color:var(--paper-dim); flex:none; }
-  .pk-bar{ position:relative; height:5px; background:var(--rule); margin:18px 6px 0; cursor:pointer; touch-action:none; }
+  .pk-bar{ position:relative; height:5px; background:var(--rule); margin:18px 6px 0; cursor:pointer; }
   .pk-bar i{ display:block; position:relative; height:100%; width:0; background:var(--accent); pointer-events:none; }
   .pk-bar i::after{ content:""; position:absolute; right:-5px; top:50%; transform:translateY(-50%); width:11px; height:11px; border-radius:50%; background:var(--accent); opacity:0; transition:opacity .2s ease; }
   .pk-bar:hover i::after{ opacity:1; }
@@ -264,17 +264,13 @@
   if (!audio || !rows.length) return;
   var active = null;
 
-  function tryPlay() {
-    var p = audio.play();
-    if (p && p.catch) p.catch(function () {}); /* rejection: no "playing" event fires, so no stuck UI */
-  }
   function play(row) {
-    if (row === active) { audio.paused ? tryPlay() : audio.pause(); return; }
+    if (row === active) { audio.paused ? audio.play() : audio.pause(); return; }
     if (active) active.classList.remove("is-playing");
-    active = row; /* class is added by the "playing" event once sound actually starts */
+    active = row; row.classList.add("is-playing");
     audio.src = row.getAttribute("data-audio");
     prog.style.width = "0%";
-    tryPlay();
+    var p = audio.play(); if (p && p.catch) p.catch(function () {});
   }
   rows.forEach(function (row) {
     row.addEventListener("click", function () { play(row); });
@@ -308,12 +304,7 @@
     active = null; prog.style.width = "0%";
   });
   audio.addEventListener("pause", function () { if (active) active.classList.remove("is-playing"); });
-  audio.addEventListener("playing", function () { if (active) active.classList.add("is-playing"); });
-  audio.addEventListener("error", function () {
-    /* dead or unreachable file: clear the row so it never sticks in a fake "playing" state */
-    if (active) active.classList.remove("is-playing");
-    active = null; prog.style.width = "0%";
-  });
+  audio.addEventListener("play", function () { if (active) active.classList.add("is-playing"); });
 })();
 </script>
 
