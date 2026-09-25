@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en" class="final" data-grain="on" data-ticker="on" data-letterbox="off" data-sprockets="off" data-hotspots="on" data-reveal="on" data-footer="compact" data-italics="off" data-catalog="chapters">
+<head>
+<meta charset="utf-8">
+<title>Sullen Waves — Alt / Grunge / Post-Rock</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The official site of Sullen Waves, the alt-grunge and post-rock project of Alex Pratsyuk. Stream the latest single, explore the catalog, and follow on every platform.">
+<link rel="canonical" href="https://sullenwaves.com/">
+
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="266yc7l5QExP_78exknX5nGFrjWNs_km3VtJgQ58N5o" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="music.musician">
+<meta property="og:site_name" content="Sullen Waves">
+<meta property="og:title" content="Sullen Waves — Alt / Grunge / Post-Rock">
+<meta property="og:description" content="The official site of Sullen Waves, the alt-grunge and post-rock project of Alex Pratsyuk. Stream the latest single and follow on every platform.">
+<meta property="og:url" content="https://sullenwaves.com/">
+<meta property="og:image" content="https://sullenwaves.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@sullenwaves">
+<meta name="twitter:title" content="Sullen Waves — Alt / Grunge / Post-Rock">
+<meta name="twitter:description" content="The official site of Sullen Waves, the alt-grunge and post-rock project of Alex Pratsyuk.">
+<meta name="twitter:image" content="https://sullenwaves.com/og-image.jpg">
+
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Structured data: artist -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Sullen Waves",
+  "alternateName": "Alex Pratsyuk",
+  "url": "https://sullenwaves.com/",
+  "image": "https://sullenwaves.com/og-image.jpg",
+  "genre": ["Alternative Rock", "Grunge", "Post-Rock"],
+  "description": "The alt-grunge and post-rock project of Alex Pratsyuk.",
+  "member": {
+    "@type": "Person",
+    "name": "Alex Pratsyuk"
+  },
+  "sameAs": [
+    "https://open.spotify.com/artist/0ovc0euj1pJrgx8vfhrrQD",
+    "https://music.apple.com/us/artist/sullen-waves/966765904",
+    "https://sullenwaves.bandcamp.com",
+    "https://www.youtube.com/@sullenwaves",
+    "https://www.instagram.com/sullenwavesofficial",
+    "https://www.tiktok.com/@sullenwaves",
+    "https://x.com/sullenwaves",
+    "https://www.threads.com/@sullenwavesofficial",
+    "https://www.facebook.com/SullenWaves/",
+    "https://soundcloud.com/sullenwaves",
+    "https://tidal.com/artist/6527230",
+    "https://www.deezer.com/en/artist/7543944"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:wght@300;400;500&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sullen.css?v=20260810">
+<style>
+  /* ---- FINAL: v1 base + tweakable type. Italics retired site-wide. ---- */
+  .final em, .final .ticker, .final .stanza p, .final .foot .compact .quote,
+  .final .subscribe input, .final .hotspot .tip p, .final .rel-row .t,
+  .final .hero-title .deck, .final .v-tel .lede, .final .fsub{ font-style:normal; }
+  /* TRIAL: homepage font option 22 (Space Grotesk) — hero deck + About body. Revert: _backups/index.2026-06-24.pre-syne-fonts.html */
+  .final .hero-title .deck{ font-family:"Space Grotesk", sans-serif; font-weight:500; text-transform:uppercase; letter-spacing:.08em; font-size:16px; }
+  .final .v-window .text p{ font-family:"Space Grotesk", sans-serif; }
+  .final .hotspot .tip h4 em{ font-family:inherit; font-style:normal; }
+  .final .v-window .text p em{ font-style:normal; }
+  .final .ch-card .cdesc{ font-style:normal; }
+  .final .stanza p em{ font-style:normal; }
+
+  /* headline accent words follow the HEADLINE font (was hardcoded Cormorant) */
+  .final .hero-title h1 em, .final .vitrine .head h2 em,
+  .final .v-amp .stage h3 em, .final .hotspot .tip h4 em,
+  .final em.ac, .final .ac{ font-family:inherit; }
+
+  /* roman numerals retired */
+  .final .vitrine .head .ix{ display:none; }
+  .final .vitrine .head{ grid-template-columns:1fr auto; }
+
+  /* wordmark: centered in a real 3-column grid so the split nav never overlaps it */
+  .final .chrome{ display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:center; }
+  .final .chrome .left{ display:flex; align-items:center; gap:22px; justify-content:flex-start; }
+  .final .chrome .brand{
+    font-family:var(--wordmark-font, "Italiana", serif);
+    position:static; transform:none; justify-self:center;
+    text-decoration:none; color:var(--paper);
+  }
+
+  /* tweakable BODY copy (mono labels untouched) */
+  .final body{ font-family:var(--body-font, "Cormorant Garamond", serif); }
+  .final .subscribe input, .final .rel-row .t{ font-family:var(--body-font, "Cormorant Garamond", serif); }
+
+  /* SQUARE catalog cards — sized for 1:1 album artwork */
+  .final .ch-card .thumb{ aspect-ratio:1/1; }
+
+  /* ---- KILL gold word-inserts (2026-06-20). Emphasis words inherit the
+     headline/body color instead of going brass. Structural accents (section
+     rules, hotspot dots, mono labels, hover states) are untouched. ---- */
+  .final .hero-title h1 em, .final .vitrine .head h2 em, .final .feature h3 em,
+  .final .v-window .text p em, .final .ch-card h4 em, .final .disp em,
+  .final .hotspot .tip h4 em, .final em.ac, .final .ac{ color:inherit; }
+</style>
+<style>
+  /* ---- Final theme values (2026-08-23). Replaces the deleted tweaks-panel
+     script: the html tag carries the final data-attributes, sullen.css holds
+     --accent and --hero-img, and this block pins the three font variables.
+     Stale localStorage saved by the retired React panel no longer applies. ---- */
+  :root{
+    --logo-font:"Bodoni Moda", serif;      /* all headlines */
+    --wordmark-font:"Italiana", serif;     /* brand wordmark only */
+    --body-font:"Archivo", sans-serif;
+  }
+</style>
+<style>
+  /* ============================================================
+     FACELIFT v2 — additive motion layer only. Identity unchanged.
+     Removed elsewhere: roman numerals (markup), sprocket rails.
+     Added here: a hero title sequence, a slow cinematic settle on
+     the photo, reveal polish (heads draw an accent rule), and
+     refined hover motion. All scoped to .final; reduced-motion safe.
+  ============================================================ */
+
+  /* sprockets fully neutralized even if localStorage re-enables them */
+  .final .sprocket{ display:none !important; }
+  html[data-sprockets="on"] body{ padding-left:0 !important; padding-right:0 !important; }
+
+  /* hero title sequence — staggered rise on load */
+  @keyframes swRise{ from{ opacity:0; transform:translateY(24px); filter:blur(7px); } to{ opacity:1; transform:none; filter:blur(0); } }
+  @keyframes swFade{ from{ opacity:0; } to{ opacity:1; } }
+  .final .hero-title .pre  { opacity:0; animation:swRise .9s cubic-bezier(.2,.7,.2,1) .30s forwards; }
+  .final .hero-title h1    { opacity:0; animation:swRise 1.1s cubic-bezier(.2,.7,.2,1) .46s forwards; }
+  .final .hero-title .deck { opacity:0; animation:swRise 1s  cubic-bezier(.2,.7,.2,1) .78s forwards; }
+  .final .slate            { opacity:0; animation:swFade 1.2s ease 1.05s forwards; }
+  .final .scroll-cue       { opacity:0; animation:swFade 1.2s ease 1.25s forwards; }
+
+  /* hero photo — slow cinematic settle (one-shot) */
+  .final .atelier .image{ transform:scale(1.09); transform-origin:58% 42%; will-change:transform;
+    animation:swZoom 15s cubic-bezier(.16,.7,.2,1) forwards; }
+  @keyframes swZoom{ to{ transform:scale(1); } }
+
+  /* reveal polish — section heads draw an accent rule as they enter */
+  .final .vitrine .head{ position:relative; }
+  .final .vitrine .head::after{
+    content:""; position:absolute; left:0; bottom:-1px; height:2px; width:0;
+    background:var(--accent); transition:width 1.1s cubic-bezier(.2,.7,.2,1) .22s;
+  }
+  .final .vitrine.reveal.on .head::after{ width:88px; }
+
+  /* refined hover motion */
+  .final .rel-row{ transition:background .35s ease, transform .35s cubic-bezier(.2,.7,.2,1), padding .35s ease; }
+  .final .rel-row:hover{ transform:translateX(7px); }
+  .final .ch-card{ transition:transform .45s cubic-bezier(.2,.7,.2,1); }
+  .final .ch-card:hover{ transform:translateY(-7px); }
+  .final .ch-card .thumb img{ transition:transform .8s cubic-bezier(.2,.7,.2,1), filter .6s ease; }
+  .final .ch-card:hover .thumb img{ transform:scale(1.05); }
+  .final .chrome nav a{ position:relative; }
+  .final .chrome nav a::after{ content:""; position:absolute; left:0; bottom:-5px; height:1px; width:0;
+    background:var(--accent); transition:width .3s cubic-bezier(.2,.7,.2,1); }
+  .final .chrome nav a:hover::after{ width:100%; }
+
+  /* reduced motion: settle immediately, no movement */
+  @media (prefers-reduced-motion: reduce){
+    .final .hero-title .pre,.final .hero-title h1,.final .hero-title .deck,
+    .final .slate,.final .scroll-cue{ opacity:1 !important; animation:none !important; filter:none !important; }
+    .final .atelier .image{ transform:none !important; animation:none !important; }
+    .final .vitrine .head::after,.final .rel-row,.final .ch-card,
+    .final .ch-card .thumb img,.final .chrome nav a::after{ transition:none !important; }
+  }
+
+  /* ---- featured single: custom in-page player (mirrors the catalog player; no second
+         cover — the disc on the left already shows the artwork) ---- */
+  .feat-player{ display:flex; align-items:center; gap:16px; max-width:380px; margin:2px 0 4px; }
+  .feat-player .ps-play{ flex:none; width:46px; height:46px; border-radius:50%; border:1px solid var(--accent); background:none; color:var(--paper); cursor:pointer; position:relative; transition:background .25s ease, transform .15s ease-out; }
+  .feat-player .ps-play:hover{ background:color-mix(in oklab,var(--accent) 16%, transparent); }
+  .feat-player .ps-play:active{ transform:scale(.94); }
+  .feat-player .ps-play:focus-visible{ outline:none; box-shadow:0 0 0 2px var(--ink), 0 0 0 3px var(--accent); }
+  .feat-player .ps-play svg{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .feat-player .ps-play .ico-pause{ display:none; }
+  .feat-player .ps-play .ico-play{ margin-left:2px; }
+  .feat-player.is-playing .ps-play .ico-play{ display:none; }
+  .feat-player.is-playing .ps-play .ico-pause{ display:block; }
+  .feat-player .ps-time{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.1em; color:var(--paper-dim); width:42px; }
+  .feat-player .ps-time.total{ text-align:right; }
+  .feat-player .ps-seek{ -webkit-appearance:none; appearance:none; flex:1; min-width:60px; height:2px; background:var(--rule); cursor:pointer; outline:none; }
+  .feat-player .ps-seek::-webkit-slider-runnable-track{ height:2px; background:linear-gradient(90deg, var(--accent) var(--pct,0%), var(--rule) var(--pct,0%)); }
+  .feat-player .ps-seek::-moz-range-progress{ height:2px; background:var(--accent); }
+  .feat-player .ps-seek::-moz-range-track{ height:2px; background:var(--rule); }
+  .feat-player .ps-seek::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:12px; height:12px; border-radius:50%; background:var(--accent); margin-top:-5px; transition:transform .15s ease; }
+  .feat-player .ps-seek:hover::-webkit-slider-thumb{ transform:scale(1.3); }
+  .feat-player .ps-seek::-moz-range-thumb{ width:12px; height:12px; border:0; border-radius:50%; background:var(--accent); }
+  .feat-hint{ min-height:12px; margin-top:9px; }
+</style>
+<noscript><style>
+  /* JS off: the intro overlay can never open and reveal-on-scroll can never fire.
+     Show the page instead of a sealed dark screen. */
+  .sw-intro{ display:none; }
+  .reveal{ opacity:1; transform:none; transition:none; }
+</style></noscript>
+</head>
+<body>
+
+<!-- intro title card: shows once per browser session, splits open to reveal the site.
+     Skippable (click / scroll / key); reduced-motion just fades. -->
+<style>
+  .sw-intro{ position:fixed; inset:0; z-index:9999; }
+  .sw-intro.done{ pointer-events:none; }
+  .swi-half{ position:absolute; left:0; right:0; height:50.5%; background:var(--ink);
+    transition:transform 1.05s cubic-bezier(.76,0,.24,1); }
+  .swi-half.top{ top:0; } .swi-half.bottom{ bottom:0; }
+  .swi-center{ position:absolute; inset:0; z-index:1; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; transition:opacity .55s ease; }
+  .swi-word{ font-family:var(--logo-font,"Italiana",serif); color:var(--paper);
+    font-size:clamp(34px,7vw,76px); letter-spacing:.02em; line-height:1;
+    opacity:0; transform:translateY(14px); transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1); }
+  .swi-rule{ width:0; height:1px; background:var(--accent); margin:20px 0 15px;
+    transition:width .9s cubic-bezier(.2,.7,.2,1) .3s; }
+  .swi-sub{ font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.32em;
+    text-transform:uppercase; color:var(--paper-dim); opacity:0; transition:opacity .8s ease .45s; }
+  .sw-intro.play .swi-word{ opacity:1; transform:none; }
+  .sw-intro.play .swi-rule{ width:min(280px,46vw); }
+  .sw-intro.play .swi-sub{ opacity:1; }
+  .sw-intro.done .swi-half.top{ transform:translateY(-100%); }
+  .sw-intro.done .swi-half.bottom{ transform:translateY(100%); }
+  .sw-intro.done .swi-center{ opacity:0; }
+  .sw-intro.reduce .swi-half{ transition:opacity .5s ease; }
+  .sw-intro.reduce.done .swi-half{ opacity:0; }
+  @media (prefers-reduced-motion: reduce){ .sw-intro .swi-word,.sw-intro .swi-rule,.sw-intro .swi-sub{ transition-duration:.4s; transition-delay:0s; } }
+</style>
+<div class="sw-intro" id="swIntro" role="presentation">
+  <div class="swi-half top"></div>
+  <div class="swi-half bottom"></div>
+  <div class="swi-center">
+    <div class="swi-word">Sullen Waves</div>
+    <div class="swi-rule"></div>
+    <div class="swi-sub">An alt / post-grunge project · Los Angeles</div>
+  </div>
+</div>
+<script>
+(function () {
+  var el = document.getElementById("swIntro");
+  if (!el) return;
+  var seen = false; try { seen = sessionStorage.getItem("sw_intro") === "1"; } catch (e) {}
+  if (seen) { if (el.parentNode) el.parentNode.removeChild(el); return; }   // repeat visit → no flash
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) el.classList.add("reduce");
+  // next frame so the .play transitions actually run
+  requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add("play"); }); });
+  var removed = false;
+  function finish() {
+    if (removed) return; removed = true;
+    el.classList.add("done");
+    try { sessionStorage.setItem("sw_intro", "1"); } catch (e) {}
+    cleanup();
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, reduce ? 600 : 1150);
+  }
+  function onKey() { finish(); }
+  function cleanup() {
+    el.removeEventListener("click", finish);
+    window.removeEventListener("keydown", onKey);
+    window.removeEventListener("wheel", finish);
+    window.removeEventListener("touchstart", finish);
+  }
+  var hold = setTimeout(finish, reduce ? 650 : 1850);
+  el.addEventListener("click", finish);
+  window.addEventListener("keydown", onKey, { once: true });
+  window.addEventListener("wheel", finish, { once: true, passive: true });
+  window.addEventListener("touchstart", finish, { once: true, passive: true });
+})();
+</script>
+
+<!-- sprocket strips (08) -->
+
+<!-- chrome -->
+<header class="chrome">
+  <nav class="left">
+    <a href="#listen">Listen</a>
+    <a href="#catalog">Music</a>
+  </nav>
+  <a class="brand" href="/" aria-label="Sullen Waves, home">Sullen Waves</a>
+  <nav class="right">
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="atelier" data-screen-label="Home / hero">
+  <div class="image"></div>
+  <div class="glow"></div>
+
+  <div class="hero-title">
+    <div class="pre eyebrow">Alternative · Post-grunge · Los Angeles</div>
+    <h1>Sullen Waves</h1>
+    <p class="deck">New single out now.<br>Listen below.</p>
+  </div>
+
+  <!-- hotspots removed 2026-06-20 (template-metaphor labels; nav lives in the top bar) -->
+
+  <div class="scroll-cue"><span>or scroll</span><span class="li"></span></div>
+</section>
+
+<!-- ticker (01) -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Echoes from the Void — June 26, 2026</span>
+    <span>Alternative, post-grunge</span>
+    <span>Written, recorded, produced independently</span>
+    <span>Los Angeles, California</span>
+    <span>Echoes from the Void — June 26, 2026</span>
+    <span>Alternative, post-grunge</span>
+    <span>Written, recorded, produced independently</span>
+    <span>Los Angeles, California</span>
+  </div>
+</div>
+
+<!-- II · LISTEN — Featured Release -->
+<section class="vitrine v-feature reveal" id="listen" data-screen-label="Home / listen">
+  <div class="head">
+    <h2 class="disp">New single</h2>
+    <div class="r">01 · Out now</div>
+  </div>
+  <div class="feature">
+    <span class="fslug"><b>SW.05</b>·OUT NOW</span>
+    <span class="ftc">2026 · Single</span>
+    <div class="art">
+      <img src="assets/photos/eftv-cover.jpg" alt="Echoes from the Void cover art" width="1000" height="1000">
+    </div>
+    <div class="info">
+      <div class="ns">Out now</div>
+      <h3 class="disp">Echoes from the Void</h3>
+      <div class="fmeta">
+        <span><b>Release</b>June 26, 2026</span>
+        <span><b>Format</b>Single</span>
+        <span><b>Cat</b>SW.05</span>
+      </div>
+      <!-- Custom in-page player. Drives the SAME off-screen Spotify embed as the catalog
+           player (counts as a stream), and falls back to the local file if Spotify is
+           blocked. Wired by the catalog player script at the bottom of the page. -->
+      <div class="embed">
+        <div class="feat-player" id="featplayer"
+             data-uri="spotify:track:30Co7Qk63OVh6yE1qvMrVt"
+             data-audio="assets/audio/echoes-from-the-void.mp3"
+             data-spotify="https://open.spotify.com/track/30Co7Qk63OVh6yE1qvMrVt">
+          <button class="ps-play" id="fp-play" type="button" aria-label="Play Echoes from the Void">
+            <svg class="ico-play" width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0 L15 8.5 L0 17 Z"/></svg>
+            <svg class="ico-pause" width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><rect x="1" width="4" height="16"/><rect x="9" width="4" height="16"/></svg>
+          </button>
+          <span class="ps-time ps-cur" id="fp-cur">0:00</span>
+          <input class="ps-seek" id="fp-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">
+          <span class="ps-time total ps-dur" id="fp-dur">0:00</span>
+        </div>
+        <div class="cp-hint feat-hint" id="fp-hint"></div>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://open.spotify.com/track/30Co7Qk63OVh6yE1qvMrVt" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://music.apple.com/us/song/echoes-from-the-void/6782503783" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://sullenwaves.bandcamp.com/track/echoes-from-the-void" target="_blank" rel="noopener">Bandcamp</a>
+    </div>
+  </div>
+</section>
+
+<!-- I · ABOUT (window) -->
+<section class="vitrine v-window reveal" id="about" data-screen-label="Home / about">
+  <div class="head">
+    <h2 class="disp">About</h2>
+    <div class="r">02 · About</div>
+  </div>
+  <div class="body">
+    <div class="photo" style="background-image:url('assets/photos/studio-portrait-bw.jpg');">
+      <div class="cap"><b>Portrait</b>Alex Pratsyuk</div>
+    </div>
+    <div class="text">
+      <p>Sullen Waves is the solo project of Alex Pratsyuk. Alternative and post-grunge: heavy guitars, melodic tension, a dark and introspective core.</p>
+      <p>Written, recorded, and produced independently, sometimes solo, sometimes with a band. Founded June 2014. Based in Los Angeles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERTITLE removed -->
+
+<!-- III · CATALOG (01 table) -->
+<style>
+  /* catalog = the compact album-card grid (as before) + a custom now-playing player.
+     Cards play in-page via the Spotify iFrame API (embed mounted off-screen) instead of
+     opening Spotify. */
+  .sp-offscreen{ position:fixed; width:300px; height:80px; left:-9999px; top:0; opacity:0; pointer-events:none; }
+  .v-catalog .ch-card{ cursor:pointer; }
+  .v-catalog .ch-card.is-soon{ cursor:default; }
+  .v-catalog .ch-card.is-current{ border-color:var(--accent); }
+  .v-catalog .ch-card .cv-play{ position:absolute; top:50%; left:50%; z-index:3; transform:translate(-50%,-44%); width:42px; height:42px; border-radius:50%; border:1px solid rgba(231,222,200,.6); background:rgba(8,7,10,.42); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); opacity:0; transition:opacity .3s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
+  .v-catalog .ch-card .cv-play::after{ content:""; position:absolute; top:50%; left:55%; transform:translate(-50%,-50%); border-left:10px solid var(--paper); border-top:6px solid transparent; border-bottom:6px solid transparent; }
+  @media (hover:hover){ .v-catalog .ch-card:not(.is-soon):hover .cv-play{ opacity:1; transform:translate(-50%,-50%); } }
+  .v-catalog .ch-card.is-current .cv-play{ opacity:1; transform:translate(-50%,-50%); border-color:var(--accent); }
+
+  /* inline now-playing panel — expands full-width directly below the clicked card's row,
+     with a caret pointing up to the active card and a now-playing equalizer cue */
+  .cat-player{ grid-column:1 / -1; position:relative; max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .5s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
+  .cat-player.is-empty{ display:none; }
+  .cat-player.on{ max-height:200px; opacity:1; }
+  .cp-caret{ position:absolute; top:13px; left:var(--caret-x,50%); width:12px; height:12px; margin-left:-6px;
+    transform:rotate(45deg); background:var(--ink-2); border-left:2px solid var(--accent); border-top:2px solid var(--accent);
+    transition:left .5s cubic-bezier(.2,.7,.2,1); z-index:2; }
+  .cp-inner{ position:relative; margin-top:18px; display:flex; align-items:center; gap:22px;
+    padding:18px 24px; background:var(--ink-2); border:1px solid var(--rule); border-top:2px solid var(--accent); }
+  .cp-cover{ width:90px; height:90px; flex:none; object-fit:cover; border:1px solid var(--rule); }
+  .cp-id{ flex:none; width:240px; display:flex; flex-direction:column; gap:7px; }
+  .cp-cat{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); }
+  .cp-titlewrap{ display:flex; align-items:flex-end; gap:11px; }
+  .cp-title{ font-family:var(--logo-font); font-size:26px; color:var(--paper); line-height:1; }
+  .cp-eq{ display:inline-flex; align-items:flex-end; gap:2px; height:15px; padding-bottom:3px; }
+  .cp-eq i{ width:2px; height:22%; background:var(--accent); animation:cpEq 1s ease-in-out infinite; }
+  .cp-eq i:nth-child(2){ animation-delay:-.8s; } .cp-eq i:nth-child(3){ animation-delay:-.5s; } .cp-eq i:nth-child(4){ animation-delay:-.2s; }
+  @keyframes cpEq{ 0%,100%{ height:22%; } 50%{ height:100%; } }
+  .cat-player:not(.is-playing) .cp-eq i{ animation-play-state:paused; height:22%; }
+  .cat-player .ps-play{ flex:none; width:46px; height:46px; border-radius:50%; border:1px solid var(--accent); background:none; color:var(--paper); cursor:pointer; position:relative; transition:background .25s ease, transform .15s ease-out; }
+  .cat-player .ps-play:hover{ background:color-mix(in oklab,var(--accent) 16%, transparent); }
+  .cat-player .ps-play:active{ transform:scale(.94); }
+  .cat-player .ps-play:focus-visible{ outline:none; box-shadow:0 0 0 2px var(--ink-2), 0 0 0 3px var(--accent); }
+  .cat-player .ps-play svg{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .cat-player .ps-play .ico-pause{ display:none; }
+  .cat-player .ps-play .ico-play{ margin-left:2px; }
+  .cat-player.is-playing .ps-play .ico-play{ display:none; }
+  .cat-player.is-playing .ps-play .ico-pause{ display:block; }
+  .cat-player .ps-time{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.1em; color:var(--paper-dim); width:42px; }
+  .cat-player .ps-time.total{ text-align:right; }
+  .cat-player .ps-seek{ -webkit-appearance:none; appearance:none; flex:1; height:2px; background:var(--rule); cursor:pointer; outline:none; }
+  .cat-player .ps-seek::-webkit-slider-runnable-track{ height:2px; background:linear-gradient(90deg, var(--accent) var(--pct,0%), var(--rule) var(--pct,0%)); }
+  .cat-player .ps-seek::-moz-range-progress{ height:2px; background:var(--accent); }
+  .cat-player .ps-seek::-moz-range-track{ height:2px; background:var(--rule); }
+  .cat-player .ps-seek::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:12px; height:12px; border-radius:50%; background:var(--accent); margin-top:-5px; transition:transform .15s ease; }
+  .cat-player .ps-seek:hover::-webkit-slider-thumb{ transform:scale(1.3); }
+  .cat-player .ps-seek::-moz-range-thumb{ width:12px; height:12px; border:0; border-radius:50%; background:var(--accent); }
+  .cp-links{ flex:none; display:flex; gap:16px; }
+  .cp-links a{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--paper-dim); transition:color .25s; }
+  .cp-links a:hover{ color:var(--accent); }
+  .cp-hint{ flex:none; font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--paper-dim); }
+  .cp-hint a{ color:var(--accent); }
+  @media (max-width:1000px){ .cp-id{ width:auto; } .cp-links{ display:none; } }
+  @media (max-width:760px){
+    .cp-inner{ flex-wrap:wrap; gap:14px 18px; padding:16px; }
+    .cp-cover{ width:64px; height:64px; }
+    .cp-id{ flex:1 1 auto; }
+    .cat-player .ps-seek{ order:6; flex:1 1 100%; }
+    /* mobile stacks the inner items (cover/title row, controls, full-width seek), so the
+       open bar is ~305px tall — cap must clear that or the bottom seek row gets clipped
+       (only the gold thumb peeked through). Headroom left for a two-line title. */
+    .cat-player.on{ max-height:360px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cat-player{ transition:none !important; }
+    .cp-eq i{ animation:none !important; }
+    .cp-caret{ transition:none !important; }
+  }
+  .cat-player.no-caret .cp-caret{ display:none; }
+
+  /* EP tracklist panel (Sense of Emergency) */
+  .ep-panel{ grid-column:1 / -1; position:relative; max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .55s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
+  .ep-panel.is-empty{ display:none; }
+  .ep-panel.on{ max-height:460px; opacity:1; }
+  .ep-inner{ position:relative; margin-top:18px; padding:20px 26px 10px;
+    background:var(--ink-2); border:1px solid var(--rule); border-top:2px solid var(--accent); }
+  .ep-head{ display:flex; align-items:baseline; gap:14px; padding-bottom:14px; border-bottom:1px solid var(--rule); }
+  .ep-cat{ font-family:"JetBrains Mono", monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); }
+  .ep-name{ font-size:24px; color:var(--paper); line-height:1; }
+  .ep-list{ list-style:none; margin:0; padding:4px 0 0; counter-reset:none; }
+  .ep-row{ display:flex; align-items:center; gap:16px; padding:13px 4px; cursor:pointer;
+    border-bottom:1px solid color-mix(in oklab, var(--rule) 55%, transparent); transition:background .2s ease; }
+  .ep-row:last-child{ border-bottom:0; }
+  @media (hover:hover){ .ep-row:hover{ background:color-mix(in oklab, var(--accent) 7%, transparent); } }
+  .ep-row:focus-visible{ outline:none; background:color-mix(in oklab, var(--accent) 10%, transparent); box-shadow:inset 2px 0 0 var(--accent); }
+  .ep-n{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.14em; color:var(--paper-dim); width:22px; flex:none; }
+  .ep-row:hover .ep-n, .ep-row.is-playing-row .ep-n{ color:var(--accent); }
+  .ep-t{ flex:1 1 auto; font-family:var(--logo-font); font-size:20px; color:var(--paper); line-height:1.1; }
+  .ep-row.is-playing-row .ep-t{ color:var(--accent-soft); }
+  .ep-time{ font-family:"JetBrains Mono", monospace; font-size:11px; letter-spacing:.06em; color:var(--paper-dim); flex:none; }
+  .ep-eq{ display:none; align-items:flex-end; gap:2px; height:13px; flex:none; }
+  .ep-row.is-playing-row .ep-eq{ display:inline-flex; }
+  .ep-eq i{ width:2px; height:30%; background:var(--accent); }
+  .ep-row.snd .ep-eq i{ animation:cpEq 1s ease-in-out infinite; }
+  .ep-eq i:nth-child(2){ animation-delay:-.8s; } .ep-eq i:nth-child(3){ animation-delay:-.5s; } .ep-eq i:nth-child(4){ animation-delay:-.2s; }
+  .ep-play{ flex:none; width:30px; height:30px; border-radius:50%; border:1px solid var(--rule); background:none; cursor:pointer; position:relative; transition:border-color .2s ease; }
+  .ep-row:hover .ep-play, .ep-row.is-playing-row .ep-play{ border-color:var(--accent); }
+  .ep-play::after{ content:""; position:absolute; top:50%; left:54%; transform:translate(-50%,-50%); border-left:8px solid var(--paper); border-top:5px solid transparent; border-bottom:5px solid transparent; }
+  @media (max-width:760px){
+    .ep-inner{ padding:16px; } .ep-name{ font-size:20px; } .ep-t{ font-size:17px; }
+    .ep-play{ display:none; } .ep-panel.on{ max-height:520px; }
+  }
+  @media (prefers-reduced-motion: reduce){ .ep-panel{ transition:none !important; } .ep-eq i{ animation:none !important; } }
+</style>
+<section class="vitrine v-catalog reveal" id="catalog" data-screen-label="Home / catalog">
+  <div class="head">
+    <h2 class="disp">Releases</h2>
+    <div class="r">03 · Releases</div>
+  </div>
+  <div class="toolbar">
+    <span class="eyebrow">Five releases</span>
+  </div>
+  <div class="chapter-grid" id="grid">
+    <a class="ch-card" href="https://open.spotify.com/track/30Co7Qk63OVh6yE1qvMrVt" target="_blank" rel="noopener"
+       data-uri="spotify:track:30Co7Qk63OVh6yE1qvMrVt" data-cat="SW.05" data-title="Echoes from the Void"
+       data-cover="assets/photos/eftv-cover.jpg" data-audio="assets/audio/echoes-from-the-void.mp3" data-spotify="https://open.spotify.com/track/30Co7Qk63OVh6yE1qvMrVt">
+      <div class="thumb"><img src="assets/photos/eftv-cover.jpg" alt="Echoes from the Void" width="1000" height="1000" loading="lazy" decoding="async"><span class="cnum"><b>SW.05</b></span><span class="cv-play" aria-hidden="true"></span></div>
+      <div class="cbody"><h4>Echoes from the Void</h4><div class="cdesc">Single</div></div>
+    </a>
+    <a class="ch-card" href="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY" target="_blank" rel="noopener"
+       data-uri="spotify:track:5jaqRMqzgfOYjEB6cyJLqY" data-cat="SW.04" data-title="Experience from Before"
+       data-cover="assets/covers/sw04-experience.jpg" data-audio="assets/audio/experience-from-before.mp3" data-spotify="https://open.spotify.com/track/5jaqRMqzgfOYjEB6cyJLqY">
+      <div class="thumb"><img src="assets/covers/sw04-experience.jpg" alt="Experience from Before" width="800" height="800" loading="lazy" decoding="async"><span class="cnum"><b>SW.04</b></span><span class="cv-play" aria-hidden="true"></span></div>
+      <div class="cbody"><h4>Experience from Before</h4><div class="cdesc">Single</div></div>
+    </a>
+    <a class="ch-card" href="https://open.spotify.com/track/5cImsqOlv8GQxqNFjG4Bk2" target="_blank" rel="noopener"
+       data-uri="spotify:track:5cImsqOlv8GQxqNFjG4Bk2" data-cat="SW.03" data-title="King of Loneliness"
+       data-cover="assets/covers/sw03-king.jpg" data-audio="assets/audio/king-of-loneliness.mp3" data-spotify="https://open.spotify.com/track/5cImsqOlv8GQxqNFjG4Bk2">
+      <div class="thumb"><img src="assets/covers/sw03-king.jpg" alt="King of Loneliness" width="800" height="800" loading="lazy" decoding="async"><span class="cnum"><b>SW.03</b></span><span class="cv-play" aria-hidden="true"></span></div>
+      <div class="cbody"><h4>King of Loneliness</h4><div class="cdesc">Single</div></div>
+    </a>
+    <a class="ch-card is-ep" href="https://open.spotify.com/album/3j3DdrVQWkAanFzPiEAKAj" target="_blank" rel="noopener"
+       data-cat="SW.02 · EP" data-title="Sense of Emergency"
+       data-cover="assets/covers/sw02-emergency.jpg" data-spotify="https://open.spotify.com/album/3j3DdrVQWkAanFzPiEAKAj">
+      <div class="thumb"><img src="assets/covers/sw02-emergency.jpg" alt="Sense of Emergency" width="800" height="800" loading="lazy" decoding="async"><span class="cnum"><b>SW.02</b></span><span class="cv-play" aria-hidden="true"></span></div>
+      <div class="cbody"><h4>Sense of Emergency</h4><div class="cdesc">EP</div></div>
+    </a>
+    <a class="ch-card" href="https://open.spotify.com/track/112a2sK07drqbLf3rFAwdG" target="_blank" rel="noopener"
+       data-uri="spotify:track:112a2sK07drqbLf3rFAwdG" data-cat="SW.01" data-title="Seven"
+       data-cover="assets/covers/sw01-seven.jpg" data-audio="assets/audio/seven.m4a" data-spotify="https://open.spotify.com/track/112a2sK07drqbLf3rFAwdG">
+      <div class="thumb"><img src="assets/covers/sw01-seven.jpg" alt="Seven" width="800" height="800" loading="lazy" decoding="async"><span class="cnum"><b>SW.01</b></span><span class="cv-play" aria-hidden="true"></span></div>
+      <div class="cbody"><h4>Seven</h4><div class="cdesc">Single</div></div>
+    </a>
+  </div>
+
+  <!-- EP tracklist panel (Sense of Emergency, SW.02). Clicking the EP cover expands this
+       below its row; clicking a track plays it in the now-playing bar underneath. JS moves
+       this into #grid. Reveal-and-wait: opening does NOT auto-play. -->
+  <div class="ep-panel is-empty" id="eppanel" aria-live="polite">
+    <span class="cp-caret" aria-hidden="true"></span>
+    <div class="ep-inner">
+      <div class="ep-head">
+        <span class="ep-cat">SW.02 · EP</span>
+        <span class="ep-name disp">Sense of Emergency</span>
+      </div>
+      <ol class="ep-list">
+        <li class="ep-row" tabindex="0" role="button"
+            data-uri="spotify:track:63TQS4EIZ0jBWCdyeIis6H" data-audio="assets/audio/seven.m4a"
+            data-title="Seven" data-cat="SW.02 · EP · 1" data-cover="assets/covers/sw02-emergency.jpg"
+            data-spotify="https://open.spotify.com/track/63TQS4EIZ0jBWCdyeIis6H">
+          <span class="ep-n">01</span><span class="ep-t">Seven</span>
+          <span class="ep-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="ep-time">2:23</span>
+          <button class="ep-play" type="button" tabindex="-1" aria-hidden="true"></button>
+        </li>
+        <li class="ep-row" tabindex="0" role="button"
+            data-uri="spotify:track:3C7pX1a7ySb33xxCfZFWt7" data-audio="assets/audio/dean.m4a"
+            data-title="Dean" data-cat="SW.02 · EP · 2" data-cover="assets/covers/sw02-emergency.jpg"
+            data-spotify="https://open.spotify.com/track/3C7pX1a7ySb33xxCfZFWt7">
+          <span class="ep-n">02</span><span class="ep-t">Dean</span>
+          <span class="ep-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="ep-time">4:01</span>
+          <button class="ep-play" type="button" tabindex="-1" aria-hidden="true"></button>
+        </li>
+        <li class="ep-row" tabindex="0" role="button"
+            data-uri="spotify:track:08Fau9oeGxoIn0qQMdrA5L" data-audio="assets/audio/sense-of-emergency.m4a"
+            data-title="Sense of Emergency" data-cat="SW.02 · EP · 3" data-cover="assets/covers/sw02-emergency.jpg"
+            data-spotify="https://open.spotify.com/track/08Fau9oeGxoIn0qQMdrA5L">
+          <span class="ep-n">03</span><span class="ep-t">Sense of Emergency</span>
+          <span class="ep-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="ep-time">4:33</span>
+          <button class="ep-play" type="button" tabindex="-1" aria-hidden="true"></button>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- local-audio fallback element: used when Spotify's embed is blocked (Brave, ad-blockers) -->
+  <audio id="cp-audio" preload="none"></audio>
+
+  <!-- inline now-playing player (custom; drives the off-screen Spotify embed, or the local
+       <audio> fallback when Spotify is blocked). JS moves this into #grid below the active row. -->
+  <div class="cat-player is-empty" id="catplayer" aria-live="polite">
+    <span class="cp-caret" aria-hidden="true"></span>
+    <div class="cp-inner">
+      <img class="cp-cover" id="cp-img" src="" alt="">
+      <div class="cp-id">
+        <span class="cp-cat" id="cp-cat"></span>
+        <span class="cp-titlewrap">
+          <span class="cp-title" id="cp-title"></span>
+          <span class="cp-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </span>
+      </div>
+      <button class="ps-play" id="cp-play" type="button" aria-label="Play / pause">
+        <svg class="ico-play" width="15" height="17" viewBox="0 0 15 17" fill="currentColor"><path d="M0 0 L15 8.5 L0 17 Z"/></svg>
+        <svg class="ico-pause" width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><rect x="1" width="4" height="16"/><rect x="9" width="4" height="16"/></svg>
+      </button>
+      <span class="ps-time ps-cur" id="cp-cur">0:00</span>
+      <input class="ps-seek" id="cp-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">
+      <span class="ps-time total ps-dur" id="cp-dur">0:00</span>
+      <div class="cp-links" id="cp-links"></div>
+      <span class="cp-hint" id="cp-hint"></span>
+    </div>
+  </div>
+</section>
+
+
+<!-- IV · PRESS -->
+<section class="vitrine v-press reveal" id="press" data-screen-label="Home / press">
+  <div class="head">
+    <h2 class="disp">Press</h2>
+    <div class="r">04 · Press</div>
+  </div>
+  <div class="rows">
+    <a class="rel-row" href="https://v13.net/2026/06/sullen-waves-releases-new-single-echoes-from-the-void/" target="_blank" rel="noopener">
+      <span class="n">2026</span>
+      <span class="t">New Single — Echoes from the Void</span>
+      <span class="f">V13 Media</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://returnofrock.com/sullen-waves-delivers-brooding-alt-rock-power-on-echoes-from-the-void/" target="_blank" rel="noopener">
+      <span class="n">2026</span>
+      <span class="t">Echoes from the Void — Review</span>
+      <span class="f">Return of Rock</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://www.expansionradial.mx/sullen-waves-echoes-from-the-void-alternative-rock/" target="_blank" rel="noopener">
+      <span class="n">2026</span>
+      <span class="t">Post-Grunge with Emotional Depth</span>
+      <span class="f">Expansi&oacute;n Radial</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://v13.net/2025/04/sullen-waves-experience-from-before-single-premiere/" target="_blank" rel="noopener">
+      <span class="n">2025</span>
+      <span class="t">Single Premiere — Experience from Before</span>
+      <span class="f">V13 Media</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://lastdaydeaf.com/listening-now-sullen-waves-experience-from-before/" target="_blank" rel="noopener">
+      <span class="n">2025</span>
+      <span class="t">Experience from Before — Review</span>
+      <span class="f">Last Day Deaf</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://getsomemagazine.com/blog/sullen-waves-drops-nostalgic-grunge-masterpiece" target="_blank" rel="noopener">
+      <span class="n">2025</span>
+      <span class="t">Nostalgic Grunge Masterpiece</span>
+      <span class="f">Get Some Magazine</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://www.imdb.com/title/tt1183374/soundtrack/" target="_blank" rel="noopener">
+      <span class="n">2016</span>
+      <span class="t">Pet — Film Soundtrack (Seven, Strange)</span>
+      <span class="f">IMDB</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://v13.net/2015/02/interview-with-sullen-waves-vocalist-and-guitarist-alex-pratsyuk-offers-insight-into-his-budding-band-and-their-nirvana-esque-sound/" target="_blank" rel="noopener">
+      <span class="n">2015</span>
+      <span class="t">Interview — Alex Pratsyuk</span>
+      <span class="f">V13 Media</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://v13.net/2015/02/sullen-waves-seven-song-review/" target="_blank" rel="noopener">
+      <span class="n">2015</span>
+      <span class="t">Seven — Song Review</span>
+      <span class="f">V13 Media</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+    <a class="rel-row" href="https://v13.net/2015/02/sullen-waves-seven-soundcloud-song-stream/" target="_blank" rel="noopener">
+      <span class="n">2015</span>
+      <span class="t">Seven — Feature</span>
+      <span class="f">V13 Media</span>
+      <span class="y"></span>
+      <span class="d"></span>
+      <span class="go mono">&#8599;</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- V · GALLERY (camera) -->
+<section class="vitrine v-camera reveal" id="gallery" data-screen-label="Home / gallery">
+  <div class="head">
+    <h2 class="disp">Photographs</h2>
+    <div class="r"><a href="/gallery" style="color:inherit;">See all</a></div>
+  </div>
+  <div class="strip">
+    <a class="cell" href="/gallery">
+      <img src="assets/photos/portrait-window-bw.jpg" alt="Window light, black and white" width="2000" height="1336" loading="lazy" decoding="async">
+      <span class="cap-c"><span>Window light</span></span>
+    </a>
+    <a class="cell" href="/gallery">
+      <img src="assets/photos/steps-jaguar.jpg" alt="The steps, Jaguar" width="1335" height="2000" loading="lazy" decoding="async">
+      <span class="cap-c"><span>The steps</span></span>
+    </a>
+    <a class="cell" href="/gallery">
+      <img src="assets/photos/live-sing.jpg" alt="Live, the vocal" width="2301" height="1536" loading="lazy" decoding="async">
+      <span class="cap-c"><span>Live, the vocal</span></span>
+    </a>
+    <a class="cell" href="/gallery">
+      <img src="assets/photos/red-wall-archtop.jpg" alt="Red wall, archtop guitar" width="1333" height="2000" loading="lazy" decoding="async">
+      <span class="cap-c"><span>Red wall</span></span>
+    </a>
+  </div>
+</section>
+
+
+<!-- VII · REACH (telephone) -->
+<section class="vitrine reveal" id="reach" data-screen-label="Home / mailing list">
+  <div class="head">
+    <h2 class="disp">Hear it first</h2>
+    <div class="r">Mailing list</div>
+  </div>
+  <p class="lede">Word on new releases and shows, sent rarely.</p>
+
+  <form class="sub-form" id="subForm" novalidate>
+    <label class="sub-sr" for="subEmail">Email address</label>
+    <input class="sub-input" id="subEmail" name="email_address" type="email" required autocomplete="email" placeholder="Email address" inputmode="email">
+    <button class="sub-btn" type="submit">Subscribe</button>
+  </form>
+  <p class="sub-note">Confirm by email. Unsubscribe anytime.</p>
+  <p class="sub-status" id="subStatus" role="status" aria-live="polite"></p>
+
+  <style>
+    #reach .lede{ font-family:"Space Grotesk", sans-serif; font-style:normal; font-size:18px; line-height:1.55; letter-spacing:.01em; color:var(--paper-dim); max-width:46ch; margin:0 auto; text-align:center; }
+    #reach .sub-form{ display:flex; align-items:stretch; max-width:480px; margin:36px auto 0; border:1px solid var(--rule); transition:border-color .3s; }
+    #reach .sub-form:focus-within{ border-color:var(--accent); }
+    #reach .sub-form.is-done{ display:none; }
+    #reach .sub-input{ flex:1 1 auto; min-width:0; background:transparent; border:0; color:var(--paper); font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; padding:15px 16px; }
+    #reach .sub-input:focus{ outline:none; }
+    #reach .sub-input::placeholder{ color:var(--paper-faint); letter-spacing:.18em; text-transform:uppercase; opacity:1; }
+    #reach .sub-btn{ flex:0 0 auto; background:transparent; border:0; border-left:1px solid var(--rule); color:var(--accent); font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.3em; text-transform:uppercase; padding:15px 26px; cursor:pointer; transition:background .3s,color .3s; }
+    #reach .sub-btn:hover,#reach .sub-btn:focus-visible{ background:var(--accent); color:var(--ink); outline:none; }
+    #reach .sub-btn:disabled{ opacity:.45; cursor:default; background:transparent; color:var(--accent); }
+    #reach .sub-note{ font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.28em; color:var(--paper-faint); text-transform:uppercase; margin-top:14px; text-align:center; }
+    #reach .sub-status{ font-family:"Space Grotesk", sans-serif; font-style:normal; font-size:17px; letter-spacing:.01em; color:var(--accent-soft); margin-top:20px; min-height:1.3em; text-align:center; }
+    #reach .sub-status.is-error{ color:#c98a8a; }
+    #reach .sub-sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    @media (max-width:560px){
+      #reach .sub-form{ flex-wrap:wrap; }
+      #reach .sub-input{ flex:1 0 100%; text-align:center; }
+      #reach .sub-btn{ flex:1 0 100%; border-left:0; border-top:1px solid var(--rule); }
+    }
+  </style>
+  <script>
+  (function(){
+    var f=document.getElementById('subForm'), s=document.getElementById('subStatus'), inp=document.getElementById('subEmail');
+    if(!f) return;
+    var btn=f.querySelector('.sub-btn'), busy=false;
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(busy) return;
+      var email=(inp.value||'').trim();
+      if(!email || !inp.checkValidity()){ s.classList.add('is-error'); s.textContent='Enter a valid email address.'; inp.focus(); return; }
+      busy=true; if(btn) btn.disabled=true;
+      s.classList.remove('is-error'); s.textContent='Sending...';
+      var data=new FormData(); data.append('email_address', email);
+      fetch('https://app.kit.com/forms/9619498/subscriptions', { method:'POST', headers:{'Accept':'application/json'}, body:data })
+        .then(function(r){ if(!r.ok) throw new Error('http'); return r.json().catch(function(){ return {status:'success'}; }); })
+        .then(function(){ f.classList.add('is-done'); var n=document.querySelector('#reach .sub-note'); if(n) n.style.display='none'; s.textContent='Thank you. Check your inbox to confirm your subscription.'; })
+        .catch(function(){ busy=false; if(btn) btn.disabled=false; s.classList.add('is-error'); s.textContent='Something went wrong. Please try again, or write to contact@sullenwaves.com.'; });
+    });
+  })();
+  </script>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="compact">
+    <div class="quote">Sullen Waves. Alternative and post‑grunge from Los Angeles. Founded 2014.</div>
+    <div>
+      <h4>Listen</h4>
+      <ul>
+        <li><a href="https://open.spotify.com/artist/0ovc0euj1pJrgx8vfhrrQD" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</a></li>
+        <li><a href="https://music.apple.com/us/artist/sullen-waves/966765904" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z"/></svg>Apple Music</a></li>
+        <li><a href="https://sullenwaves.bandcamp.com" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg>Bandcamp</a></li>
+        <li><a href="https://tidal.com/artist/6527230" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996 4.004 12l4.004-4.004L12.012 12l-4.004 4.004 4.004 4.004 4.004-4.004L12.012 12l4.004-4.004-4.004-4.004zM16.042 7.996l3.979-3.979L24 7.996l-3.979 3.979z"/></svg>Tidal</a></li>
+        <li><a href="https://soundcloud.com/sullenwaves" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></svg>SoundCloud</a></li>
+        <li><a href="https://www.deezer.com/en/artist/7543944" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.027h5.189V8.38h-5.19zm12.54 0v3.027H24V8.38h-5.19zM6.27 12.594v3.027h5.189v-3.027h-5.19zm6.271 0v3.027h5.19v-3.027h-5.19zm6.27 0v3.027H24v-3.027h-5.19zM0 16.81v3.029h5.19v-3.03H0zm6.27 0v3.029h5.189v-3.03h-5.19zm6.271 0v3.029h5.19v-3.03h-5.19zm6.27 0v3.029H24v-3.03h-5.19Z"/></svg>Deezer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/sullenwavesofficial" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>Instagram</a></li>
+        <li><a href="https://www.youtube.com/@sullenwaves" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a></li>
+        <li><a href="https://www.tiktok.com/@sullenwaves" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TikTok</a></li>
+        <li><a href="https://x.com/sullenwaves" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>X</a></li>
+        <li><a href="https://www.threads.com/@sullenwavesofficial" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg>Threads</a></li>
+        <li><a href="https://www.facebook.com/SullenWaves/" target="_blank" rel="noopener"><svg class="pi" width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="credits">
+    <div class="end disp">The <em>End.</em></div>
+    <div class="scroll">
+      <div class="row"><div class="role">Written, recorded, and produced by</div><div>Alex Pratsyuk</div></div>
+    </div>
+  </div>
+
+  <div class="colophon">
+    <span>© 2026 Sullen Waves</span>
+    <span>Los Angeles, California</span>
+  </div>
+</footer>
+
+<script src="site.js?v=20260629b"></script>
+
+<!-- off-screen Spotify controller host for the catalog player -->
+<div class="sp-offscreen" aria-hidden="true"><div id="sp-host"></div></div>
+<script>
+/* Catalog now-playing player — custom controls over the Spotify iFrame API. The Spotify
+   embed is mounted off-screen (#sp-host); clicking an album card plays it in the compact
+   bar below the grid (instead of opening Spotify). Logged-in Spotify visitors get full
+   tracks (counts as a stream); logged-out visitors get Spotify's ~30s preview. */
+(function () {
+  var grid = document.getElementById("grid");
+  var cards = [].slice.call(document.querySelectorAll(".v-catalog .ch-card"));
+  var bar = document.getElementById("catplayer");
+  var ep = document.getElementById("eppanel");
+  var audio = document.getElementById("cp-audio");
+  if (!grid || !bar) return;
+  var img = document.getElementById("cp-img"), cat = document.getElementById("cp-cat"), title = document.getElementById("cp-title");
+  var play = document.getElementById("cp-play"), cur = document.getElementById("cp-cur"), dur = document.getElementById("cp-dur");
+  var seek = document.getElementById("cp-seek"), hint = document.getElementById("cp-hint"), links = document.getElementById("cp-links");
+  var controller = null, lastDur = 0, scrub = false;
+  var wantPlay = false, playTries = 0, playerFailed = false;
+  var spWatch = null, spStarted = false, curTrack = null;   // Spotify "did it actually start?" watchdog
+  var playSeq = 0;                 // load generation; stale watchdogs/updates must not act
+  var mode = "spotify";            // active engine: "spotify" | "local"
+  var current = null;              // expanded single card, or null
+  var epCard = null;               // expanded EP card, or null
+  var activeRow = null;            // playing EP track <li>, or null
+  var curSpotify = "#";            // current track's Spotify URL (used by the preview hint)
+  var APPLE = "https://music.apple.com/us/artist/sullen-waves/966765904", BANDCAMP = "https://sullenwaves.bandcamp.com";
+
+  // ---- two display surfaces share ONE engine (only one thing ever plays at a time):
+  //      the catalog now-playing bar, and the featured "New single" player up top. ----
+  var fpEl = document.getElementById("featplayer");
+  var catUI = {
+    cur: cur, dur: dur, seek: seek, hint: hint,
+    setPlaying: function (on) { bar.classList.toggle("is-playing", on); if (activeRow) activeRow.classList.toggle("snd", on); }
+  };
+  var featUI = fpEl ? {
+    cur: document.getElementById("fp-cur"), dur: document.getElementById("fp-dur"),
+    seek: document.getElementById("fp-seek"), hint: document.getElementById("fp-hint"),
+    setPlaying: function (on) { fpEl.classList.toggle("is-playing", on); }
+  } : null;
+  var ui = catUI;                  // active display surface
+  var featLoaded = false;          // true while the featured player is the loaded source
+
+  function fmt(ms) {
+    if (!ms || ms < 0) ms = 0;
+    var s = Math.floor(ms / 1000), m = Math.floor(s / 60);
+    return m + ":" + String(s % 60).padStart(2, "0");
+  }
+  // Use the local <audio> file when the Spotify embed is unavailable (blocked, or not yet loaded).
+  function useLocal() { return playerFailed || !controller; }
+  function trackOf(el) {
+    return { uri: el.getAttribute("data-uri"), audio: el.getAttribute("data-audio"),
+             cover: el.getAttribute("data-cover"), cat: el.getAttribute("data-cat"),
+             title: el.getAttribute("data-title"), spotify: el.getAttribute("data-spotify") };
+  }
+  function setMeta(t) {
+    img.src = t.cover || ""; img.alt = (t.title || "") + " cover";
+    cat.textContent = t.cat || ""; title.textContent = t.title || "";
+    curSpotify = t.spotify || "#";
+    links.innerHTML =
+      '<a href="' + curSpotify + '" target="_blank" rel="noopener">Spotify</a>' +
+      '<a href="' + APPLE + '" target="_blank" rel="noopener">Apple</a>' +
+      '<a href="' + BANDCAMP + '" target="_blank" rel="noopener">Bandcamp</a>';
+    hint.textContent = ""; cur.textContent = "0:00"; dur.textContent = "0:00";
+    seek.value = 0; seek.style.setProperty("--pct", "0%");
+  }
+  function setPlaying(on) { ui.setPlaying(on); }
+
+  // ---- placement ----
+  function rowLast(card) {
+    var top = card.offsetTop, last = card;
+    cards.forEach(function (c) { if (Math.abs(c.offsetTop - top) < 6 && c.offsetLeft >= last.offsetLeft) last = c; });
+    return last;
+  }
+  function caretTo(panel, card) {
+    var gx = grid.getBoundingClientRect().left, cr = card.getBoundingClientRect();
+    panel.style.setProperty("--caret-x", (cr.left - gx + cr.width / 2) + "px");
+  }
+  // place the now-playing bar after `node`; if `card` is given, point the caret at it, else hide caret.
+  function placeBar(node, card) {
+    var wasOpen = bar.classList.contains("on") && !bar.classList.contains("is-empty");
+    bar.classList.add("is-empty");
+    grid.insertBefore(bar, node.nextSibling);
+    bar.classList.remove("is-empty");
+    if (card) { bar.classList.remove("no-caret"); caretTo(bar, card); } else { bar.classList.add("no-caret"); }
+    return wasOpen;
+  }
+
+  // ---- engine (Spotify primary, local <audio> fallback) ----
+  function playLocal(t) {
+    mode = "local"; wantPlay = false;
+    try { if (controller) controller.pause(); } catch (e) {}
+    audio.src = t.audio || "";
+    try { audio.currentTime = 0; } catch (e) {}
+    var p = audio.play();
+    if (p && p.catch) p.catch(function () {
+      // iOS/WebKit: a play() fired from the watchdog timer is outside the user-activation
+      // window and rejects. Say so instead of sitting silent at 0:00.
+      if (mode !== "local") return;
+      setPlaying(false);
+      ui.hint.textContent = "Tap play to listen";
+    });
+  }
+  function startPlay(t) {
+    var seq = ++playSeq;
+    curTrack = t; clearTimeout(spWatch); lastDur = 0;
+    if (useLocal()) { playLocal(t); return; }          // embed blocked / not loaded
+    mode = "spotify"; spStarted = false;
+    try { audio.pause(); } catch (e) {}
+    try { controller.pause(); } catch (e) {}  // silence the old track so its late updates read paused
+    controller.loadUri(t.uri);     // Spotify loads async; play() now + retry on playback_update
+    wantPlay = true; playTries = 0;
+    controller.play();
+    // Watchdog: some tracks (e.g. a brand-new release) won't play in the embed for
+    // logged-out listeners. If Spotify hasn't actually started in a couple seconds,
+    // fall back to the self-hosted file so the visitor still hears the song.
+    spWatch = setTimeout(function () {
+      if (seq === playSeq && mode === "spotify" && !spStarted && t.audio) { playLocal(t); }
+    }, 2800);
+  }
+  function enginePause() { clearTimeout(spWatch); wantPlay = false; if (mode === "local") { try { audio.pause(); } catch (e) {} } else if (controller) { controller.pause(); } }
+  function engineToggle() {
+    if (mode === "local") {
+      if (audio.paused) { var p = audio.play(); if (p && p.catch) p.catch(function () {}); }
+      else audio.pause();
+    } else if (controller) { wantPlay = false; controller.togglePlay(); }  // explicit toggle owns playback now
+  }
+
+  // ---- show/hide (deferred display:none, guarded so a quick reopen isn't hidden) ----
+  function hideBar() { bar.classList.remove("on", "is-playing"); clearTimeout(bar._h); bar._h = setTimeout(function () { if (!bar.classList.contains("on")) bar.classList.add("is-empty"); }, 470); }
+  function hideEP() { if (!ep) return; ep.classList.remove("on"); clearTimeout(ep._h); ep._h = setTimeout(function () { if (!ep.classList.contains("on")) ep.classList.add("is-empty"); }, 470); }
+  function clearActiveRow() { if (activeRow) { activeRow.classList.remove("is-playing-row", "snd"); activeRow = null; } }
+
+  function collapse() {                 // close everything and stop audio
+    enginePause();
+    hideBar(); hideEP();
+    cards.forEach(function (c) { c.classList.remove("is-current"); });
+    clearActiveRow();
+    current = null; epCard = null;
+  }
+
+  // ---- singles (instant play) ----
+  function selectSingle(card) {
+    stopFeat();
+    if (epCard) { hideEP(); epCard.classList.remove("is-current"); epCard = null; clearActiveRow(); }
+    current = card;
+    cards.forEach(function (c) { c.classList.toggle("is-current", c === card); });
+    setMeta(trackOf(card));
+    var wasOpen = placeBar(rowLast(card), card);
+    if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
+    startPlay(trackOf(card));
+  }
+
+  // ---- EP (reveal the tracklist and wait; tracks play on click) ----
+  function openEP(card) {
+    if (current) { enginePause(); hideBar(); current.classList.remove("is-current"); current = null; }
+    epCard = card; card.classList.add("is-current");
+    ep.classList.add("is-empty");
+    grid.insertBefore(ep, rowLast(card).nextSibling);
+    ep.classList.remove("is-empty");
+    caretTo(ep, card);
+    setTimeout(function () { ep.classList.add("on"); }, 16);
+  }
+  function playEPTrack(row) {
+    if (row === activeRow) { engineToggle(); return; }   // re-click active track → toggle play/pause
+    stopFeat();
+    clearActiveRow();
+    activeRow = row; row.classList.add("is-playing-row");
+    setMeta(trackOf(row));
+    var wasOpen = placeBar(ep, null);                    // sits under the EP panel, no caret
+    if (!wasOpen) setTimeout(function () { bar.classList.add("on"); }, 16);
+    startPlay(trackOf(row));
+  }
+
+  // ---- featured "New single" player (top of page; shares this same engine) ----
+  function stopFeat() {
+    if (!featLoaded) return;
+    enginePause();
+    if (featUI) {
+      featUI.setPlaying(false);
+      featUI.seek.value = 0; featUI.seek.style.setProperty("--pct", "0%");
+      featUI.cur.textContent = "0:00"; featUI.dur.textContent = "0:00";
+      featUI.hint.innerHTML = "";
+    }
+    featLoaded = false; ui = catUI;
+  }
+  function featSelect() {
+    if (!featUI) return;
+    if (featLoaded) { engineToggle(); return; }   // already loaded → toggle play/pause
+    collapse();                                   // stop & close any catalog playback first
+    ui = featUI; featLoaded = true;
+    var t = trackOf(fpEl);
+    curSpotify = t.spotify || "#";
+    ui.hint.innerHTML = ""; ui.cur.textContent = "0:00"; ui.dur.textContent = "0:00";
+    ui.seek.value = 0; ui.seek.style.setProperty("--pct", "0%");
+    startPlay(t);
+  }
+
+  // ---- events ----
+  cards.forEach(function (card) {
+    card.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // open-in-new-tab etc. → let the link work
+      if (card.classList.contains("is-soon")) return;                 // forthcoming → no-op
+      if (card.classList.contains("is-ep")) {
+        e.preventDefault();
+        if (epCard !== card) { openEP(card); return; }
+        if (featLoaded) {              // featured owns the engine — close the panel, keep the music
+          hideEP(); card.classList.remove("is-current"); epCard = null; clearActiveRow();
+        } else collapse();
+        return;
+      }
+      if (!card.getAttribute("data-uri")) return;
+      e.preventDefault();
+      (card === current) ? collapse() : selectSingle(card);
+    });
+  });
+  if (ep) {
+    [].slice.call(ep.querySelectorAll(".ep-row")).forEach(function (row) {
+      row.addEventListener("click", function () { playEPTrack(row); });
+      row.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playEPTrack(row); } });
+    });
+  }
+  play.addEventListener("click", engineToggle);
+  if (featUI) document.getElementById("fp-play").addEventListener("click", featSelect);
+  function wireSeek(seekEl, curEl, ownUI) {
+    seekEl.addEventListener("input", function () {
+      if (ui !== ownUI) {              // this surface doesn't own the engine — don't remote-control it
+        seekEl.value = 0; seekEl.style.setProperty("--pct", "0%"); return;
+      }
+      scrub = true;
+      seekEl.style.setProperty("--pct", (seekEl.value / 10) + "%");
+      curEl.textContent = fmt(lastDur * (seekEl.value / 1000));
+    });
+    seekEl.addEventListener("change", function () {
+      if (ui !== ownUI) return;
+      if (mode === "local") { if (audio.duration) audio.currentTime = audio.duration * (seekEl.value / 1000); }
+      else if (controller && lastDur) { controller.seek(Math.round((lastDur * (seekEl.value / 1000)) / 1000)); }
+      scrub = false;
+    });
+  }
+  wireSeek(seek, cur, catUI);
+  if (featUI) wireSeek(featUI.seek, featUI.cur, featUI);
+  var rz;
+  window.addEventListener("resize", function () {
+    clearTimeout(rz);
+    rz = setTimeout(function () {
+      if (epCard) { grid.insertBefore(ep, rowLast(epCard).nextSibling); caretTo(ep, epCard); if (activeRow) placeBar(ep, null); }
+      else if (current) placeBar(rowLast(current), current);
+    }, 150);
+  });
+
+  // ---- local <audio> events (drive the same UI as Spotify) ----
+  audio.addEventListener("loadedmetadata", function () { if (mode !== "local") return; lastDur = (audio.duration || 0) * 1000; ui.dur.textContent = fmt(lastDur); });
+  audio.addEventListener("timeupdate", function () {
+    if (mode !== "local" || scrub) return;
+    var pos = audio.currentTime * 1000;
+    ui.cur.textContent = fmt(pos);
+    if (lastDur) { var pct = Math.min(1000, Math.round((pos / lastDur) * 1000)); ui.seek.value = pct; ui.seek.style.setProperty("--pct", (pct / 10) + "%"); }
+  });
+  audio.addEventListener("play", function () { if (mode === "local") { setPlaying(true); ui.hint.textContent = ""; } });
+  audio.addEventListener("pause", function () { if (mode === "local") setPlaying(false); });
+  audio.addEventListener("ended", function () { if (mode === "local") { setPlaying(false); ui.seek.value = 0; ui.seek.style.setProperty("--pct", "0%"); ui.cur.textContent = "0:00"; } });
+
+  // ---- Spotify iFrame API ----
+  function onUpdate(e) {
+    var d = (e && e.data) ? e.data : e;
+    if (!d) return;
+    if (mode !== "spotify") {
+      // local fallback took over but the embed honored its deferred play → two sources at once
+      if (!d.isPaused && controller) { try { controller.pause(); } catch (err) {} }
+      return;
+    }
+    if (!d.isPaused) { spStarted = true; clearTimeout(spWatch); }   // Spotify really started
+    if (wantPlay) {                       // retry play until the freshly-loaded track starts
+      if (!d.isPaused) { wantPlay = false; }
+      else if (playTries < 6) { playTries++; controller.play(); }
+    }
+    setPlaying(!d.isPaused);
+    if (typeof d.duration === "number" && d.duration > 0) {
+      lastDur = d.duration;
+      ui.dur.textContent = fmt(d.duration);
+      ui.hint.innerHTML = (d.duration <= 31000)
+        ? 'Preview · <a href="' + curSpotify + '" target="_blank" rel="noopener">full track on Spotify</a>'
+        : '';
+    }
+    if (!scrub && typeof d.position === "number") {
+      ui.cur.textContent = fmt(d.position);
+      if (lastDur) {
+        var pct = Math.min(1000, Math.round((d.position / lastDur) * 1000));
+        ui.seek.value = pct; ui.seek.style.setProperty("--pct", (pct / 10) + "%");
+      }
+    }
+  }
+  window.onSpotifyIframeApiReady = function (IFrameAPI) {
+    IFrameAPI.createController(
+      document.getElementById("sp-host"),
+      { width: 300, height: 80, uri: "spotify:track:5jaqRMqzgfOYjEB6cyJLqY" },
+      function (ctrl) {
+        controller = ctrl;
+        playerFailed = false;             // API loaded (even if slow) → prefer Spotify next play
+        controller.addListener("playback_update", onUpdate);
+      }
+    );
+  };
+  // If the Spotify embed API is blocked (Brave Shields / ad-blocker / VPN) it never loads;
+  // mark failed so playback falls back to the in-page local <audio> instead of opening a new tab.
+  function markFailed() { if (!controller) playerFailed = true; }
+  (function () {
+    var s = document.createElement("script");
+    s.src = "https://open.spotify.com/embed/iframe-api/v1"; s.async = true;
+    s.onerror = markFailed;
+    document.body.appendChild(s);
+    setTimeout(markFailed, 6000);
+  })();
+})();
+</script>
+
+</body>
+</html>
